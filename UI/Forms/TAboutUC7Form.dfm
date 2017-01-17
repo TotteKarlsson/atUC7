@@ -1,8 +1,8 @@
-object AboutATDBForm: TAboutATDBForm
+object AboutUC7Form: TAboutUC7Form
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'About ATDB'
+  Caption = 'About atUC7'
   ClientHeight = 631
   ClientWidth = 737
   Color = clBtnFace
@@ -7574,8 +7574,8 @@ object AboutATDBForm: TAboutATDBForm
       Transparent = True
     end
     object versionLabel: TLabel
-      Left = 278
-      Top = 27
+      Left = 118
+      Top = 74
       Width = 104
       Height = 39
       Caption = 'Version'
@@ -7589,9 +7589,9 @@ object AboutATDBForm: TAboutATDBForm
     object Label1: TLabel
       Left = 34
       Top = 16
-      Width = 144
+      Width = 114
       Height = 52
-      Caption = 'AT-UC7'
+      Caption = 'atUC7'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -43

@@ -19,14 +19,15 @@ using namespace mtk;
 using std::string;
 
 extern HWND         gOtherAppWindow             = NULL;
-extern string       gApplicationRegistryRoot    = "\\Software\\Allen Institute\\UC7";
+extern bool 		gAppIsStartingUp 			= true;
+extern string       gApplicationRegistryRoot    = "\\Software\\Allen Institute\\atUC7";
 extern string       gDefaultAppTheme            = "Iceberg Classico";
 extern string       gAppMutexName           	= "UC7AppMutex";
-extern bool 		gAppIsStartingUp 			= true;
 extern string       gRestartMutexName           = "UC7RestartMutex";
 extern string       gFullDateTimeFormat         = "%Y-%m-%dT%H:%M:%S";
 extern string       gDateFormat                 = "%Y-%m-%d";
 extern string       gTimeFormat                 = "%H:%M:%S";
+
 extern string       gCommonAppDataLocation      = ""; //Filled out later
 extern string       gLogFileLocation            = "";
 extern string       gLogFileName                = "atUC7.log";

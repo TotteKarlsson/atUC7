@@ -9,17 +9,17 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 
-TAboutATDBForm *AboutATDBForm;
+TAboutUC7Form *AboutUC7Form;
 using namespace std;
 using namespace mtk;
 
 //---------------------------------------------------------------------------
-__fastcall TAboutATDBForm::TAboutATDBForm(TComponent* Owner)
+__fastcall TAboutUC7Form::TAboutUC7Form(TComponent* Owner)
 	: TForm(Owner)
 {}
 
 //---------------------------------------------------------------------------
-void __fastcall TAboutATDBForm::FormShow(TObject *Sender)
+void __fastcall TAboutUC7Form::FormShow(TObject *Sender)
 {
     stringstream ss;
     mtkApplicationInfo appInfo(Application);
@@ -33,7 +33,7 @@ void __fastcall TAboutATDBForm::FormShow(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TAboutATDBForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+void __fastcall TAboutUC7Form::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
 	if(Key == vkEscape)
     {

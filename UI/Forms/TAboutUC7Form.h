@@ -8,7 +8,7 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
 //---------------------------------------------------------------------------
-class TAboutATDBForm : public TForm
+class TAboutUC7Form : public TForm
 {
 __published:	// IDE-managed Components
 	TGroupBox *GroupBox1;
@@ -24,9 +24,9 @@ __published:	// IDE-managed Components
 
 private:	// User declarations
 public:		// User declarations
-	__fastcall TAboutATDBForm(TComponent* Owner);
+	__fastcall TAboutUC7Form(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TAboutATDBForm *AboutATDBForm;
+extern PACKAGE TAboutUC7Form *AboutUC7Form;
 //---------------------------------------------------------------------------
 #endif

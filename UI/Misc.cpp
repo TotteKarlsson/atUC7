@@ -2,7 +2,7 @@
 #include "TMainForm.h"
 #include "mtkVCLUtils.h"
 #include "mtkLogger.h"
-//#include "TAboutATDBForm.h"
+#include "TAboutUC7Form.h"
 #pragma package(smart_init)
 using Poco::DateTimeFormatter;
 
@@ -18,12 +18,13 @@ void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState S
     }
 }
 
-//void __fastcall TMainForm::OpenAboutFormAExecute(TObject *Sender)
-//{
-//	TAboutATDBForm* f = new TAboutATDBForm(this);
-//    f->ShowModal();
-//    delete f;
-//}
+
+void __fastcall TMainForm::OpenAboutFormAExecute(TObject *Sender)
+{
+	TAboutUC7Form* f = new TAboutUC7Form(this);
+    f->ShowModal();
+    delete f;
+}
 
 void __fastcall TMainForm::ClearMemoAExecute(TObject *Sender)
 {
@@ -32,7 +33,7 @@ void __fastcall TMainForm::ClearMemoAExecute(TObject *Sender)
 
 void TMainForm::setupWindowTitle()
 {
-	string title = createWindowTitle("UC7 Test Application", Application);
+	string title = createWindowTitle("atUC7", Application);
 	this->Caption = vclstr(title);
 }
 

@@ -284,6 +284,7 @@ object MainForm: TMainForm
     end
     object OpenAboutFormA: TAction
       Caption = 'About'
+      OnExecute = OpenAboutFormAExecute
     end
   end
   object PopupMenu1: TPopupMenu

@@ -90,6 +90,7 @@ class TMainForm : public TRegistryForm
 	void __fastcall mConnectUC7BtnClick(TObject *Sender);
 	void __fastcall mSendBtn1Click(TObject *Sender);
 	void __fastcall mStartStopBtnClick(TObject *Sender);
+	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 
     private:
         bool                                            gCanClose;

@@ -8,12 +8,6 @@ enum ApplicationMessageEnum
     amSplashWasClosed,
 };
 
-using Poco::DateTime;
-
-//struct DBStatistics
-//{
-//	int 		mNumberOfRecs;
-//};
 
 struct AppMessageStruct;
 
