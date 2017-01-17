@@ -79,6 +79,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender)
 	BottomPanel->Height     = mBottomPanelHeight + 1;
 	SB->Top = MainForm->Top + MainForm->Height + 10;
 	SB->SizeGrip = true;
+    mSendRAW1->EditLabel->Visible = false;
 }
 
 void TMainForm::setupIniFile()
@@ -96,6 +97,7 @@ void TMainForm::setupIniFile()
 	//For convenience and for option form, populate appProperties container
 	mAppProperties.append(&mGeneralProperties);
 	mAppProperties.append(&mSplashProperties);
+
 }
 
 bool TMainForm::setupAndReadIniParameters()

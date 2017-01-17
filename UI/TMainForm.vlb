@@ -19,10 +19,6 @@ LayerNames=OrdersLayer
 Coordinates=524,513,55,33
 LayerNames=OrdersLayer
 
-[TopPanel]
-Coordinates=10,452,60,51
-LayerNames=OrdersLayer
-
 [AmazonDataModule.OrderItemsCDS]
 Coordinates=836,10,192,213
 
@@ -322,4 +318,8 @@ Coordinates=1160,1177,145,141
 
 [atdbDM.ribbonNotesDS]
 Coordinates=898,407,129,123
+
+[mMiddlePanel]
+Coordinates=10,452,60,51
+LayerNames=OrdersLayer
 

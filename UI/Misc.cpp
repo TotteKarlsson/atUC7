@@ -2,7 +2,7 @@
 #include "TMainForm.h"
 #include "mtkVCLUtils.h"
 #include "mtkLogger.h"
-#include "TAboutATDBForm.h"
+//#include "TAboutATDBForm.h"
 #pragma package(smart_init)
 using Poco::DateTimeFormatter;
 

@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'UC7 Controller'
-  ClientHeight = 543
-  ClientWidth = 873
+  ClientHeight = 643
+  ClientWidth = 983
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,80 +23,137 @@ object MainForm: TMainForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 331
-    Width = 873
+    Top = 431
+    Width = 983
     Height = 3
     Cursor = crVSplit
     Align = alBottom
     ExplicitLeft = 88
     ExplicitTop = 430
-    ExplicitWidth = 973
+    ExplicitWidth = 990
   end
-  object TopPanel: TPanel
+  object mMiddlePanel: TPanel
     Left = 0
     Top = 41
-    Width = 873
-    Height = 290
+    Width = 983
+    Height = 390
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 626
-    object GroupBox3: TGroupBox
+    ExplicitWidth = 304
+    ExplicitHeight = 290
+    object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
-      Width = 392
-      Height = 288
+      Width = 320
+      Height = 388
       Align = alLeft
-      Caption = 'Controls'
       TabOrder = 0
-      ExplicitLeft = -2
-      ExplicitTop = -1
-      object mStartStopBtn: TButton
-        Left = 16
-        Top = 40
-        Width = 121
-        Height = 89
-        Caption = 'Start'
-        Enabled = False
+      object HandwheelGB: TGroupBox
+        Left = 1
+        Top = 193
+        Width = 318
+        Height = 194
+        Align = alBottom
+        Caption = 'Handwheel Position'
         TabOrder = 0
-        OnClick = mStartStopBtnClick
+        ExplicitTop = 195
+        ExplicitWidth = 981
+        object Pie1: TPie
+          Left = 95
+          Top = 64
+          Width = 90
+          Height = 90
+          Angles.StartAngle = 90
+          Angles.EndAngle = 180
+        end
+        object Label1: TLabel
+          Left = 40
+          Top = 64
+          Width = 36
+          Height = 13
+          Caption = 'Retract'
+        end
+        object Label2: TLabel
+          Left = 216
+          Top = 64
+          Width = 70
+          Height = 13
+          Caption = 'Before Cutting'
+        end
+        object Label3: TLabel
+          Left = 216
+          Top = 144
+          Width = 35
+          Height = 13
+          Caption = 'Cutting'
+        end
+        object Label4: TLabel
+          Left = 40
+          Top = 144
+          Width = 63
+          Height = 13
+          Caption = 'After Cutting'
+        end
+      end
+      object GroupBox3: TGroupBox
+        Left = 1
+        Top = 1
+        Width = 392
+        Height = 192
+        Align = alLeft
+        Caption = 'Cutting Motor Controls'
+        TabOrder = 1
+        ExplicitLeft = -207
+        object mStartStopBtn: TButton
+          Left = 16
+          Top = 24
+          Width = 121
+          Height = 89
+          Caption = 'Start'
+          Enabled = False
+          TabOrder = 0
+          OnClick = mStartStopBtnClick
+        end
       end
     end
   end
   object SB: TStatusBar
     Left = 0
-    Top = 524
-    Width = 873
+    Top = 624
+    Width = 983
     Height = 19
     Panels = <>
-    ExplicitWidth = 626
+    ExplicitTop = 163
+    ExplicitWidth = 304
   end
   object BottomPanel: TPanel
     Left = 0
-    Top = 334
-    Width = 873
+    Top = 434
+    Width = 983
     Height = 190
     Align = alBottom
     TabOrder = 2
-    ExplicitWidth = 626
+    ExplicitTop = -27
+    ExplicitWidth = 304
     object infoMemo: TMemo
       Left = 1
       Top = 49
-      Width = 871
+      Width = 981
       Height = 140
       Align = alClient
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
-      ExplicitWidth = 624
+      ExplicitWidth = 302
     end
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 871
+      Width = 981
       Height = 48
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 624
+      ExplicitWidth = 302
       object Button1: TButton
         Left = 8
         Top = 12
@@ -131,14 +188,11 @@ object MainForm: TMainForm
   object mTopPanel: TPanel
     Left = 0
     Top = 0
-    Width = 873
+    Width = 983
     Height = 41
     Align = alTop
     TabOrder = 3
-    ExplicitWidth = 626
-    DesignSize = (
-      873
-      41)
+    ExplicitWidth = 304
     object mComportCB: TComboBox
       Left = 8
       Top = 12
@@ -202,15 +256,17 @@ object MainForm: TMainForm
       Value = 's10'
     end
     object mResetBtn: TButton
-      Left = 772
-      Top = 5
+      Left = 897
+      Top = 1
       Width = 85
-      Height = 30
-      Anchors = [akTop, akRight]
+      Height = 39
+      Align = alRight
       Caption = 'Reset UC7'
       Enabled = False
       TabOrder = 4
-      ExplicitLeft = 525
+      ExplicitLeft = 788
+      ExplicitTop = 5
+      ExplicitHeight = 30
     end
   end
   object ActionList1: TActionList

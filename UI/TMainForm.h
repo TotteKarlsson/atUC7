@@ -28,6 +28,7 @@
 #include "database/atATDBServerSession.h"
 #include "mtkIniFileC.h"
 #include "atUC7.h"
+#include "pies.h"
 
 using mtk::Property;
 using mtk::SQLite;
@@ -46,7 +47,7 @@ class TMainForm : public TRegistryForm
         TAction *ClearMemoA;
         TMenuItem *ClearMemoA1;
     TSplitter *Splitter1;
-    TPanel *TopPanel;
+	TPanel *mMiddlePanel;
     mtkIniFileC *mIniFileC;
     TMainMenu *MainMenu1;
     TMenuItem *File1;
@@ -69,6 +70,13 @@ class TMainForm : public TRegistryForm
 	TGroupBox *GroupBox3;
 	TPanel *mTopPanel;
 	TButton *mResetBtn;
+	TGroupBox *HandwheelGB;
+	TPie *Pie1;
+	TLabel *Label1;
+	TLabel *Label2;
+	TLabel *Label3;
+	TLabel *Label4;
+	TPanel *mMiddleLeftPanel;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 

@@ -21,6 +21,7 @@
 #pragma package(smart_init)
 #pragma link "mtkIniFileC"
 #pragma link "mtkIniFileC"
+#pragma link "pies"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
