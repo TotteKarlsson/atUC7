@@ -137,6 +137,9 @@
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>8</BuildOrder>
         </CppCompile>
+        <CppCompile Include="source\atUC7MessageConsumer.cpp">
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
         <CppCompile Include="UI\ClosingAppLogic.cpp">
             <BuildOrder>19</BuildOrder>
         </CppCompile>
@@ -160,9 +163,6 @@
             <FormType>dfm</FormType>
             <DependentOn>UI\TMainForm.h</DependentOn>
             <BuildOrder>2</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="P:\libs\atapi\source\UC7\atUC7Command.cpp">
-            <BuildOrder>8</BuildOrder>
         </CppCompile>
         <FormResources Include="UI\TMainForm.dfm"/>
         <BuildConfiguration Include="Release">

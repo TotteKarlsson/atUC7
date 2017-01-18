@@ -39,8 +39,6 @@ object MainForm: TMainForm
     Height = 390
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 304
-    ExplicitHeight = 290
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
@@ -50,69 +48,122 @@ object MainForm: TMainForm
       TabOrder = 0
       object HandwheelGB: TGroupBox
         Left = 1
-        Top = 193
+        Top = 240
         Width = 318
-        Height = 194
+        Height = 147
         Align = alBottom
         Caption = 'Handwheel Position'
         TabOrder = 0
-        ExplicitTop = 195
-        ExplicitWidth = 981
-        object Pie1: TPie
+        object mCrankPositionPie: TPie
           Left = 95
-          Top = 64
+          Top = 36
           Width = 90
           Height = 90
           Angles.StartAngle = 90
           Angles.EndAngle = 180
+          Brush.Color = clCream
         end
-        object Label1: TLabel
+        object mRetractLbl: TLabel
           Left = 40
-          Top = 64
+          Top = 36
           Width = 36
           Height = 13
           Caption = 'Retract'
+          Enabled = False
         end
         object Label2: TLabel
-          Left = 216
-          Top = 64
+          Left = 191
+          Top = 36
           Width = 70
           Height = 13
           Caption = 'Before Cutting'
+          Enabled = False
         end
         object Label3: TLabel
-          Left = 216
-          Top = 144
+          Left = 191
+          Top = 116
           Width = 35
           Height = 13
           Caption = 'Cutting'
+          Enabled = False
         end
         object Label4: TLabel
           Left = 40
-          Top = 144
+          Top = 116
           Width = 63
           Height = 13
           Caption = 'After Cutting'
+          Enabled = False
         end
       end
       object GroupBox3: TGroupBox
         Left = 1
         Top = 1
-        Width = 392
-        Height = 192
-        Align = alLeft
+        Width = 318
+        Height = 239
+        Align = alClient
         Caption = 'Cutting Motor Controls'
         TabOrder = 1
-        ExplicitLeft = -207
         object mStartStopBtn: TButton
-          Left = 16
+          Left = 40
           Top = 24
-          Width = 121
-          Height = 89
+          Width = 219
+          Height = 81
           Caption = 'Start'
           Enabled = False
           TabOrder = 0
           OnClick = mStartStopBtnClick
+        end
+        object Panel2: TPanel
+          Left = 2
+          Top = 128
+          Width = 314
+          Height = 109
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 1
+          object GroupBox1: TGroupBox
+            Left = 149
+            Top = 0
+            Width = 165
+            Height = 109
+            Align = alClient
+            Caption = 'Return Speed (um/s)'
+            TabOrder = 0
+            object FloatLabeledEdit2: TFloatLabeledEdit
+              Left = 6
+              Top = 48
+              Width = 89
+              Height = 21
+              EditLabel.Width = 30
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Speed'
+              TabOrder = 0
+              Text = '-1.00'
+              Value = -1.000000000000000000
+            end
+          end
+          object GroupBox2: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 149
+            Height = 109
+            Align = alLeft
+            Caption = 'Cutting Speed (um/s)'
+            TabOrder = 1
+            object FloatLabeledEdit1: TFloatLabeledEdit
+              Left = 12
+              Top = 48
+              Width = 89
+              Height = 21
+              EditLabel.Width = 30
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Speed'
+              TabOrder = 0
+              Text = '-1.00'
+              Value = -1.000000000000000000
+            end
+          end
         end
       end
     end
@@ -123,8 +174,6 @@ object MainForm: TMainForm
     Width = 983
     Height = 19
     Panels = <>
-    ExplicitTop = 163
-    ExplicitWidth = 304
   end
   object BottomPanel: TPanel
     Left = 0
@@ -133,8 +182,6 @@ object MainForm: TMainForm
     Height = 190
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = -27
-    ExplicitWidth = 304
     object infoMemo: TMemo
       Left = 1
       Top = 49
@@ -144,7 +191,6 @@ object MainForm: TMainForm
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
-      ExplicitWidth = 302
     end
     object Panel1: TPanel
       Left = 1
@@ -153,7 +199,6 @@ object MainForm: TMainForm
       Height = 48
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 302
       object Button1: TButton
         Left = 8
         Top = 12
@@ -192,7 +237,6 @@ object MainForm: TMainForm
     Height = 41
     Align = alTop
     TabOrder = 3
-    ExplicitWidth = 304
     object mComportCB: TComboBox
       Left = 8
       Top = 12
@@ -264,9 +308,6 @@ object MainForm: TMainForm
       Caption = 'Reset UC7'
       Enabled = False
       TabOrder = 4
-      ExplicitLeft = 788
-      ExplicitTop = 5
-      ExplicitHeight = 30
     end
   end
   object ActionList1: TActionList

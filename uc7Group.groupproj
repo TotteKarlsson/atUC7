@@ -18,6 +18,9 @@
         <Projects Include="P:\libs\dslib\VCL\Forms\DuneForms.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="P:\libs\atapi\source\vcl\atVCLCore.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="atUC7Main.cbproj">
             <Dependencies>P:\libs\atapi\source\atCore.cbproj</Dependencies>
         </Projects>
@@ -74,6 +77,15 @@
     <Target Name="DuneForms:Make">
         <MSBuild Projects="P:\libs\dslib\VCL\Forms\DuneForms.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="atVCLCore">
+        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj"/>
+    </Target>
+    <Target Name="atVCLCore:Clean">
+        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atVCLCore:Make">
+        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="atUC7Main" DependsOnTargets="atCore">
         <MSBuild Projects="atUC7Main.cbproj"/>
     </Target>
@@ -84,13 +96,13 @@
         <MSBuild Projects="atUC7Main.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="mtkCommon;atCore;VCLCommon;DuneComponents;DuneForms;atUC7Main"/>
+        <CallTarget Targets="mtkCommon;atCore;VCLCommon;DuneComponents;DuneForms;atVCLCore;atUC7Main"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="mtkCommon:Clean;atCore:Clean;VCLCommon:Clean;DuneComponents:Clean;DuneForms:Clean;atUC7Main:Clean"/>
+        <CallTarget Targets="mtkCommon:Clean;atCore:Clean;VCLCommon:Clean;DuneComponents:Clean;DuneForms:Clean;atVCLCore:Clean;atUC7Main:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="mtkCommon:Make;atCore:Make;VCLCommon:Make;DuneComponents:Make;DuneForms:Make;atUC7Main:Make"/>
+        <CallTarget Targets="mtkCommon:Make;atCore:Make;VCLCommon:Make;DuneComponents:Make;DuneForms:Make;atVCLCore:Make;atUC7Main:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

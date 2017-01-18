@@ -102,7 +102,7 @@ BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::AppInBox(mlxStructMessage &msg)
+void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
 {
     if(msg.lparam == NULL)
     {
@@ -111,14 +111,21 @@ void __fastcall TMainForm::AppInBox(mlxStructMessage &msg)
 
     try
     {
-        ApplicationMessageEnum aMsg = msg.lparam->mMessageEnum;
+        ApplicationMessageEnum aMsg = msg.wparam;
 
         switch(aMsg)
         {
-            case amSplashWasClosed:
+            case atUC7SplashWasClosed:
                 Log(lDebug2) << "Splash form sent message that it was closed";
             break;
 
+			case atUC7Message:
+            {
+            	UC7Message* m = (UC7Message*) msg.lparam;
+                Log(lInfo) << "Handling UC7 message:" << m->getMessageNameAsString();
+                handleUC7Message(*m);
+                delete m;
+            }
             default:
             break ;
         }

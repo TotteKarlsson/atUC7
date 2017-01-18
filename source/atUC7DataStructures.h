@@ -5,26 +5,31 @@
 
 enum ApplicationMessageEnum
 {
-    amSplashWasClosed,
+    atUC7SplashWasClosed = 0,
+    atUC7Message
 };
 
 
-struct AppMessageStruct;
+//struct AppMessageStruct;
 
-struct mlxStructMessage
+struct ATWindowStructMessage
 {
 	Cardinal            Msg;
+    					//
 	int                 wparam;
-	AppMessageStruct*   lparam;
+
+    					//This is our data
+    void*				lparam;
 	LRESULT             Result;
 };
 
-struct AppMessageStruct
-{
-	ApplicationMessageEnum 	mMessageEnum;
-	void*                   mData;
-
-};
-
+//struct AppMessageStruct
+//{
+//							//The Message enum encodes what is passed by the void pointer
+//	ApplicationMessageEnum 	mMessageEnum;
+//	void*                   mData;
+//
+//};
+//
 
 #endif

@@ -25,11 +25,11 @@
 #include "TRegistryForm.h"
 #include "TRegistryProperties.h"
 #include "TSTDStringLabeledEdit.h"
-#include "database/atATDBServerSession.h"
 #include "mtkIniFileC.h"
 #include "atUC7.h"
 #include "pies.h"
-
+#include "TFloatLabeledEdit.h"
+#include "atUC7MessageConsumer.h"
 using mtk::Property;
 using mtk::SQLite;
 using mtk::MessageContainer;
@@ -71,12 +71,17 @@ class TMainForm : public TRegistryForm
 	TPanel *mTopPanel;
 	TButton *mResetBtn;
 	TGroupBox *HandwheelGB;
-	TPie *Pie1;
-	TLabel *Label1;
+	TPie *mCrankPositionPie;
+	TLabel *mRetractLbl;
 	TLabel *Label2;
 	TLabel *Label3;
 	TLabel *Label4;
 	TPanel *mMiddleLeftPanel;
+	TGroupBox *GroupBox1;
+	TPanel *Panel2;
+	TGroupBox *GroupBox2;
+	TFloatLabeledEdit *FloatLabeledEdit1;
+	TFloatLabeledEdit *FloatLabeledEdit2;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -98,6 +103,10 @@ class TMainForm : public TRegistryForm
 
 
 		UC7												mUC7;
+
+        												//!Consume UC7 messages
+        UC7MessageConsumer		  						mUC7Consumer;
+
         int												getCOMPortNumber();
         void __fastcall                                 logMsg();
 		LogFileReader                                   mLogFileReader;
@@ -105,10 +114,6 @@ class TMainForm : public TRegistryForm
 		void                                            setupWindowTitle();
 		void                                            updateWindowTitle();
 
-														//Threads can drop messages into the
-														//Message container. The main thread pops them
-														//using the messageProcessor
-		MessageContainer                                mMessages;
 
                                                         //INI Parameters...
         IniFileProperties	      	                    mGeneralProperties;
@@ -119,20 +124,20 @@ class TMainForm : public TRegistryForm
         mtk::Property<bool>                             mShowSplashOnStartup;
 
         void        __fastcall                          PopulateStyleMenu();
-
         bool                                            setupAndReadIniParameters();
         void                                            setupIniFile();
 
-		void __fastcall                                 AppInBox(mlxStructMessage &Msg);
 		void __fastcall 								onConnectedToUC7();
         void __fastcall 								onDisConnectedToUC7();
+		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
+        bool											handleUC7Message(const UC7Message& m);
 
-    public:		// User declarations
+    public:
                     __fastcall                          TMainForm(TComponent* Owner);
                     __fastcall                          ~TMainForm();
 
         BEGIN_MESSAGE_MAP
-                  MESSAGE_HANDLER(UWM_MESSAGE,        mlxStructMessage,         AppInBox);
+                  MESSAGE_HANDLER(UWM_MESSAGE,        ATWindowStructMessage,         AppInBox);
         END_MESSAGE_MAP(TForm)
 };
 
