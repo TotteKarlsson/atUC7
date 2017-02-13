@@ -286,19 +286,6 @@ object MainForm: TMainForm
       TabOrder = 2
       OnClick = mSendBtn1Click
     end
-    object mSendRAW1: TSTDStringLabeledEdit
-      Left = 245
-      Top = 12
-      Width = 145
-      Height = 21
-      EditLabel.Width = 62
-      EditLabel.Height = 13
-      EditLabel.Caption = 'mSendRAW1'
-      Enabled = False
-      TabOrder = 3
-      Text = 's10'
-      Value = 's10'
-    end
     object mResetBtn: TButton
       Left = 897
       Top = 1
@@ -308,6 +295,26 @@ object MainForm: TMainForm
       Caption = 'Reset UC7'
       Enabled = False
       TabOrder = 4
+    end
+    object mCheckSumEdit: TSTDStringEdit
+      Left = 504
+      Top = 10
+      Width = 49
+      Height = 21
+      TabOrder = 5
+      Text = 'CC'
+      Value = 'CC'
+    end
+    object mSendRAW1: TSTDStringEdit
+      Left = 245
+      Top = 12
+      Width = 145
+      Height = 21
+      Enabled = False
+      TabOrder = 3
+      Text = '81F0F8'
+      OnKeyDown = mSendRAW1KeyDown
+      Value = '81F0F8'
     end
   end
   object ActionList1: TActionList

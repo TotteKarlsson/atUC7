@@ -23,6 +23,7 @@
 #pragma link "mtkIniFileC"
 #pragma link "pies"
 #pragma link "TFloatLabeledEdit"
+#pragma link "TSTDStringEdit"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
@@ -102,7 +103,9 @@ int	TMainForm::getCOMPortNumber()
 
 void __fastcall TMainForm::mSendBtn1Click(TObject *Sender)
 {
-	mUC7.sendRawMessage(mSendRAW1->getValue());
+	string msg = mSendRAW1->getValue();
+    msg += '\r';
+	mUC7.sendRawMessage(msg);
 }
 
 void __fastcall TMainForm::onConnectedToUC7()
@@ -249,8 +252,41 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
 
             }
         }
-
         default: return UNKNOWN;
     }
 }
+
+void __fastcall TMainForm::mSendRAW1KeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+{
+	//Auto calculate the checksum
+
+    if(Key == VK_RETURN)
+    {
+        UC7Message msg(mSendRAW1->getValue());
+
+        msg.calculateCheckSum();
+
+
+        int cs;
+        string csS = msg.checksum();
+        char* str;
+        strcpy(str, csS.c_str());
+        str2int(cs, str, 10);
+        stringstream convert;
+//        for(int i = 0; i < cs.size(); i++)
+//        {
+//        	convert << std::hex << cs;
+//        }
+
+//        string hex = convert.str();
+//        mCheckSumEdit->setValue(hex);
+//
+//        string binVal = hexStringToBinString(hex);
+//		Log(lInfo) << binVal;
+
+    }
+
+}
+
+
 

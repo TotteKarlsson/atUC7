@@ -22,7 +22,7 @@
             <Dependencies/>
         </Projects>
         <Projects Include="atUC7Main.cbproj">
-            <Dependencies>P:\libs\atapi\source\atCore.cbproj</Dependencies>
+            <Dependencies/>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -86,13 +86,13 @@
     <Target Name="atVCLCore:Make">
         <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="atUC7Main" DependsOnTargets="atCore">
+    <Target Name="atUC7Main">
         <MSBuild Projects="atUC7Main.cbproj"/>
     </Target>
-    <Target Name="atUC7Main:Clean" DependsOnTargets="atCore:Clean">
+    <Target Name="atUC7Main:Clean">
         <MSBuild Projects="atUC7Main.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="atUC7Main:Make" DependsOnTargets="atCore:Make">
+    <Target Name="atUC7Main:Make">
         <MSBuild Projects="atUC7Main.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">

@@ -5,7 +5,7 @@
 #define MyAppVersion "0.5.0"
 #define MyAppPublisher "Smith Lab"
 #define MyAppURL "http://www.example.com/"
-#define MyAppExeName "atdb.exe"
+#define MyAppExeName "atuc7Main.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -22,7 +22,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}
-OutputDir=x:\ATDB\versions
+OutputDir=x:\atUC7\versions
 Compression=lzma
 SolidCompression=yes
 
@@ -33,9 +33,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-; Source: "P:\AppReleases\atdb\atdb.exe"; DestDir: "{app}"; Flags: ignoreversion
-; Source: "P:\atdb\db\atDB.db";      DestDir: "{localappdata}\ArrayBot"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "P:\AppReleases\atdb\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "P:\AppReleases\atUC7\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

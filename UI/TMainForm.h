@@ -30,6 +30,7 @@
 #include "pies.h"
 #include "TFloatLabeledEdit.h"
 #include "atUC7MessageConsumer.h"
+#include "TSTDStringEdit.h"
 using mtk::Property;
 using mtk::SQLite;
 using mtk::MessageContainer;
@@ -64,7 +65,6 @@ class TMainForm : public TRegistryForm
 	TComboBox *LogLevelCB;
 	TComboBox *mComportCB;
 	TButton *mConnectUC7Btn;
-	TSTDStringLabeledEdit *mSendRAW1;
 	TButton *mSendBtn1;
 	TButton *mStartStopBtn;
 	TGroupBox *GroupBox3;
@@ -82,6 +82,8 @@ class TMainForm : public TRegistryForm
 	TGroupBox *GroupBox2;
 	TFloatLabeledEdit *FloatLabeledEdit1;
 	TFloatLabeledEdit *FloatLabeledEdit2;
+	TSTDStringEdit *mCheckSumEdit;
+	TSTDStringEdit *mSendRAW1;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -96,6 +98,9 @@ class TMainForm : public TRegistryForm
 	void __fastcall mSendBtn1Click(TObject *Sender);
 	void __fastcall mStartStopBtnClick(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
+	void __fastcall mSendRAW1KeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+
+
 
     private:
         bool                                            gCanClose;
