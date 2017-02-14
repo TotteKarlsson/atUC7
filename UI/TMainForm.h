@@ -83,7 +83,7 @@ class TMainForm : public TRegistryForm
 	TFloatLabeledEdit *FloatLabeledEdit1;
 	TFloatLabeledEdit *FloatLabeledEdit2;
 	TSTDStringEdit *mCheckSumEdit;
-	TSTDStringEdit *mSendRAW1;
+	TSTDStringEdit *mRawCMDE;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -98,7 +98,7 @@ class TMainForm : public TRegistryForm
 	void __fastcall mSendBtn1Click(TObject *Sender);
 	void __fastcall mStartStopBtnClick(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
-	void __fastcall mSendRAW1KeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 
 
 

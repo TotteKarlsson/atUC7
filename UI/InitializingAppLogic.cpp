@@ -110,11 +110,13 @@ bool TMainForm::setupAndReadIniParameters()
 
 	mGeneralProperties.add((BaseProperty*)  &mLogLevel.setup( 	                    "LOG_LEVEL",    	                lAny));
 	mGeneralProperties.add((BaseProperty*)  &mCOMPort.setup( 	                    "COM_PORT",    	                	0));
+	mGeneralProperties.add((BaseProperty*)  &mRawCMDE->getProperty()->setup(        "RAW_CMD",    	                	""));
 
 	//Read from file. Create if file do not exist
 	mGeneralProperties.read();
 
 	//Setup UI elements
+	mRawCMDE->update();
 	mSplashProperties.add((BaseProperty*)  &mShowSplashOnStartup.setup(             "ShowOnStartup",                    true));
 	mComportCB->ItemIndex = mCOMPort - 1;
 

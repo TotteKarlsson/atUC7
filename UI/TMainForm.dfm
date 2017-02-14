@@ -305,7 +305,7 @@ object MainForm: TMainForm
       Text = 'CC'
       Value = 'CC'
     end
-    object mSendRAW1: TSTDStringEdit
+    object mRawCMDE: TSTDStringEdit
       Left = 245
       Top = 12
       Width = 145
@@ -313,7 +313,7 @@ object MainForm: TMainForm
       Enabled = False
       TabOrder = 3
       Text = '81F0F8'
-      OnKeyDown = mSendRAW1KeyDown
+      OnKeyDown = mRawCMDEKeyDown
       Value = '81F0F8'
     end
   end

@@ -64,37 +64,6 @@ void __fastcall TMainForm::logMsg()
     mLogFileReader.purge();
 }
 
-void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
-{
-	if(mConnectUC7Btn->Caption == "Open")
-    {
-        if(mUC7.connect(getCOMPortNumber()))
-        {
-            Log(lInfo) << "Connected to a UC7 device";
-        }
-        else
-        {
-            Log(lInfo) << "Connection failed";
-        }
-    }
-    else
-    {
-        if(!mUC7.disConnect())
-        {
-			Log(lError) << "Failed to close serial port";
-        }
-    }
-
-    if(mUC7.isConnected())
-    {
-	    onConnectedToUC7();
-    }
-    else
-    {
-		onDisConnectedToUC7();
-    }
-}
-
 //---------------------------------------------------------------------------
 int	TMainForm::getCOMPortNumber()
 {
@@ -103,15 +72,16 @@ int	TMainForm::getCOMPortNumber()
 
 void __fastcall TMainForm::mSendBtn1Click(TObject *Sender)
 {
-	string msg = mSendRAW1->getValue();
-    msg += '\r';
-	mUC7.sendRawMessage(msg);
+	string msg = mRawCMDE->getValue();
+    UC7Message uc7Msg(msg, false);
+    Log(lInfo) << "Sending message: " << uc7Msg.getFullMessage();
+	mUC7.sendRawMessage(uc7Msg.getFullMessage());
 }
 
 void __fastcall TMainForm::onConnectedToUC7()
 {
     mConnectUC7Btn->Caption         = "Close";
-	mSendRAW1->Enabled 		        = true;
+	mRawCMDE->Enabled 		        = true;
 	mSendBtn1->Enabled 		        = true;
     mStartStopBtn->Enabled 	        = true;
     mResetBtn->Enabled 		        = true;
@@ -123,7 +93,7 @@ void __fastcall TMainForm::onConnectedToUC7()
 void __fastcall TMainForm::onDisConnectedToUC7()
 {
     mConnectUC7Btn->Caption         = "Open";
-	mSendRAW1->Enabled 		        = false;
+	mRawCMDE->Enabled 		        = false;
 	mSendBtn1->Enabled 		        = false;
     mStartStopBtn->Enabled 	        = false;
     mResetBtn->Enabled 		        = false;
@@ -256,36 +226,16 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
     }
 }
 
-void __fastcall TMainForm::mSendRAW1KeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+void __fastcall TMainForm::mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
 	//Auto calculate the checksum
 
-    if(Key == VK_RETURN)
+//  if(Key == VK_RETURN)
     {
-        UC7Message msg(mSendRAW1->getValue());
-
+        UC7Message msg(mRawCMDE->getValue(), false);
         msg.calculateCheckSum();
-
-
-        int cs;
-        string csS = msg.checksum();
-        char* str;
-        strcpy(str, csS.c_str());
-        str2int(cs, str, 10);
-        stringstream convert;
-//        for(int i = 0; i < cs.size(); i++)
-//        {
-//        	convert << std::hex << cs;
-//        }
-
-//        string hex = convert.str();
-//        mCheckSumEdit->setValue(hex);
-//
-//        string binVal = hexStringToBinString(hex);
-//		Log(lInfo) << binVal;
-
+        mCheckSumEdit->setValue(msg.checksum());
     }
-
 }
 
 
