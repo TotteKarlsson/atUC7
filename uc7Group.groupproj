@@ -24,7 +24,7 @@
         <Projects Include="P:\libs\atapi\source\vcl\atVCLCore.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="atUC7Main.cbproj">
+        <Projects Include="atUC7.cbproj">
             <Dependencies>P:\libs\atapi\source\atCore.cbproj</Dependencies>
         </Projects>
     </ItemGroup>
@@ -98,23 +98,23 @@
     <Target Name="atVCLCore:Make">
         <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="atUC7Main" DependsOnTargets="atCore">
-        <MSBuild Projects="atUC7Main.cbproj"/>
+    <Target Name="atUC7" DependsOnTargets="atCore">
+        <MSBuild Projects="atUC7.cbproj"/>
     </Target>
-    <Target Name="atUC7Main:Clean" DependsOnTargets="atCore:Clean">
-        <MSBuild Projects="atUC7Main.cbproj" Targets="Clean"/>
+    <Target Name="atUC7:Clean" DependsOnTargets="atCore:Clean">
+        <MSBuild Projects="atUC7.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="atUC7Main:Make" DependsOnTargets="atCore:Make">
-        <MSBuild Projects="atUC7Main.cbproj" Targets="Make"/>
+    <Target Name="atUC7:Make" DependsOnTargets="atCore:Make">
+        <MSBuild Projects="atUC7.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="mtkCommon;mtkIPC;atCore;VCLCommon;DuneComponents;DuneForms;atVCLCore;atUC7Main"/>
+        <CallTarget Targets="mtkCommon;mtkIPC;atCore;VCLCommon;DuneComponents;DuneForms;atVCLCore;atUC7"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="mtkCommon:Clean;mtkIPC:Clean;atCore:Clean;VCLCommon:Clean;DuneComponents:Clean;DuneForms:Clean;atVCLCore:Clean;atUC7Main:Clean"/>
+        <CallTarget Targets="mtkCommon:Clean;mtkIPC:Clean;atCore:Clean;VCLCommon:Clean;DuneComponents:Clean;DuneForms:Clean;atVCLCore:Clean;atUC7:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="mtkCommon:Make;mtkIPC:Make;atCore:Make;VCLCommon:Make;DuneComponents:Make;DuneForms:Make;atVCLCore:Make;atUC7Main:Make"/>
+        <CallTarget Targets="mtkCommon:Make;mtkIPC:Make;atCore:Make;VCLCommon:Make;DuneComponents:Make;DuneForms:Make;atVCLCore:Make;atUC7:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

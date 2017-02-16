@@ -5,7 +5,7 @@
 #define MyAppVersion "0.5.0"
 #define MyAppPublisher "Smith Lab"
 #define MyAppURL "http://www.example.com/"
-#define MyAppExeName "atuc7Main.exe"
+#define MyAppExeName "atUC7.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -33,7 +33,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "P:\AppReleases\atUC7\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "P:\AppReleases\atUC7\atUC7.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "P:\AppReleases\atUC7\*";            DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
