@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'UC7 Controller'
-  ClientHeight = 643
-  ClientWidth = 983
+  ClientHeight = 571
+  ClientWidth = 862
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,8 +23,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 431
-    Width = 983
+    Top = 359
+    Width = 862
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -35,157 +35,133 @@ object MainForm: TMainForm
   object mMiddlePanel: TPanel
     Left = 0
     Top = 41
-    Width = 983
-    Height = 390
+    Width = 862
+    Height = 318
     Align = alClient
     TabOrder = 0
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
       Width = 320
-      Height = 388
+      Height = 316
       Align = alLeft
       TabOrder = 0
-      object HandwheelGB: TGroupBox
-        Left = 1
-        Top = 240
-        Width = 318
-        Height = 147
-        Align = alBottom
-        Caption = 'Handwheel Position'
-        TabOrder = 0
-        object mCrankPositionPie: TPie
-          Left = 95
-          Top = 36
-          Width = 90
-          Height = 90
-          Angles.StartAngle = 90
-          Angles.EndAngle = 180
-          Brush.Color = clCream
-        end
-        object mRetractLbl: TLabel
-          Left = 40
-          Top = 36
-          Width = 36
-          Height = 13
-          Caption = 'Retract'
-          Enabled = False
-        end
-        object Label2: TLabel
-          Left = 191
-          Top = 36
-          Width = 70
-          Height = 13
-          Caption = 'Before Cutting'
-          Enabled = False
-        end
-        object Label3: TLabel
-          Left = 191
-          Top = 116
-          Width = 35
-          Height = 13
-          Caption = 'Cutting'
-          Enabled = False
-        end
-        object Label4: TLabel
-          Left = 40
-          Top = 116
-          Width = 63
-          Height = 13
-          Caption = 'After Cutting'
-          Enabled = False
-        end
-      end
-      object GroupBox3: TGroupBox
+      object CuttingMotorGB: TGroupBox
         Left = 1
         Top = 1
         Width = 318
-        Height = 239
+        Height = 314
         Align = alClient
         Caption = 'Cutting Motor Controls'
-        TabOrder = 1
+        TabOrder = 0
         object mStartStopBtn: TButton
-          Left = 40
-          Top = 24
-          Width = 219
+          Left = 2
+          Top = 231
+          Width = 314
           Height = 81
+          Align = alBottom
           Caption = 'Start'
           Enabled = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -21
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 0
-          OnClick = mStartStopBtnClick
+          OnClick = mSendBtn1Click
         end
-        object Panel2: TPanel
+        object GroupBox2: TGroupBox
           Left = 2
-          Top = 128
+          Top = 159
           Width = 314
-          Height = 109
+          Height = 72
           Align = alBottom
-          BevelOuter = bvNone
+          Caption = 'Motor Speeds (um/s)'
           TabOrder = 1
-          object GroupBox1: TGroupBox
-            Left = 149
-            Top = 0
-            Width = 165
-            Height = 109
-            Align = alClient
-            Caption = 'Return Speed (um/s)'
+          object FloatLabeledEdit1: TFloatLabeledEdit
+            Left = 20
+            Top = 35
+            Width = 89
+            Height = 21
+            EditLabel.Width = 68
+            EditLabel.Height = 13
+            EditLabel.Caption = 'Cutting Speed'
             TabOrder = 0
-            object FloatLabeledEdit2: TFloatLabeledEdit
-              Left = 6
-              Top = 48
-              Width = 89
-              Height = 21
-              EditLabel.Width = 30
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Speed'
-              TabOrder = 0
-              Text = '-1.00'
-              Value = -1.000000000000000000
-            end
+            Text = '-1.00'
+            Value = -1.000000000000000000
           end
-          object GroupBox2: TGroupBox
-            Left = 0
-            Top = 0
-            Width = 149
-            Height = 109
-            Align = alLeft
-            Caption = 'Cutting Speed (um/s)'
+          object FloatLabeledEdit2: TFloatLabeledEdit
+            Left = 135
+            Top = 35
+            Width = 89
+            Height = 21
+            EditLabel.Width = 66
+            EditLabel.Height = 13
+            EditLabel.Caption = 'Return Speed'
             TabOrder = 1
-            object FloatLabeledEdit1: TFloatLabeledEdit
-              Left = 12
-              Top = 48
-              Width = 89
-              Height = 21
-              EditLabel.Width = 30
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Speed'
-              TabOrder = 0
-              Text = '-1.00'
-              Value = -1.000000000000000000
-            end
+            Text = '-1.00'
+            Value = -1.000000000000000000
           end
         end
+      end
+    end
+    object NorthSouthGB: TGroupBox
+      Left = 336
+      Top = 6
+      Width = 233
+      Height = 209
+      Caption = 'North-South'
+      TabOrder = 1
+      object mFeedRateE: TSTDStringLabeledEdit
+        Left = 16
+        Top = 40
+        Width = 73
+        Height = 27
+        EditLabel.Width = 72
+        EditLabel.Height = 13
+        EditLabel.Caption = 'FeedRate (nm)'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Text = '0'
+        Value = '0'
+      end
+      object mGetCurrentFeedRateBtn: TButton
+        Left = 119
+        Top = 40
+        Width = 74
+        Height = 25
+        Caption = 'Get Current'
+        Enabled = False
+        TabOrder = 1
+        OnClick = mSendBtn1Click
       end
     end
   end
   object SB: TStatusBar
     Left = 0
-    Top = 624
-    Width = 983
+    Top = 552
+    Width = 862
     Height = 19
     Panels = <>
   end
   object BottomPanel: TPanel
     Left = 0
-    Top = 434
-    Width = 983
+    Top = 362
+    Width = 862
     Height = 190
     Align = alBottom
+    Constraints.MinHeight = 190
     TabOrder = 2
     object infoMemo: TMemo
       Left = 1
       Top = 49
-      Width = 981
+      Width = 542
       Height = 140
       Align = alClient
       ScrollBars = ssBoth
@@ -195,7 +171,7 @@ object MainForm: TMainForm
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 981
+      Width = 860
       Height = 48
       Align = alTop
       TabOrder = 1
@@ -229,11 +205,57 @@ object MainForm: TMainForm
           'EVERYTHING')
       end
     end
+    object HandwheelGB: TGroupBox
+      Left = 543
+      Top = 49
+      Width = 318
+      Height = 140
+      Align = alRight
+      Caption = 'Handwheel Position'
+      TabOrder = 2
+      object mCrankPositionPie: TPie
+        Left = 95
+        Top = 36
+        Width = 90
+        Height = 90
+        Angles.StartAngle = 90
+        Angles.EndAngle = 180
+        Brush.Color = clCream
+      end
+      object mRetractLbl: TLabel
+        Left = 40
+        Top = 36
+        Width = 36
+        Height = 13
+        Caption = 'Retract'
+      end
+      object mBe: TLabel
+        Left = 191
+        Top = 36
+        Width = 70
+        Height = 13
+        Caption = 'Before Cutting'
+      end
+      object Label3: TLabel
+        Left = 191
+        Top = 116
+        Width = 35
+        Height = 13
+        Caption = 'Cutting'
+      end
+      object Label4: TLabel
+        Left = 40
+        Top = 116
+        Width = 63
+        Height = 13
+        Caption = 'After Cutting'
+      end
+    end
   end
   object mTopPanel: TPanel
     Left = 0
     Top = 0
-    Width = 983
+    Width = 862
     Height = 41
     Align = alTop
     TabOrder = 3
@@ -277,17 +299,17 @@ object MainForm: TMainForm
       OnClick = mConnectUC7BtnClick
     end
     object mSendBtn1: TButton
-      Left = 396
+      Left = 431
       Top = 10
       Width = 50
       Height = 25
-      Caption = '->'
+      Caption = 'Send'
       Enabled = False
       TabOrder = 2
       OnClick = mSendBtn1Click
     end
     object mResetBtn: TButton
-      Left = 897
+      Left = 776
       Top = 1
       Width = 85
       Height = 39
@@ -297,29 +319,41 @@ object MainForm: TMainForm
       TabOrder = 4
     end
     object mCheckSumEdit: TSTDStringEdit
-      Left = 504
-      Top = 10
-      Width = 49
+      Left = 396
+      Top = 14
+      Width = 29
       Height = 21
+      Enabled = False
       TabOrder = 5
       Text = 'CC'
       Value = 'CC'
     end
     object mRawCMDE: TSTDStringEdit
-      Left = 245
-      Top = 12
-      Width = 145
+      Left = 282
+      Top = 14
+      Width = 108
       Height = 21
-      Enabled = False
       TabOrder = 3
       Text = '81F0F8'
+      OnChange = mRawCMDEChange
       OnKeyDown = mRawCMDEKeyDown
       Value = '81F0F8'
     end
+    object STDStringEdit1: TSTDStringEdit
+      Left = 254
+      Top = 14
+      Width = 22
+      Height = 21
+      Alignment = taCenter
+      Enabled = False
+      TabOrder = 6
+      Text = '!'
+      Value = '!'
+    end
   end
   object ActionList1: TActionList
-    Left = 584
-    Top = 192
+    Left = 744
+    Top = 208
     object ClearMemoA: TAction
       Category = 'Memo'
       Caption = 'Clear Messages'
@@ -336,8 +370,8 @@ object MainForm: TMainForm
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 512
-    Top = 232
+    Left = 736
+    Top = 256
     object ClearMemoA1: TMenuItem
       Action = ClearMemoA
     end
@@ -345,12 +379,12 @@ object MainForm: TMainForm
   object mIniFileC: mtkIniFileC
     IniFileName = 'atUC7.ini'
     RootFolder = '.'
-    Left = 482
-    Top = 88
+    Left = 810
+    Top = 72
   end
   object MainMenu1: TMainMenu
-    Left = 533
-    Top = 136
+    Left = 733
+    Top = 88
     object File1: TMenuItem
       Caption = 'File'
       object Exit1: TMenuItem
@@ -368,7 +402,7 @@ object MainForm: TMainForm
     Enabled = False
     Interval = 50
     OnTimer = ShutDownTimerTimer
-    Left = 578
-    Top = 72
+    Left = 746
+    Top = 152
   end
 end

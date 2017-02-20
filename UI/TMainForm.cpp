@@ -72,86 +72,112 @@ int	TMainForm::getCOMPortNumber()
 
 void __fastcall TMainForm::mSendBtn1Click(TObject *Sender)
 {
-	string msg = mRawCMDE->getValue();
+	TButton* btn = dynamic_cast<TButton*>(Sender);
+
+	string msg;
+	bool sendRaw(false);
+    if(btn == mGetCurrentFeedRateBtn)
+    {
+    	mUC7.getCurrentFeedRate();
+    }
+    else if (btn == mStartStopBtn)
+    {
+    	if(mStartStopBtn->Caption == "Start")
+        {
+            Log(lInfo) << "Starting cutter";
+            mUC7.startCutter();
+
+        }
+        else
+        {
+            Log(lInfo) << "Stopping cutter";
+            mUC7.stopCutter();
+        }
+    }
+    else if (btn == mSendBtn1)
+    {
+		sendRaw = true;
+    }
+
+ 	if(!sendRaw)
+    {
+    	mRawCMDE->setValue(mUC7.getLastSentMessage().getMessage());
+	    mCheckSumEdit->setValue(mUC7.getLastSentMessage().getCheckSum());
+    }
+
+	msg = mRawCMDE->getValue();
     UC7Message uc7Msg(msg, false);
-    Log(lInfo) << "Sending message: " << uc7Msg.getFullMessage();
-	mUC7.sendRawMessage(uc7Msg.getFullMessage());
+    uc7Msg.calculateCheckSum();
+    Log(lInfo) << "Checksum is: " <<uc7Msg.getCheckSum();
+
+
+    if(sendRaw)
+    {
+	    Log(lInfo) << "Sending message: " << uc7Msg.getFullMessage();
+		mUC7.sendRawMessage(uc7Msg.getFullMessage());
+    }
 }
 
 void __fastcall TMainForm::onConnectedToUC7()
 {
-    mConnectUC7Btn->Caption         = "Close";
-	mRawCMDE->Enabled 		        = true;
-	mSendBtn1->Enabled 		        = true;
-    mStartStopBtn->Enabled 	        = true;
-    mResetBtn->Enabled 		        = true;
-    mRetractLbl->Enabled            = true;
-    mCrankPositionPie->Brush->Color 		= clRed;
+	enableDisableUI(true);
 }
 
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::onDisConnectedToUC7()
 {
-    mConnectUC7Btn->Caption         = "Open";
-	mRawCMDE->Enabled 		        = false;
-	mSendBtn1->Enabled 		        = false;
-    mStartStopBtn->Enabled 	        = false;
-    mResetBtn->Enabled 		        = false;
-    mRetractLbl->Enabled 	        = false;
-    mCrankPositionPie->Brush->Color 		= this->Color;
+	enableDisableUI(false);
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::mStartStopBtnClick(TObject *Sender)
+void __fastcall TMainForm::enableDisableUI(bool enableDisable)
 {
-	if(mStartStopBtn->Caption == "Start")
-    {
-    	Log(lInfo) << "Starting cutter";
-	    mUC7.startCutter();
-	}
-    else
-    {
-	   	Log(lInfo) << "Stopping cutter";
-	    mUC7.stopCutter();
-    }
+    mConnectUC7Btn->Caption                 = enableDisable ? "Close" : "Open";
+	mSendBtn1->Enabled 		                = enableDisable;
+
+	enableDisableGroupBox(CuttingMotorGB, enableDisable);
+    enableDisableGroupBox(HandwheelGB, enableDisable);
+    enableDisableGroupBox(NorthSouthGB,enableDisable);
+
+    mCrankPositionPie->Brush->Color 		= enableDisable ? clRed : this->Color;
 }
 
-
+//---------------------------------------------------------------------------
 bool TMainForm::handleUC7Message(const UC7Message& m)
 {
 	//Find out controller address from sender parameter
-	switch(toInt(m.sender()))
+	switch(toInt(m.getSender()))
     {
     	case 1: 		return UNKNOWN;
         case 2:			return UNKNOWN;
         case 3:			return UNKNOWN;
         case 4:
         {
-        	if(m.command() == "20")
+        	if(m.getCommand() == "20")
             {
 
             }
-            else if(m.command() == "21")
+            else if(m.getCommand() == "21")
             {
 
             }
-            else if(m.command() == "23")
+            else if(m.getCommand() == "23")
             {
 
             }
-            else if(m.command() == "30")
+            else if(m.getCommand() == "30")
             {
 
             }
-            else if(m.command() == "31")
+            else if(m.getCommand() == "31")
             {
 
             }
-            else if(m.command() == "40")	//Handwheel position
+            else if(m.getCommand() == "40")	//Handwheel position
             {
 
             }
-            else if(m.command() == "41")
+            else if(m.getCommand() == "41")
             {
 
             }
@@ -162,9 +188,9 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
         }
 		case 5:
         {
-        	if(m.command() == "20")
+        	if(m.getCommand() == "20")
             {
-            	string d = m.data().substr(2,2);
+            	string d = m.getData().substr(2,2);
                 if(d == "00")
                 {
                 	Log(lInfo) << "Cutting motor is off";
@@ -181,17 +207,17 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 }
 
             }
-        	else if(m.command() == "30")
+        	else if(m.getCommand() == "30")
             {
 
             }
-        	else if(m.command() == "31")
+        	else if(m.getCommand() == "31")
             {
 
             }
-        	else if(m.command() == "40")
+        	else if(m.getCommand() == "40")
             {
-            	string d = m.data().substr(2,2);
+            	string d = m.getData().substr(2,2);
                 if(d == "00")  //Retract
                 {
                 	mCrankPositionPie->Angles->EndAngle = 180;
@@ -228,15 +254,16 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
 
 void __fastcall TMainForm::mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
-	//Auto calculate the checksum
-
-//  if(Key == VK_RETURN)
-    {
-        UC7Message msg(mRawCMDE->getValue(), false);
-        msg.calculateCheckSum();
-        mCheckSumEdit->setValue(msg.checksum());
-    }
+    UC7Message msg(mRawCMDE->getValue(), false);
+    msg.calculateCheckSum();
+    Log(lInfo) << "Checksum is: " << msg.getCheckSum();
+    mCheckSumEdit->setValue(msg.getCheckSum());
 }
 
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::mRawCMDEChange(TObject *Sender)
+{
+	mRawCMDE->OnChange(Sender);
+}
 
 

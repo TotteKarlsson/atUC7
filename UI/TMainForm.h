@@ -25,8 +25,9 @@
 #include "TRegistryForm.h"
 #include "TRegistryProperties.h"
 #include "TSTDStringLabeledEdit.h"
+#include "TSTDStringEdit.h"
 #include "mtkIniFileC.h"
-#include "atUC7.h"
+#include "atUC7Component.h"
 #include "pies.h"
 #include "TFloatLabeledEdit.h"
 #include "atUC7MessageConsumer.h"
@@ -67,23 +68,25 @@ class TMainForm : public TRegistryForm
 	TButton *mConnectUC7Btn;
 	TButton *mSendBtn1;
 	TButton *mStartStopBtn;
-	TGroupBox *GroupBox3;
+	TGroupBox *CuttingMotorGB;
 	TPanel *mTopPanel;
 	TButton *mResetBtn;
 	TGroupBox *HandwheelGB;
 	TPie *mCrankPositionPie;
 	TLabel *mRetractLbl;
-	TLabel *Label2;
+	TLabel *mBe;
 	TLabel *Label3;
 	TLabel *Label4;
 	TPanel *mMiddleLeftPanel;
-	TGroupBox *GroupBox1;
-	TPanel *Panel2;
 	TGroupBox *GroupBox2;
 	TFloatLabeledEdit *FloatLabeledEdit1;
 	TFloatLabeledEdit *FloatLabeledEdit2;
 	TSTDStringEdit *mCheckSumEdit;
 	TSTDStringEdit *mRawCMDE;
+	TSTDStringEdit *STDStringEdit1;
+	TGroupBox *NorthSouthGB;
+	TSTDStringLabeledEdit *mFeedRateE;
+	TButton *mGetCurrentFeedRateBtn;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -96,9 +99,9 @@ class TMainForm : public TRegistryForm
     void __fastcall LogLevelCBChange(TObject *Sender);
 	void __fastcall mConnectUC7BtnClick(TObject *Sender);
 	void __fastcall mSendBtn1Click(TObject *Sender);
-	void __fastcall mStartStopBtnClick(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall mRawCMDEChange(TObject *Sender);
 
 
 
@@ -136,6 +139,7 @@ class TMainForm : public TRegistryForm
         void __fastcall 								onDisConnectedToUC7();
 		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
         bool											handleUC7Message(const UC7Message& m);
+		void __fastcall 								enableDisableUI(bool enableDisable);
 
     public:
                     __fastcall                          TMainForm(TComponent* Owner);

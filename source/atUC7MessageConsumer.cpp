@@ -4,7 +4,7 @@
 #include "Poco/Mutex.h"
 #include "mtkLogger.h"
 #include "mtkUtils.h"
-#include "atUC7.h"
+#include "atUC7Component.h"
 #include "atUC7ApplicationMessages.h"
 #include "atUC7DataStructures.h"
 //---------------------------------------------------------------------------
