@@ -1,3 +1,12 @@
+Release 0.5.1 (Feb 20)
+=======================
+* Added UI enable/disable stuff, reflecting connection state
+* Minor refactoring
+* Fixed more of composing message to send to UC7
+* Moved message consumer to UI code
+* Fixed naming of application
+* Added a pie to indicate cutter position
+
 Release 0.5.0 (Jan 17)
 =======================
 * Initial commit of the UC7 application code.
