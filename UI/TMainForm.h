@@ -32,6 +32,7 @@
 #include "TFloatLabeledEdit.h"
 #include "atUC7MessageConsumer.h"
 #include "TSTDStringEdit.h"
+#include "TIntegerLabeledEdit.h"
 using mtk::Property;
 using mtk::SQLite;
 using mtk::MessageContainer;
@@ -70,7 +71,7 @@ class TMainForm : public TRegistryForm
 	TButton *mStartStopBtn;
 	TGroupBox *CuttingMotorGB;
 	TPanel *mTopPanel;
-	TButton *mResetBtn;
+	TButton *mSynchUIBtn;
 	TGroupBox *HandwheelGB;
 	TPie *mCrankPositionPie;
 	TLabel *mRetractLbl;
@@ -85,8 +86,10 @@ class TMainForm : public TRegistryForm
 	TSTDStringEdit *mRawCMDE;
 	TSTDStringEdit *STDStringEdit1;
 	TGroupBox *NorthSouthGB;
-	TSTDStringLabeledEdit *mFeedRateE;
-	TButton *mGetCurrentFeedRateBtn;
+	TButton *mGetFeedRateBtn;
+	TIntegerLabeledEdit *mFeedRateE;
+	TIntegerLabeledEdit *mKnifeStageNSAbsPosE;
+	TButton *mGetKnifeStagePosBtn;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -102,6 +105,9 @@ class TMainForm : public TRegistryForm
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall mRawCMDEChange(TObject *Sender);
+	void __fastcall mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall mSynchUIBtnClick(TObject *Sender);
+
 
 
 

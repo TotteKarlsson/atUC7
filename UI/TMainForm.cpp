@@ -24,6 +24,7 @@
 #pragma link "pies"
 #pragma link "TFloatLabeledEdit"
 #pragma link "TSTDStringEdit"
+#pragma link "TIntegerLabeledEdit"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
@@ -76,9 +77,13 @@ void __fastcall TMainForm::mSendBtn1Click(TObject *Sender)
 
 	string msg;
 	bool sendRaw(false);
-    if(btn == mGetCurrentFeedRateBtn)
+    if(btn == mGetFeedRateBtn)
     {
     	mUC7.getCurrentFeedRate();
+    }
+    else if (btn == mGetKnifeStagePosBtn) 
+    {
+     	mUC7.getKnifeStagePosition();        
     }
     else if (btn == mStartStopBtn)
     {
@@ -86,7 +91,6 @@ void __fastcall TMainForm::mSendBtn1Click(TObject *Sender)
         {
             Log(lInfo) << "Starting cutter";
             mUC7.startCutter();
-
         }
         else
         {
@@ -108,12 +112,9 @@ void __fastcall TMainForm::mSendBtn1Click(TObject *Sender)
 	msg = mRawCMDE->getValue();
     UC7Message uc7Msg(msg, false);
     uc7Msg.calculateCheckSum();
-    Log(lInfo) << "Checksum is: " <<uc7Msg.getCheckSum();
-
 
     if(sendRaw)
     {
-	    Log(lInfo) << "Sending message: " << uc7Msg.getFullMessage();
 		mUC7.sendRawMessage(uc7Msg.getFullMessage());
     }
 }
@@ -134,6 +135,7 @@ void __fastcall TMainForm::enableDisableUI(bool enableDisable)
 {
     mConnectUC7Btn->Caption                 = enableDisable ? "Close" : "Open";
 	mSendBtn1->Enabled 		                = enableDisable;
+    mSynchUIBtn->Enabled					= enableDisable;
 
 	enableDisableGroupBox(CuttingMotorGB, enableDisable);
     enableDisableGroupBox(HandwheelGB, enableDisable);
@@ -148,9 +150,6 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
 	//Find out controller address from sender parameter
 	switch(toInt(m.getSender()))
     {
-    	case 1: 		return UNKNOWN;
-        case 2:			return UNKNOWN;
-        case 3:			return UNKNOWN;
         case 4:
         {
         	if(m.getCommand() == "20")
@@ -161,13 +160,21 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
             {
 
             }
-            else if(m.getCommand() == "23")
+            else if(m.getCommand() == "23") //Feed
             {
-
+            	if(m.getData().size() == 6)
+                {
+	                string feedIn_nm  = m.getData().substr(2);
+                    mFeedRateE->setValue(hexToDec(feedIn_nm));
+                }
             }
             else if(m.getCommand() == "30")
             {
-
+            	if(m.getXX() == "FF") //This is info about position
+                {
+	                string absPos  = m.getData().substr(2);
+                    mKnifeStageNSAbsPosE->setValue(hexToDec(absPos));
+                }
             }
             else if(m.getCommand() == "31")
             {
@@ -264,6 +271,23 @@ void __fastcall TMainForm::mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftSta
 void __fastcall TMainForm::mRawCMDEChange(TObject *Sender)
 {
 	mRawCMDE->OnChange(Sender);
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+
+{
+	if(Key == VK_RETURN)
+    {
+    	//Set feedrate
+        mUC7.setFeedRate(mFeedRateE->getValue());
+    }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::mSynchUIBtnClick(TObject *Sender)
+{
+    mUC7.getStatus();
 }
 
 

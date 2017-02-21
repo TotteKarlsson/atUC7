@@ -9,7 +9,6 @@ using Poco::DateTimeFormatter;
 using namespace mtk;
 
 extern HWND gOtherAppWindow;
-//extern TSplashForm*  gSplashForm;
 void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
     if(Key == VK_ESCAPE)
@@ -17,7 +16,6 @@ void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState S
         Close();
     }
 }
-
 
 void __fastcall TMainForm::OpenAboutFormAExecute(TObject *Sender)
 {
@@ -118,10 +116,10 @@ void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
 
 BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
 {
-	static TCHAR buffer[50];
-	GetWindowText(hwnd, buffer, 50);
+	static TCHAR buffer[1024];
+	GetWindowText(hwnd, buffer, 1024);
 
-	if(_tcsstr(buffer, "atDB"))
+	if(_tcsstr(buffer, "atUC7"))
 	{
 		// do something with hwnd here
 		gOtherAppWindow = hwnd;
@@ -152,7 +150,7 @@ void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
 			case atUC7Message:
             {
             	UC7Message* m = (UC7Message*) msg.lparam;
-                Log(lInfo) << "Handling UC7 message:" << m->getMessageNameAsString();
+                Log(lInfo) << "Handling UC7 message: \"" << m->getMessageNameAsString()<<"\" with data: "<<m->getData();
                 handleUC7Message(*m);
                 delete m;
             }
@@ -162,7 +160,7 @@ void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
 	}
 	catch(...)
 	{
-		Log(lError) << "Received an unhandled windows message!";
+		Log(lError) << "An exception was thrown in AppInBox.";
 	}
 }
 

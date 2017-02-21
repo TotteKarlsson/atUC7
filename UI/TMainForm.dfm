@@ -113,14 +113,24 @@ object MainForm: TMainForm
       Height = 209
       Caption = 'North-South'
       TabOrder = 1
-      object mFeedRateE: TSTDStringLabeledEdit
-        Left = 16
+      object mGetFeedRateBtn: TButton
+        Left = 119
         Top = 40
+        Width = 74
+        Height = 25
+        Caption = 'Get Current'
+        Enabled = False
+        TabOrder = 1
+        OnClick = mSendBtn1Click
+      end
+      object mFeedRateE: TIntegerLabeledEdit
+        Left = 16
+        Top = 37
         Width = 73
         Height = 27
-        EditLabel.Width = 72
+        EditLabel.Width = 94
         EditLabel.Height = 13
-        EditLabel.Caption = 'FeedRate (nm)'
+        EditLabel.Caption = 'Feed Rate (nm/cut)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -129,16 +139,34 @@ object MainForm: TMainForm
         ParentFont = False
         TabOrder = 0
         Text = '0'
-        Value = '0'
+        OnKeyDown = mFeedRateEKeyDown
       end
-      object mGetCurrentFeedRateBtn: TButton
+      object mKnifeStageNSAbsPosE: TIntegerLabeledEdit
+        Left = 16
+        Top = 101
+        Width = 73
+        Height = 27
+        EditLabel.Width = 95
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Knife Stage Position'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        Text = '0'
+        OnKeyDown = mFeedRateEKeyDown
+      end
+      object mGetKnifeStagePosBtn: TButton
         Left = 119
-        Top = 40
+        Top = 104
         Width = 74
         Height = 25
         Caption = 'Get Current'
         Enabled = False
-        TabOrder = 1
+        TabOrder = 3
         OnClick = mSendBtn1Click
       end
     end
@@ -308,15 +336,15 @@ object MainForm: TMainForm
       TabOrder = 2
       OnClick = mSendBtn1Click
     end
-    object mResetBtn: TButton
+    object mSynchUIBtn: TButton
       Left = 776
       Top = 1
       Width = 85
       Height = 39
       Align = alRight
-      Caption = 'Reset UC7'
-      Enabled = False
+      Caption = 'Get All Status'
       TabOrder = 4
+      OnClick = mSynchUIBtnClick
     end
     object mCheckSumEdit: TSTDStringEdit
       Left = 396
