@@ -33,8 +33,8 @@
 #include "atUC7MessageConsumer.h"
 #include "TSTDStringEdit.h"
 #include "TIntegerLabeledEdit.h"
+#include "TIntLabel.h"
 using mtk::Property;
-using mtk::SQLite;
 using mtk::MessageContainer;
 using mtk::IniFileProperties;
 using mtk::TRegistryProperties;
@@ -90,6 +90,10 @@ class TMainForm : public TRegistryForm
 	TIntegerLabeledEdit *mFeedRateE;
 	TIntegerLabeledEdit *mKnifeStageNSAbsPosE;
 	TButton *mGetKnifeStagePosBtn;
+	TGroupBox *CounterGB;
+	TIntegerLabeledEdit *mCountToE;
+	TButton *mResetCounterBtn;
+	TIntLabel *mCounterLabel;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -101,20 +105,16 @@ class TMainForm : public TRegistryForm
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
     void __fastcall LogLevelCBChange(TObject *Sender);
 	void __fastcall mConnectUC7BtnClick(TObject *Sender);
-	void __fastcall mSendBtn1Click(TObject *Sender);
+	void __fastcall createUC7Message(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall mRawCMDEChange(TObject *Sender);
 	void __fastcall mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall mSynchUIBtnClick(TObject *Sender);
-
-
-
+	void __fastcall miscBtnClicks(TObject *Sender);
 
     private:
         bool                                            gCanClose;
-        TApplicationProperties                          mAppProperties;
-
 
 		UC7												mUC7;
 
@@ -134,10 +134,9 @@ class TMainForm : public TRegistryForm
         mtk::Property<int>	                            mBottomPanelHeight;
 		mtk::Property<mtk::LogLevel>	                mLogLevel;
 		mtk::Property<int>	                			mCOMPort;
-        TRegistryProperties   	  	                    mSplashProperties;
-        mtk::Property<bool>                             mShowSplashOnStartup;
+        mtk::Property<int>                             	mCountTo;
 
-        void        __fastcall                          PopulateStyleMenu();
+        void __fastcall                          		PopulateStyleMenu();
         bool                                            setupAndReadIniParameters();
         void                                            setupIniFile();
 

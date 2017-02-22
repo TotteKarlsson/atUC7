@@ -8,7 +8,6 @@
 using namespace mtk;
 extern string gCommonAppDataLocation;
 
-
 __fastcall TMainForm::~TMainForm()
 {
 	Log(lInfo) << "Destructor in Main Form";
@@ -63,8 +62,5 @@ void __fastcall TMainForm::FormClose(TObject *Sender, TCloseAction &Action)
 
 	//Write to file
 	mIniFileC->save();
-
-	//Registry settings
-	mSplashProperties.write();
 }
 

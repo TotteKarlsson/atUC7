@@ -14,6 +14,11 @@ using mtk::gEmptyString;
 
 typedef void __fastcall (__closure *UICallback)(void);
 
+//The message consumer monitors the referenced UC7 object for new
+//messages. When a new message is available, the message is popped
+//from the UC7 queue and propagated to the main UI, which is responsible
+//to handle it.
+
 class AT_CORE UC7MessageConsumer : public ABObject, public mtk::Thread
 {
     public:

@@ -69,7 +69,7 @@ object MainForm: TMainForm
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          OnClick = mSendBtn1Click
+          OnClick = createUC7Message
         end
         object GroupBox2: TGroupBox
           Left = 2
@@ -121,7 +121,7 @@ object MainForm: TMainForm
         Caption = 'Get Current'
         Enabled = False
         TabOrder = 1
-        OnClick = mSendBtn1Click
+        OnClick = createUC7Message
       end
       object mFeedRateE: TIntegerLabeledEdit
         Left = 16
@@ -167,7 +167,61 @@ object MainForm: TMainForm
         Caption = 'Get Current'
         Enabled = False
         TabOrder = 3
-        OnClick = mSendBtn1Click
+        OnClick = createUC7Message
+      end
+    end
+    object CounterGB: TGroupBox
+      Left = 584
+      Top = 6
+      Width = 249
+      Height = 209
+      Caption = 'Counter'
+      TabOrder = 2
+      object mCounterLabel: TIntLabel
+        Left = 32
+        Top = 35
+        Width = 11
+        Height = 25
+        Caption = '1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Value = 1
+        TheFont.Charset = DEFAULT_CHARSET
+        TheFont.Color = clWindowText
+        TheFont.Height = -21
+        TheFont.Name = 'Tahoma'
+        TheFont.Style = []
+      end
+      object mCountToE: TIntegerLabeledEdit
+        Left = 120
+        Top = 34
+        Width = 49
+        Height = 31
+        EditLabel.Width = 55
+        EditLabel.Height = 13
+        EditLabel.Caption = 'mCountToE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Text = '0'
+      end
+      object mResetCounterBtn: TButton
+        Left = 15
+        Top = 66
+        Width = 50
+        Height = 25
+        Caption = 'Reset'
+        Enabled = False
+        TabOrder = 1
+        OnClick = miscBtnClicks
       end
     end
   end
@@ -334,7 +388,7 @@ object MainForm: TMainForm
       Caption = 'Send'
       Enabled = False
       TabOrder = 2
-      OnClick = mSendBtn1Click
+      OnClick = createUC7Message
     end
     object mSynchUIBtn: TButton
       Left = 776
@@ -380,7 +434,7 @@ object MainForm: TMainForm
     end
   end
   object ActionList1: TActionList
-    Left = 744
+    Left = 768
     Top = 208
     object ClearMemoA: TAction
       Category = 'Memo'
@@ -398,8 +452,8 @@ object MainForm: TMainForm
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 736
-    Top = 256
+    Left = 680
+    Top = 208
     object ClearMemoA1: TMenuItem
       Action = ClearMemoA
     end
@@ -411,8 +465,8 @@ object MainForm: TMainForm
     Top = 72
   end
   object MainMenu1: TMainMenu
-    Left = 733
-    Top = 88
+    Left = 605
+    Top = 208
     object File1: TMenuItem
       Caption = 'File'
       object Exit1: TMenuItem
@@ -430,7 +484,7 @@ object MainForm: TMainForm
     Enabled = False
     Interval = 50
     OnTimer = ShutDownTimerTimer
-    Left = 746
-    Top = 152
+    Left = 770
+    Top = 144
   end
 end

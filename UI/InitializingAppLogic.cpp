@@ -94,11 +94,6 @@ void TMainForm::setupIniFile()
 	}
 
 	mIniFileC->init(fldr);
-
-	//For convenience and for option form, populate appProperties container
-	mAppProperties.append(&mGeneralProperties);
-	mAppProperties.append(&mSplashProperties);
-
 }
 
 bool TMainForm::setupAndReadIniParameters()
@@ -113,22 +108,18 @@ bool TMainForm::setupAndReadIniParameters()
 	mGeneralProperties.add((BaseProperty*)  &mLogLevel.setup( 	                    "LOG_LEVEL",    	                lAny));
 	mGeneralProperties.add((BaseProperty*)  &mCOMPort.setup( 	                    "COM_PORT",    	                	0));
 	mGeneralProperties.add((BaseProperty*)  &mRawCMDE->getProperty()->setup(        "RAW_CMD",    	                	""));
+	mGeneralProperties.add((BaseProperty*)  &mCountToE->getProperty()->setup(       "COUNT_TO",                     	10));
 
 	//Read from file. Create if file do not exist
 	mGeneralProperties.read();
 
 	//Setup UI elements
 	mRawCMDE->update();
-	mSplashProperties.add((BaseProperty*)  &mShowSplashOnStartup.setup(             "ShowOnStartup",                    true));
+	mCountToE->update();
+
 	mComportCB->ItemIndex = mCOMPort - 1;
 
     gLogger.setLogLevel(mLogLevel);
-
-	if(mSplashProperties.doesSectionExist())
-	{
-		mSplashProperties.read();
-	}
-
 	return true;
 }
 

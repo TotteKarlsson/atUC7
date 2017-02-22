@@ -1,30 +1,20 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "atVCLUtils.h"
-#include "database/atDBUtils.h"
 #include "mtkLogger.h"
-#include "mtkMoleculixException.h"
-#include "mtkSQLiteException.h"
-#include "mtkSQLiteQuery.h"
-#include "mtkSQLiteTable.h"
 #include "mtkStringUtils.h"
 #include "mtkUtils.h"
 #include "mtkVCLUtils.h"
-#include "Poco/DateTime.h"
-#include "Poco/DateTimeFormat.h"
-#include "Poco/DateTimeFormatter.h"
-#include "Poco/Glob.h"
-#include "Poco/Timezone.h"
 #include "TMainForm.h"
 #include "TMemoLogger.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "mtkIniFileC"
-#pragma link "mtkIniFileC"
 #pragma link "pies"
 #pragma link "TFloatLabeledEdit"
 #pragma link "TSTDStringEdit"
 #pragma link "TIntegerLabeledEdit"
+#pragma link "TIntLabel"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
@@ -42,21 +32,31 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     : TRegistryForm(gApplicationRegistryRoot, "MainForm", Owner),
 
     mBottomPanelHeight(190),
-    mSplashProperties(gApplicationRegistryRoot, "Splash"),
-    mShowSplashOnStartup(true),
     mLogLevel(lAny),
     mIsStyleMenuPopulated(false),
     gCanClose(true),
     mLogFileReader(joinPath(getSpecialFolder(CSIDL_LOCAL_APPDATA), "atUC7", gLogFileName), &logMsg),
     mCOMPort(0),
-    mUC7Consumer(mUC7, Handle)
+    mUC7Consumer(mUC7, Handle),
+    mCountTo(0)
 {
     //Close any dataconnection created by stupid TSQLConnection
     TMemoLogger::mMemoIsEnabled = false;
     setupIniFile();
     setupAndReadIniParameters();
+
+    //Setup UC7 object
     mUC7Consumer.start();
+
+	//Setup references
+  	//The following causes the editbox, and its property to reference the counters CountTo value
+   	mCountToE->setReference(mUC7.getCounter().getCountToReference());
+    mUC7.getCounter().increase(5);
+
+   	mCounterLabel->setReference(mUC7.getCounter().getCountReference());
+    mCounterLabel->update();
 }
+
 
 //This one is called from the reader thread
 void __fastcall TMainForm::logMsg()
@@ -71,7 +71,7 @@ int	TMainForm::getCOMPortNumber()
 	return mComportCB->ItemIndex + 1;
 }
 
-void __fastcall TMainForm::mSendBtn1Click(TObject *Sender)
+void __fastcall TMainForm::createUC7Message(TObject *Sender)
 {
 	TButton* btn = dynamic_cast<TButton*>(Sender);
 
@@ -133,130 +133,19 @@ void __fastcall TMainForm::onDisConnectedToUC7()
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::enableDisableUI(bool enableDisable)
 {
+	//Buttons
     mConnectUC7Btn->Caption                 = enableDisable ? "Close" : "Open";
 	mSendBtn1->Enabled 		                = enableDisable;
     mSynchUIBtn->Enabled					= enableDisable;
 
-	enableDisableGroupBox(CuttingMotorGB, enableDisable);
-    enableDisableGroupBox(HandwheelGB, enableDisable);
-    enableDisableGroupBox(NorthSouthGB,enableDisable);
+    //group boxes
+	enableDisableGroupBox(CounterGB, 		enableDisable);
+	enableDisableGroupBox(CuttingMotorGB, 	enableDisable);
+    enableDisableGroupBox(HandwheelGB, 		enableDisable);
+    enableDisableGroupBox(NorthSouthGB,		enableDisable);
 
+	//Misc
     mCrankPositionPie->Brush->Color 		= enableDisable ? clRed : this->Color;
-}
-
-//---------------------------------------------------------------------------
-bool TMainForm::handleUC7Message(const UC7Message& m)
-{
-	//Find out controller address from sender parameter
-	switch(toInt(m.getSender()))
-    {
-        case 4:
-        {
-        	if(m.getCommand() == "20")
-            {
-
-            }
-            else if(m.getCommand() == "21")
-            {
-
-            }
-            else if(m.getCommand() == "23") //Feed
-            {
-            	if(m.getData().size() == 6)
-                {
-	                string feedIn_nm  = m.getData().substr(2);
-                    mFeedRateE->setValue(hexToDec(feedIn_nm));
-                }
-            }
-            else if(m.getCommand() == "30")
-            {
-            	if(m.getXX() == "FF") //This is info about position
-                {
-	                string absPos  = m.getData().substr(2);
-                    mKnifeStageNSAbsPosE->setValue(hexToDec(absPos));
-                }
-            }
-            else if(m.getCommand() == "31")
-            {
-
-            }
-            else if(m.getCommand() == "40")	//Handwheel position
-            {
-
-            }
-            else if(m.getCommand() == "41")
-            {
-
-            }
-			else
-            {
-
-            }
-        }
-		case 5:
-        {
-        	if(m.getCommand() == "20")
-            {
-            	string d = m.getData().substr(2,2);
-                if(d == "00")
-                {
-                	Log(lInfo) << "Cutting motor is off";
-                    mStartStopBtn->Caption = "Start";
-                }
-                else if(d == "01")
-                {
-                	Log(lInfo) << "Cutting motor is on";
-                    mStartStopBtn->Caption = "Stop";
-                }
-                else if(d == "E0")
-                {
-                	Log(lError) << "Invalid calibration";
-                }
-
-            }
-        	else if(m.getCommand() == "30")
-            {
-
-            }
-        	else if(m.getCommand() == "31")
-            {
-
-            }
-        	else if(m.getCommand() == "40")
-            {
-            	string d = m.getData().substr(2,2);
-                if(d == "00")  //Retract
-                {
-                	mCrankPositionPie->Angles->EndAngle = 180;
-                	mCrankPositionPie->Angles->StartAngle = 90;
-                }
-                else if(d == "01")  //Before cutting
-                {
-                	mCrankPositionPie->Angles->EndAngle = 90;
-                	mCrankPositionPie->Angles->StartAngle = 0;
-                }
-                else if(d == "03") //Cutting
-                {
-                	mCrankPositionPie->Angles->EndAngle = 0;
-                	mCrankPositionPie->Angles->StartAngle = 270;
-                }
-                else if(d == "02") //After cutting
-                {
-                	mCrankPositionPie->Angles->EndAngle = 270;
-                	mCrankPositionPie->Angles->StartAngle = 180;
-                }
-                else if(d == "E0")
-                {
-
-                }
-            }
-            else
-            {
-
-            }
-        }
-        default: return UNKNOWN;
-    }
 }
 
 void __fastcall TMainForm::mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
@@ -288,6 +177,17 @@ void __fastcall TMainForm::mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftS
 void __fastcall TMainForm::mSynchUIBtnClick(TObject *Sender)
 {
     mUC7.getStatus();
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::miscBtnClicks(TObject *Sender)
+{
+	TButton* btn = dynamic_cast<TButton*>(Sender);
+    if(btn == mResetCounterBtn)
+    {
+    	mUC7.getCounter().reset();
+        mCounterLabel->update();
+    }
 }
 
 
