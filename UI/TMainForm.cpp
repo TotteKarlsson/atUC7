@@ -15,6 +15,7 @@
 #pragma link "TSTDStringEdit"
 #pragma link "TIntegerLabeledEdit"
 #pragma link "TIntLabel"
+#pragma link "mtkIntEdit"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
@@ -33,7 +34,6 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 
     mBottomPanelHeight(190),
     mLogLevel(lAny),
-    mIsStyleMenuPopulated(false),
     gCanClose(true),
     mLogFileReader(joinPath(getSpecialFolder(CSIDL_LOCAL_APPDATA), "atUC7", gLogFileName), &logMsg),
     mCOMPort(0),
@@ -67,26 +67,29 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
 {
 	TButton* btn = dynamic_cast<TButton*>(Sender);
 
-	string msg;
+    if(!btn)
+    {
+    	Log(lError) << "Sender object was NULl!";
+    	return;
+    }
+
 	bool sendRaw(false);
     if(btn == mGetFeedRateBtn)
     {
     	mUC7.getCurrentFeedRate();
     }
-    else if (btn == mGetKnifeStagePosBtn) 
+    else if (btn == mGetKnifeStagePosBtn)
     {
-     	mUC7.getKnifeStagePosition();        
+     	mUC7.getKnifeStagePosition();
     }
     else if (btn == mStartStopBtn)
     {
     	if(mStartStopBtn->Caption == "Start")
         {
-            Log(lInfo) << "Starting cutter";
             mUC7.startCutter();
         }
         else
         {
-            Log(lInfo) << "Stopping cutter";
             mUC7.stopCutter();
         }
     }
@@ -110,18 +113,20 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
 		sendRaw = true;
     }
 
- 	if(!sendRaw)
-    {
-    	mRawCMDE->setValue(mUC7.getLastSentMessage().getMessage());
-	    mCheckSumEdit->setValue(mUC7.getLastSentMessage().getCheckSum());
-    }
+// 	if(!sendRaw)
+//    {
+//    	string msg = mUC7.getLastSentMessage().getMessage();
+//    	mRawCMDE->setValue(msg);
+//	    mCheckSumEdit->setValue(mUC7.getLastSentMessage().getCheckSum());
+//    }
 
-	msg = mRawCMDE->getValue();
-    UC7Message uc7Msg(msg, false);
-    uc7Msg.calculateCheckSum();
 
     if(sendRaw)
     {
+        string msg = mRawCMDE->getValue();
+        UC7Message uc7Msg(msg, false);
+        uc7Msg.calculateCheckSum();
+
     	Log(lInfo) << "Sending UC7 message:\""<<msg << "\"\t"<<uc7Msg.getMessageNameAsString();
 		mUC7.sendRawMessage(uc7Msg.getFullMessage());
     }
@@ -187,12 +192,34 @@ void __fastcall TMainForm::miscBtnClicks(TObject *Sender)
     }
 }
 
-
 void __fastcall TMainForm::mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
 	if(Key == VK_RETURN)
     {
         mUC7.setPresetFeedRate(mPresetFeedRateE->getValue());
     }
-
 }
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::mRepeatTimerTimer(TObject *Sender)
+{
+	mSendBtn1->Click();
+}
+
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::mRepeatEveryBtnClick(TObject *Sender)
+{
+	mRepeatTimer->Enabled = !mRepeatTimer->Enabled;
+    if(mRepeatTimer->Enabled)
+    {
+	    mRepeatTimer->Interval = mRepeatTimeE->getValue();
+		mRepeatEveryBtn->Caption = "Stop";
+    }
+    else
+    {
+		mRepeatEveryBtn->Caption = "Repeat Every";
+    }
+}
+
+

@@ -36,7 +36,6 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
             }
             else if(m.getCommand() == "30")
             {
-				//            	Log(lDebug) << "Message
             	if(m.getXX() == "FF") //This is info about position
                 {
 	               string absPos  = m.getData().substr(2);

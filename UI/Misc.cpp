@@ -132,8 +132,14 @@ BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
 //This one is called from the reader thread
 void __fastcall TMainForm::logMsg()
 {
-    infoMemo->Lines->Add(vclstr(mLogFileReader.getData()));
-    mLogFileReader.purge();
+	try
+    {
+	    infoMemo->Lines->Add(vclstr(mLogFileReader.getData()));
+    }
+    catch(...)
+    {
+    	Log(lError) << "Bad stuff..";
+    }
 }
 
 //---------------------------------------------------------------------------
@@ -149,7 +155,7 @@ void __fastcall TMainForm::enableDisableUI(bool enableDisable)
     mConnectUC7Btn->Caption                 = enableDisable ? "Close" : "Open";
 	mSendBtn1->Enabled 		                = enableDisable;
     mSynchUIBtn->Enabled					= enableDisable;
-
+	mRepeatEveryBtn->Enabled				= enableDisable;
     //group boxes
 	enableDisableGroupBox(CounterGB, 		enableDisable);
 	enableDisableGroupBox(CuttingMotorGB, 	enableDisable);

@@ -34,6 +34,7 @@
 #include "TSTDStringEdit.h"
 #include "TIntegerLabeledEdit.h"
 #include "TIntLabel.h"
+#include "mtkIntEdit.h"
 using mtk::Property;
 using mtk::MessageContainer;
 using mtk::IniFileProperties;
@@ -99,13 +100,17 @@ class TMainForm : public TRegistryForm
 	TButton *mMoveNorthBtn;
 	TIntegerLabeledEdit *mKnifeStageJogStep;
 	TIntegerLabeledEdit *mPresetFeedRateE;
+	TButton *mRepeatEveryBtn;
+	mtkIntEdit *mRepeatTimeE;
+	TLabel *Label1;
+	TTimer *mRepeatTimer;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
     void __fastcall ClearMemoAExecute(TObject *Sender);
     void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
     void __fastcall FormShow(TObject *Sender);
-    void __fastcall ThemesMenuClick(TObject *Sender);
+
     void __fastcall ShutDownTimerTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
     void __fastcall LogLevelCBChange(TObject *Sender);
@@ -118,6 +123,8 @@ class TMainForm : public TRegistryForm
 	void __fastcall mSynchUIBtnClick(TObject *Sender);
 	void __fastcall miscBtnClicks(TObject *Sender);
 	void __fastcall mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall mRepeatTimerTimer(TObject *Sender);
+	void __fastcall mRepeatEveryBtnClick(TObject *Sender);
 
 
     private:
@@ -131,10 +138,8 @@ class TMainForm : public TRegistryForm
         int												getCOMPortNumber();
         void __fastcall                                 logMsg();
 		LogFileReader                                   mLogFileReader;
-		bool                                            mIsStyleMenuPopulated;
 		void                                            setupWindowTitle();
 		void                                            updateWindowTitle();
-
 
                                                         //INI Parameters...
         IniFileProperties	      	                    mGeneralProperties;
@@ -143,7 +148,8 @@ class TMainForm : public TRegistryForm
 		mtk::Property<int>	                			mCOMPort;
         mtk::Property<int>                             	mCountTo;
 
-        void __fastcall                          		PopulateStyleMenu();
+
+
         bool                                            setupAndReadIniParameters();
         void                                            setupIniFile();
 

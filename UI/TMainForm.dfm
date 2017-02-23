@@ -54,7 +54,6 @@ object MainForm: TMainForm
         Align = alClient
         Caption = 'Cutting Motor Controls'
         TabOrder = 0
-        ExplicitWidth = 318
         object mStartStopBtn: TButton
           Left = 2
           Top = 231
@@ -71,7 +70,6 @@ object MainForm: TMainForm
           ParentFont = False
           TabOrder = 0
           OnClick = createUC7Message
-          ExplicitWidth = 314
         end
         object GroupBox2: TGroupBox
           Left = 2
@@ -81,7 +79,6 @@ object MainForm: TMainForm
           Align = alBottom
           Caption = 'Motor Speeds (um/s)'
           TabOrder = 1
-          ExplicitWidth = 314
           object FloatLabeledEdit1: TFloatLabeledEdit
             Left = 20
             Top = 35
@@ -419,6 +416,13 @@ object MainForm: TMainForm
     Height = 41
     Align = alTop
     TabOrder = 3
+    object Label1: TLabel
+      Left = 679
+      Top = 19
+      Width = 13
+      Height = 13
+      Caption = 'ms'
+    end
     object mComportCB: TComboBox
       Left = 8
       Top = 12
@@ -510,6 +514,24 @@ object MainForm: TMainForm
       Text = '!'
       Value = '!'
     end
+    object mRepeatEveryBtn: TButton
+      Left = 519
+      Top = 10
+      Width = 89
+      Height = 25
+      Caption = 'Repeat Every'
+      Enabled = False
+      TabOrder = 7
+      OnClick = mRepeatEveryBtnClick
+    end
+    object mRepeatTimeE: mtkIntEdit
+      Left = 630
+      Top = 14
+      Width = 43
+      Height = 21
+      TabOrder = 8
+      Text = '10'
+    end
   end
   object ActionList1: TActionList
     Left = 784
@@ -564,5 +586,12 @@ object MainForm: TMainForm
     OnTimer = ShutDownTimerTimer
     Left = 770
     Top = 136
+  end
+  object mRepeatTimer: TTimer
+    Enabled = False
+    Interval = 10
+    OnTimer = mRepeatTimerTimer
+    Left = 704
+    Top = 24
   end
 end

@@ -1,5 +1,5 @@
-#ifndef atUC7MessageConsumerH
-#define atUC7MessageConsumerH
+#ifndef atUC7MessageSenderH
+#define atUC7MessageSenderH
 #include "atExporter.h"
 #include <string>
 #include "mtkThread.h"
@@ -17,11 +17,11 @@ using mtk::gEmptyString;
 //from the UC7 queue and propagated to the main UI, which is responsible
 //to handle it.
 
-class AT_CORE UC7MessageConsumer : public ABObject, public mtk::Thread
+class AT_CORE UC7MessageSender : public ABObject, public mtk::Thread
 {
     public:
-                                                    UC7MessageConsumer(UC7& list,  HWND__ *h, const string& threadName = gEmptyString);
-                                                    ~UC7MessageConsumer();
+                                                    UC7MessageSender(UC7& uc7);
+                                                    ~UC7MessageSender();
 
                                                     // overridden from Thread
         void                                        run();

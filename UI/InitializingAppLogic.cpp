@@ -53,11 +53,6 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 void __fastcall TMainForm::FormShow(TObject *Sender)
 {
 	gAppIsStartingUp = false;
-    if(mIsStyleMenuPopulated == false)
-    {
-        PopulateStyleMenu();
-        mIsStyleMenuPopulated = true;
-	}
 
 	//transfer INI values
 	BottomPanel->Height     = mBottomPanelHeight + 1;
@@ -93,6 +88,9 @@ bool TMainForm::setupAndReadIniParameters()
 	mGeneralProperties.add((BaseProperty*)  &mCOMPort.setup( 	                    "COM_PORT",    	                	0));
 	mGeneralProperties.add((BaseProperty*)  &mRawCMDE->getProperty()->setup(        "RAW_CMD",    	                	""));
 	mGeneralProperties.add((BaseProperty*)  &mCountToE->getProperty()->setup(       "COUNT_TO",                     	5));
+	mGeneralProperties.add((BaseProperty*)  &mPresetFeedRateE->getProperty()->setup("PRESET_FEED_RATE",               	100));
+	mGeneralProperties.add((BaseProperty*)  &mKnifeStageJogStep->getProperty()->setup("KNIFE_STAGE_JOG_SIZE",          	100));
+
 
 	//Read from file. Create if file do not exist
 	mGeneralProperties.read();
@@ -100,6 +98,8 @@ bool TMainForm::setupAndReadIniParameters()
 	//Setup UI elements
 	mRawCMDE->update();
 	mCountToE->update();
+    mPresetFeedRateE->update();
+    mKnifeStageJogStep->update();
 
 	mComportCB->ItemIndex = mCOMPort - 1;
 

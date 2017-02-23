@@ -19,7 +19,6 @@ mtk::Thread(threadName),
 mAllowProcessing(true),
 mUC7(messageContainer),
 mProcessedCount(0),
-mNotifyUI(NULL),
 mProcessTimeDelay(50),
 mHandle(h)
 {}
@@ -67,7 +66,7 @@ void UC7MessageConsumer::stop()
 	mtk::Thread::stop();
 
 	//If thread is waiting.. get it out of wait state
-	mUC7.mNewMessageCondition.signal();
+	mUC7.mNewReceivedMessageCondition.signal();
 }
 
 void UC7MessageConsumer::run()
@@ -81,11 +80,11 @@ void UC7MessageConsumer::worker()
 	while(mIsTimeToDie == false)
 	{
 		{
-			Poco::ScopedLock<Poco::Mutex> lock(mUC7.mBufferMutex);
+			Poco::ScopedLock<Poco::Mutex> lock(mUC7.mReceiveBufferMutex);
 			if(mUC7.mIncomingMessagesBuffer.size() == 0)
 			{
 				Log(lDebug3) << "Waiting for UC7 message.";
-				mUC7.mNewMessageCondition.wait(mUC7.mBufferMutex);
+				mUC7.mNewReceivedMessageCondition.wait(mUC7.mReceiveBufferMutex);
 			}
 
             while(mUC7.hasMessage() && mIsTimeToDie == false)
