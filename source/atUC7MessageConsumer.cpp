@@ -20,7 +20,7 @@ mAllowProcessing(true),
 mUC7(messageContainer),
 mProcessedCount(0),
 mNotifyUI(NULL),
-mProcessTimeDelay(1),
+mProcessTimeDelay(50),
 mHandle(h)
 {}
 
@@ -90,25 +90,32 @@ void UC7MessageConsumer::worker()
 
             while(mUC7.hasMessage() && mIsTimeToDie == false)
             {
-				UC7Message* msg = new UC7Message;
-	           	(*msg) = mUC7.mIncomingMessagesBuffer.front();
+            	try
+                {
+                    //Message is deleted in main thread
+                    UC7Message* msg = new UC7Message;
+                    (*msg) = mUC7.mIncomingMessagesBuffer.front();
 
-                mUC7.mIncomingMessagesBuffer.pop_front();
-                if(!msg->check())
-                {
-                	Log(lError) << "Corrupted message";
-                }
-                else
-                {
-                    //Send windows message and let UI handle the message
-                    int ret = PostMessage(mHandle, UWM_MESSAGE, 1, (long) msg);
-                    if(!ret)
+                    mUC7.mIncomingMessagesBuffer.pop_front();
+                    if(!msg->check())
                     {
-                        Log(lError) << "Post message failed..";
+                        Log(lError) << "Corrupted message";
                     }
-                }
+                    else
+                    {
+                        //Send windows message and let UI handle the message
+                        if(!PostMessage(mHandle, UWM_MESSAGE, 1, (long) msg))
+                        {
+                            Log(lError) << "Post message failed..";
+                        }
+                    }
 
-                sleep(mProcessTimeDelay);
+                    sleep(mProcessTimeDelay);
+                }
+                catch(...)
+                {
+                	Log(lError) << "Bad stuff in message consumer..";
+                }
             }
 
 		}//scoped lock

@@ -40,10 +40,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     mUC7Consumer(mUC7, Handle),
     mCountTo(0)
 {
-    //Close any dataconnection created by stupid TSQLConnection
-    TMemoLogger::mMemoIsEnabled = false;
-    setupIniFile();
-    setupAndReadIniParameters();
+    TMemoLogger::mMemoIsEnabled = (false);
 
     //Setup UC7 object
     mUC7Consumer.start();
@@ -55,14 +52,9 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 
    	mCounterLabel->setReference(mUC7.getCounter().getCountReference());
     mCounterLabel->update();
-}
 
-
-//This one is called from the reader thread
-void __fastcall TMainForm::logMsg()
-{
-    infoMemo->Lines->Add(vclstr(mLogFileReader.getData()));
-    mLogFileReader.purge();
+    setupIniFile();
+    setupAndReadIniParameters();
 }
 
 //---------------------------------------------------------------------------
@@ -98,7 +90,22 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
             mUC7.stopCutter();
         }
     }
-    else if (btn == mSendBtn1)
+    else if(btn == mRibbonStartBtn)
+    {
+        //Move knife stage back with preset
+    	//Go from a zero cut to cut preset
+        mUC7.prepareForNewRibbon(true);
+    }
+    else if(btn == mMoveSouthBtn)
+    {
+    	mUC7.moveKnifeStageSouth(mKnifeStageJogStep->getValue());
+    }
+    else if(btn == mMoveNorthBtn)
+    {
+    	mUC7.moveKnifeStageNorth(mKnifeStageJogStep->getValue());
+    }
+
+    else if(btn == mSendBtn1)
     {
 		sendRaw = true;
     }
@@ -115,37 +122,28 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
 
     if(sendRaw)
     {
+    	Log(lInfo) << "Sending UC7 message:\""<<msg << "\"\t"<<uc7Msg.getMessageNameAsString();
 		mUC7.sendRawMessage(uc7Msg.getFullMessage());
     }
 }
 
 void __fastcall TMainForm::onConnectedToUC7()
 {
+	//Setup callbacks
+    mUC7.getCounter().assignOnCountCallBack(onUC7Count);
+    mUC7.getCounter().assignOnCountedToCallBack(onUC7CountedTo);
 	enableDisableUI(true);
 }
 
-//---------------------------------------------------------------------------
-void __fastcall TMainForm::onDisConnectedToUC7()
+void TMainForm::onUC7Count()
 {
-	enableDisableUI(false);
+	mCounterLabel->update();
 }
 
-//---------------------------------------------------------------------------
-void __fastcall TMainForm::enableDisableUI(bool enableDisable)
+void TMainForm::onUC7CountedTo()
 {
-	//Buttons
-    mConnectUC7Btn->Caption                 = enableDisable ? "Close" : "Open";
-	mSendBtn1->Enabled 		                = enableDisable;
-    mSynchUIBtn->Enabled					= enableDisable;
-
-    //group boxes
-	enableDisableGroupBox(CounterGB, 		enableDisable);
-	enableDisableGroupBox(CuttingMotorGB, 	enableDisable);
-    enableDisableGroupBox(HandwheelGB, 		enableDisable);
-    enableDisableGroupBox(NorthSouthGB,		enableDisable);
-
-	//Misc
-    mCrankPositionPie->Brush->Color 		= enableDisable ? clRed : this->Color;
+//	Log(lInfo) << "Time to setup zero cut AND move knife stage AND stop counter";
+//    mUC7.prepareToCutRibbon(true);
 }
 
 void __fastcall TMainForm::mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
@@ -164,7 +162,6 @@ void __fastcall TMainForm::mRawCMDEChange(TObject *Sender)
 
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
-
 {
 	if(Key == VK_RETURN)
     {
@@ -191,3 +188,11 @@ void __fastcall TMainForm::miscBtnClicks(TObject *Sender)
 }
 
 
+void __fastcall TMainForm::mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+{
+	if(Key == VK_RETURN)
+    {
+        mUC7.setPresetFeedRate(mPresetFeedRateE->getValue());
+    }
+
+}

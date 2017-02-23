@@ -94,6 +94,11 @@ class TMainForm : public TRegistryForm
 	TIntegerLabeledEdit *mCountToE;
 	TButton *mResetCounterBtn;
 	TIntLabel *mCounterLabel;
+	TButton *mRibbonStartBtn;
+	TButton *mMoveSouthBtn;
+	TButton *mMoveNorthBtn;
+	TIntegerLabeledEdit *mKnifeStageJogStep;
+	TIntegerLabeledEdit *mPresetFeedRateE;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -112,6 +117,8 @@ class TMainForm : public TRegistryForm
 	void __fastcall mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall mSynchUIBtnClick(TObject *Sender);
 	void __fastcall miscBtnClicks(TObject *Sender);
+	void __fastcall mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+
 
     private:
         bool                                            gCanClose;
@@ -145,6 +152,8 @@ class TMainForm : public TRegistryForm
 		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
         bool											handleUC7Message(const UC7Message& m);
 		void __fastcall 								enableDisableUI(bool enableDisable);
+        void 											onUC7Count();
+        void 											onUC7CountedTo();
 
     public:
                     __fastcall                          TMainForm(TComponent* Owner);

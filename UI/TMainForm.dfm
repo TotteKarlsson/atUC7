@@ -42,22 +42,23 @@ object MainForm: TMainForm
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
-      Width = 320
+      Width = 264
       Height = 316
       Align = alLeft
       TabOrder = 0
       object CuttingMotorGB: TGroupBox
         Left = 1
         Top = 1
-        Width = 318
+        Width = 262
         Height = 314
         Align = alClient
         Caption = 'Cutting Motor Controls'
         TabOrder = 0
+        ExplicitWidth = 318
         object mStartStopBtn: TButton
           Left = 2
           Top = 231
-          Width = 314
+          Width = 258
           Height = 81
           Align = alBottom
           Caption = 'Start'
@@ -70,15 +71,17 @@ object MainForm: TMainForm
           ParentFont = False
           TabOrder = 0
           OnClick = createUC7Message
+          ExplicitWidth = 314
         end
         object GroupBox2: TGroupBox
           Left = 2
           Top = 159
-          Width = 314
+          Width = 258
           Height = 72
           Align = alBottom
           Caption = 'Motor Speeds (um/s)'
           TabOrder = 1
+          ExplicitWidth = 314
           object FloatLabeledEdit1: TFloatLabeledEdit
             Left = 20
             Top = 35
@@ -104,13 +107,32 @@ object MainForm: TMainForm
             Value = -1.000000000000000000
           end
         end
+        object mPresetFeedRateE: TIntegerLabeledEdit
+          Left = 24
+          Top = 45
+          Width = 73
+          Height = 27
+          EditLabel.Width = 128
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Preset Feed Rate (nm/cut)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          Text = '50'
+          OnKeyDown = mPresetFeedRateEKeyDown
+          Value = 50
+        end
       end
     end
     object NorthSouthGB: TGroupBox
-      Left = 336
-      Top = 6
+      Left = 282
+      Top = 14
       Width = 233
-      Height = 209
+      Height = 283
       Caption = 'North-South'
       TabOrder = 1
       object mGetFeedRateBtn: TButton
@@ -169,13 +191,52 @@ object MainForm: TMainForm
         TabOrder = 3
         OnClick = createUC7Message
       end
+      object mMoveSouthBtn: TButton
+        Left = 23
+        Top = 163
+        Width = 74
+        Height = 51
+        Caption = 'Move South'
+        Enabled = False
+        TabOrder = 4
+        OnClick = createUC7Message
+      end
+      object mMoveNorthBtn: TButton
+        Left = 127
+        Top = 163
+        Width = 74
+        Height = 51
+        Caption = 'Move North'
+        Enabled = False
+        TabOrder = 5
+        OnClick = createUC7Message
+      end
+      object mKnifeStageJogStep: TIntegerLabeledEdit
+        Left = 72
+        Top = 245
+        Width = 73
+        Height = 27
+        EditLabel.Width = 100
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Knife Stage Jog Step'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 6
+        Text = '1'
+        OnKeyDown = mFeedRateEKeyDown
+        Value = 1
+      end
     end
     object CounterGB: TGroupBox
-      Left = 584
-      Top = 6
+      Left = 543
+      Top = 19
       Width = 249
       Height = 209
-      Caption = 'Counter'
+      Caption = 'Ribbon Creation'
       TabOrder = 2
       object mCounterLabel: TIntLabel
         Left = 32
@@ -197,13 +258,13 @@ object MainForm: TMainForm
         TheFont.Style = []
       end
       object mCountToE: TIntegerLabeledEdit
-        Left = 120
+        Left = 128
         Top = 34
         Width = 49
         Height = 31
-        EditLabel.Width = 55
+        EditLabel.Width = 44
         EditLabel.Height = 13
-        EditLabel.Caption = 'mCountToE'
+        EditLabel.Caption = 'Count To'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -222,6 +283,23 @@ object MainForm: TMainForm
         Enabled = False
         TabOrder = 1
         OnClick = miscBtnClicks
+      end
+      object mRibbonStartBtn: TButton
+        Left = 2
+        Top = 136
+        Width = 245
+        Height = 71
+        Align = alBottom
+        Caption = 'Start Ribbon'
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = createUC7Message
       end
     end
   end
@@ -434,8 +512,8 @@ object MainForm: TMainForm
     end
   end
   object ActionList1: TActionList
-    Left = 768
-    Top = 208
+    Left = 784
+    Top = 296
     object ClearMemoA: TAction
       Category = 'Memo'
       Caption = 'Clear Messages'
@@ -452,8 +530,8 @@ object MainForm: TMainForm
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 680
-    Top = 208
+    Left = 688
+    Top = 296
     object ClearMemoA1: TMenuItem
       Action = ClearMemoA
     end
@@ -465,8 +543,8 @@ object MainForm: TMainForm
     Top = 72
   end
   object MainMenu1: TMainMenu
-    Left = 605
-    Top = 208
+    Left = 589
+    Top = 296
     object File1: TMenuItem
       Caption = 'File'
       object Exit1: TMenuItem
@@ -485,6 +563,6 @@ object MainForm: TMainForm
     Interval = 50
     OnTimer = ShutDownTimerTimer
     Left = 770
-    Top = 144
+    Top = 136
   end
 end

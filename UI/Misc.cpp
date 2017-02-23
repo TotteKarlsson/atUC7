@@ -129,6 +129,37 @@ BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
 	return TRUE;
 }
 
+//This one is called from the reader thread
+void __fastcall TMainForm::logMsg()
+{
+    infoMemo->Lines->Add(vclstr(mLogFileReader.getData()));
+    mLogFileReader.purge();
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::onDisConnectedToUC7()
+{
+	enableDisableUI(false);
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::enableDisableUI(bool enableDisable)
+{
+	//Buttons
+    mConnectUC7Btn->Caption                 = enableDisable ? "Close" : "Open";
+	mSendBtn1->Enabled 		                = enableDisable;
+    mSynchUIBtn->Enabled					= enableDisable;
+
+    //group boxes
+	enableDisableGroupBox(CounterGB, 		enableDisable);
+	enableDisableGroupBox(CuttingMotorGB, 	enableDisable);
+    enableDisableGroupBox(HandwheelGB, 		enableDisable);
+    enableDisableGroupBox(NorthSouthGB,		enableDisable);
+
+	//Misc
+    mCrankPositionPie->Brush->Color 		= enableDisable ? clRed : this->Color;
+}
+
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
 {
@@ -143,14 +174,10 @@ void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
 
         switch(aMsg)
         {
-            case atUC7SplashWasClosed:
-                Log(lDebug2) << "Splash form sent message that it was closed";
-            break;
-
 			case atUC7Message:
             {
             	UC7Message* m = (UC7Message*) msg.lparam;
-                Log(lInfo) << "Handling UC7 message: \"" << m->getMessageNameAsString()<<"\" with data: "<<m->getData();
+                Log(lDebug) << "Handling UC7 message: \"" << m->getMessageNameAsString()<<"\" with data: "<<m->getData();
                 handleUC7Message(*m);
                 delete m;
             }

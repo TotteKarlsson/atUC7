@@ -31,9 +31,6 @@ extern string       gTimeFormat                 = "%H:%M:%S";
 extern string       gCommonAppDataLocation      = ""; //Filled out later
 extern string       gLogFileLocation            = "";
 extern string       gLogFileName                = "atUC7.log";
-//extern bool         gIsDevelopmentRelease       = true;
-//extern bool         gHideSplash                 = true;
-//extern TSplashForm* gSplashForm                 = NULL;
 
 BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam) ;
 

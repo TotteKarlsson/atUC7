@@ -2,28 +2,13 @@
 #include "TMainForm.h"
 #include "TMemoLogger.h"
 #include "mtkVCLUtils.h"
-#include "Poco/DateTime.h"
-#include "Poco/DateTimeFormatter.h"
 #include "mtkLogger.h"
 #include "mtkIniSection.h"
-#include "Poco/Timezone.h"
 
 extern bool             gAppIsStartingUp;
-extern bool             gIsDevelopmentRelease;
-extern string           gCommonAppDataLocation;
 extern string           gLogFileLocation;
 extern string           gLogFileName;
-extern string           gFullDateTimeFormat;
-extern string           gDateFormat;
-extern string           gTimeFormat;
-
-//extern TSplashForm*     gSplashForm;
-extern string           gTimeFormat;
-
 using namespace mtk;
-//using namespace at;
-using Poco::DateTime;
-using Poco::DateTimeFormatter;
 
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::FormCreate(TObject *Sender)
@@ -34,7 +19,6 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 	LogLevelCB->ItemIndex = mLogLevel;
 	if(mLogLevel == lInfo)
 	{
-
 		StringList logs = getLinesInFile(joinPath(gLogFileLocation, gLogFileName));
 
 		StringList msgs;
@@ -108,7 +92,7 @@ bool TMainForm::setupAndReadIniParameters()
 	mGeneralProperties.add((BaseProperty*)  &mLogLevel.setup( 	                    "LOG_LEVEL",    	                lAny));
 	mGeneralProperties.add((BaseProperty*)  &mCOMPort.setup( 	                    "COM_PORT",    	                	0));
 	mGeneralProperties.add((BaseProperty*)  &mRawCMDE->getProperty()->setup(        "RAW_CMD",    	                	""));
-	mGeneralProperties.add((BaseProperty*)  &mCountToE->getProperty()->setup(       "COUNT_TO",                     	10));
+	mGeneralProperties.add((BaseProperty*)  &mCountToE->getProperty()->setup(       "COUNT_TO",                     	5));
 
 	//Read from file. Create if file do not exist
 	mGeneralProperties.read();
