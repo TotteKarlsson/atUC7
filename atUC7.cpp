@@ -82,6 +82,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         Application->MainFormOnTaskBar = true;
 
 //		TStyleManager::TrySetStyle(gDefaultAppTheme.c_str());
+		TStyleManager::TrySetStyle("Amethyst Kamri");
 		Application->Title = "atUC7";
         Application->ProcessMessages();
 		Application->CreateForm(__classid(TMainForm), &MainForm);
