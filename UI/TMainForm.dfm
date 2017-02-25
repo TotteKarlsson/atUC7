@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'UC7 Controller'
-  ClientHeight = 571
-  ClientWidth = 862
+  ClientHeight = 598
+  ClientWidth = 909
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,8 +23,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 359
-    Width = 862
+    Top = 386
+    Width = 909
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -35,28 +35,28 @@ object MainForm: TMainForm
   object mMiddlePanel: TPanel
     Left = 0
     Top = 41
-    Width = 862
-    Height = 318
+    Width = 909
+    Height = 345
     Align = alClient
     TabOrder = 0
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
       Width = 264
-      Height = 316
+      Height = 343
       Align = alLeft
       TabOrder = 0
       object CuttingMotorGB: TGroupBox
         Left = 1
         Top = 1
         Width = 262
-        Height = 314
+        Height = 341
         Align = alClient
         Caption = 'Cutting Motor Controls'
         TabOrder = 0
         object mStartStopBtn: TButton
           Left = 2
-          Top = 231
+          Top = 258
           Width = 258
           Height = 81
           Align = alBottom
@@ -73,7 +73,7 @@ object MainForm: TMainForm
         end
         object GroupBox2: TGroupBox
           Left = 2
-          Top = 159
+          Top = 186
           Width = 258
           Height = 72
           Align = alBottom
@@ -127,9 +127,9 @@ object MainForm: TMainForm
     end
     object NorthSouthGB: TGroupBox
       Left = 282
-      Top = 14
+      Top = 6
       Width = 233
-      Height = 283
+      Height = 333
       Caption = 'North-South'
       TabOrder = 1
       object mGetFeedRateBtn: TButton
@@ -165,9 +165,9 @@ object MainForm: TMainForm
         Top = 101
         Width = 73
         Height = 27
-        EditLabel.Width = 95
+        EditLabel.Width = 147
         EditLabel.Height = 13
-        EditLabel.Caption = 'Knife Stage Position'
+        EditLabel.Caption = 'Knife Stage Position (absolute)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -209,8 +209,8 @@ object MainForm: TMainForm
         OnClick = createUC7Message
       end
       object mKnifeStageJogStep: TIntegerLabeledEdit
-        Left = 72
-        Top = 245
+        Left = 24
+        Top = 237
         Width = 73
         Height = 27
         EditLabel.Width = 100
@@ -229,15 +229,15 @@ object MainForm: TMainForm
       end
     end
     object CounterGB: TGroupBox
-      Left = 543
-      Top = 19
+      Left = 521
+      Top = 6
       Width = 249
-      Height = 209
+      Height = 315
       Caption = 'Ribbon Creation'
       TabOrder = 2
       object mCounterLabel: TIntLabel
         Left = 32
-        Top = 35
+        Top = 169
         Width = 11
         Height = 25
         Caption = '1'
@@ -255,9 +255,9 @@ object MainForm: TMainForm
         TheFont.Style = []
       end
       object mCountToE: TIntegerLabeledEdit
-        Left = 128
-        Top = 34
-        Width = 49
+        Left = 144
+        Top = 194
+        Width = 89
         Height = 31
         EditLabel.Width = 44
         EditLabel.Height = 13
@@ -272,8 +272,8 @@ object MainForm: TMainForm
         Text = '0'
       end
       object mResetCounterBtn: TButton
-        Left = 15
-        Top = 66
+        Left = 23
+        Top = 200
         Width = 50
         Height = 25
         Caption = 'Reset'
@@ -283,11 +283,11 @@ object MainForm: TMainForm
       end
       object mRibbonStartBtn: TButton
         Left = 2
-        Top = 136
+        Top = 242
         Width = 245
         Height = 71
         Align = alBottom
-        Caption = 'Start Ribbon'
+        Caption = 'Resume Cutting'
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -298,19 +298,65 @@ object MainForm: TMainForm
         TabOrder = 2
         OnClick = createUC7Message
       end
+      object mRibbonCreatorActiveCB: TPropertyCheckBox
+        Left = 24
+        Top = 29
+        Width = 137
+        Height = 17
+        Caption = 'Ribbon Creator on/off'
+        TabOrder = 3
+        OnClick = mRibbonCreatorActiveCBClick
+      end
+      object mNumberOfZeroStrokesAfter: TIntegerLabeledEdit
+        Left = 32
+        Top = 136
+        Width = 73
+        Height = 27
+        EditLabel.Width = 179
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Nr of ZeroStrokes before stage move'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        Text = '0'
+        OnKeyDown = mPresetFeedRateEKeyDown
+      end
+      object mStageMoveDelayE: TIntegerLabeledEdit
+        Left = 31
+        Top = 76
+        Width = 73
+        Height = 27
+        EditLabel.Width = 107
+        EditLabel.Height = 13
+        EditLabel.Caption = 'StageMove delay (ms)'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 5
+        Text = '50'
+        OnKeyDown = mPresetFeedRateEKeyDown
+        Value = 50
+      end
     end
   end
   object SB: TStatusBar
     Left = 0
-    Top = 552
-    Width = 862
+    Top = 579
+    Width = 909
     Height = 19
     Panels = <>
   end
   object BottomPanel: TPanel
     Left = 0
-    Top = 362
-    Width = 862
+    Top = 389
+    Width = 909
     Height = 190
     Align = alBottom
     Constraints.MinHeight = 190
@@ -318,7 +364,7 @@ object MainForm: TMainForm
     object infoMemo: TMemo
       Left = 1
       Top = 49
-      Width = 542
+      Width = 589
       Height = 140
       Align = alClient
       ScrollBars = ssBoth
@@ -328,7 +374,7 @@ object MainForm: TMainForm
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 907
       Height = 48
       Align = alTop
       TabOrder = 1
@@ -363,7 +409,7 @@ object MainForm: TMainForm
       end
     end
     object HandwheelGB: TGroupBox
-      Left = 543
+      Left = 590
       Top = 49
       Width = 318
       Height = 140
@@ -412,7 +458,7 @@ object MainForm: TMainForm
   object mTopPanel: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 909
     Height = 41
     Align = alTop
     TabOrder = 3
@@ -473,7 +519,7 @@ object MainForm: TMainForm
       OnClick = createUC7Message
     end
     object mSynchUIBtn: TButton
-      Left = 776
+      Left = 823
       Top = 1
       Width = 85
       Height = 39
@@ -534,8 +580,8 @@ object MainForm: TMainForm
     end
   end
   object ActionList1: TActionList
-    Left = 784
-    Top = 296
+    Left = 824
+    Top = 312
     object ClearMemoA: TAction
       Category = 'Memo'
       Caption = 'Clear Messages'
@@ -552,8 +598,8 @@ object MainForm: TMainForm
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 688
-    Top = 296
+    Left = 848
+    Top = 200
     object ClearMemoA1: TMenuItem
       Action = ClearMemoA
     end
@@ -561,12 +607,12 @@ object MainForm: TMainForm
   object mIniFileC: mtkIniFileC
     IniFileName = 'atUC7.ini'
     RootFolder = '.'
-    Left = 810
-    Top = 72
+    Left = 842
+    Top = 64
   end
   object MainMenu1: TMainMenu
-    Left = 589
-    Top = 296
+    Left = 845
+    Top = 144
     object File1: TMenuItem
       Caption = 'File'
       object Exit1: TMenuItem
@@ -584,8 +630,8 @@ object MainForm: TMainForm
     Enabled = False
     Interval = 50
     OnTimer = ShutDownTimerTimer
-    Left = 770
-    Top = 136
+    Left = 802
+    Top = 88
   end
   object mRepeatTimer: TTimer
     Enabled = False

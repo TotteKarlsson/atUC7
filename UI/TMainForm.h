@@ -35,6 +35,7 @@
 #include "TIntegerLabeledEdit.h"
 #include "TIntLabel.h"
 #include "mtkIntEdit.h"
+#include "TPropertyCheckBox.h"
 using mtk::Property;
 using mtk::MessageContainer;
 using mtk::IniFileProperties;
@@ -104,6 +105,9 @@ class TMainForm : public TRegistryForm
 	mtkIntEdit *mRepeatTimeE;
 	TLabel *Label1;
 	TTimer *mRepeatTimer;
+	TPropertyCheckBox *mRibbonCreatorActiveCB;
+	TIntegerLabeledEdit *mNumberOfZeroStrokesAfter;
+	TIntegerLabeledEdit *mStageMoveDelayE;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -125,6 +129,7 @@ class TMainForm : public TRegistryForm
 	void __fastcall mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall mRepeatTimerTimer(TObject *Sender);
 	void __fastcall mRepeatEveryBtnClick(TObject *Sender);
+	void __fastcall mRibbonCreatorActiveCBClick(TObject *Sender);
 
 
     private:

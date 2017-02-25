@@ -6,7 +6,9 @@
 enum ApplicationMessageEnum
 {
     atUC7SplashWasClosed = 0,
-    atUC7Message
+    atUC7Message,
+    atEnableResumeBtn
+
 };
 
 
@@ -23,13 +25,5 @@ struct ATWindowStructMessage
 	LRESULT             Result;
 };
 
-//struct AppMessageStruct
-//{
-//							//The Message enum encodes what is passed by the void pointer
-//	ApplicationMessageEnum 	mMessageEnum;
-//	void*                   mData;
-//
-//};
-//
 
 #endif

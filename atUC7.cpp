@@ -21,7 +21,6 @@ using std::string;
 extern HWND         gOtherAppWindow             = NULL;
 extern bool 		gAppIsStartingUp 			= true;
 extern string       gApplicationRegistryRoot    = "\\Software\\Allen Institute\\atUC7";
-//extern string       gDefaultAppTheme            = "Iceberg Classico";
 extern string       gAppMutexName           	= "UC7AppMutex";
 extern string       gRestartMutexName           = "UC7RestartMutex";
 extern string       gFullDateTimeFormat         = "%Y-%m-%dT%H:%M:%S";
@@ -81,8 +80,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         Application->Initialize();
         Application->MainFormOnTaskBar = true;
 
-//		TStyleManager::TrySetStyle(gDefaultAppTheme.c_str());
-		TStyleManager::TrySetStyle("Amethyst Kamri");
+//		TStyleManager::TrySetStyle("Iceberg Classico");
 		Application->Title = "atUC7";
         Application->ProcessMessages();
 		Application->CreateForm(__classid(TMainForm), &MainForm);
@@ -128,7 +126,7 @@ void setupLogging()
 	clearFile(fullLogFileName);
 	mtk::gLogger.logToFile(fullLogFileName);
 	LogOutput::mShowLogLevel = true;
-	LogOutput::mShowLogTime = false;
+	LogOutput::mShowLogTime = true;
 	LogOutput::mUseLogTabs = false;
 	Log(lInfo) << "Logger was setup";
 }

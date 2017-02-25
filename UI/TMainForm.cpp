@@ -16,6 +16,7 @@
 #pragma link "TIntegerLabeledEdit"
 #pragma link "TIntLabel"
 #pragma link "mtkIntEdit"
+#pragma link "TPropertyCheckBox"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
@@ -48,11 +49,14 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 	//Setup references
   	//The following causes the editbox, and its property to reference the counters CountTo value
    	mCountToE->setReference(mUC7.getCounter().getCountToReference());
-    mUC7.getCounter().increase(5);
 
    	mCounterLabel->setReference(mUC7.getCounter().getCountReference());
     mCounterLabel->update();
 
+	mRibbonCreatorActiveCB->setReference(mUC7.getRibbonCreatorActiveReference());
+
+	mNumberOfZeroStrokesAfter->setReference(mUC7.getSetNumberOfZeroStrokes());
+    
     setupIniFile();
     setupAndReadIniParameters();
 }
@@ -95,9 +99,8 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
     }
     else if(btn == mRibbonStartBtn)
     {
-        //Move knife stage back with preset
-    	//Go from a zero cut to cut preset
         mUC7.prepareForNewRibbon(true);
+        btn->Caption = "Resume";
     }
     else if(btn == mMoveSouthBtn)
     {
@@ -113,15 +116,13 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
 		sendRaw = true;
     }
 
-// 	if(!sendRaw)
-//    {
-//    	string msg = mUC7.getLastSentMessage().getMessage();
-//    	mRawCMDE->setValue(msg);
-//	    mCheckSumEdit->setValue(mUC7.getLastSentMessage().getCheckSum());
-//    }
-
-
-    if(sendRaw)
+ 	if(!sendRaw)
+    {
+    	string msg = mUC7.getLastSentMessage().getMessage();
+    	mRawCMDE->setValue(msg);
+	    mCheckSumEdit->setValue(mUC7.getLastSentMessage().getCheckSum());
+    }
+    else
     {
         string msg = mRawCMDE->getValue();
         UC7Message uc7Msg(msg, false);
@@ -147,16 +148,24 @@ void TMainForm::onUC7Count()
 
 void TMainForm::onUC7CountedTo()
 {
-//	Log(lInfo) << "Time to setup zero cut AND move knife stage AND stop counter";
-//    mUC7.prepareToCutRibbon(true);
+	if(mUC7.isActive())
+    {
+	    mUC7.getCounter().reset();
+		Log(lInfo) << "Creating new ribbon";
+	    mUC7.prepareToCutRibbon(true);
+        mRibbonStartBtn->Enabled = false;
+    }
 }
 
 void __fastcall TMainForm::mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
     UC7Message msg(mRawCMDE->getValue(), false);
     msg.calculateCheckSum();
-    Log(lInfo) << "Checksum is: " << msg.getCheckSum();
     mCheckSumEdit->setValue(msg.getCheckSum());
+    if(Key = VK_RETURN)
+    {
+    	Log(lInfo) << "Message: "<<msg.getMessageNameAsString();
+    }
 }
 
 //---------------------------------------------------------------------------
@@ -194,9 +203,19 @@ void __fastcall TMainForm::miscBtnClicks(TObject *Sender)
 
 void __fastcall TMainForm::mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
-	if(Key == VK_RETURN)
+
+	TIntegerLabeledEdit* e = dynamic_cast<TIntegerLabeledEdit*>(Sender);
+
+    if(e == mPresetFeedRateE)
     {
-        mUC7.setPresetFeedRate(mPresetFeedRateE->getValue());
+        if(Key == VK_RETURN)
+        {
+            mUC7.setPresetFeedRate(e->getValue());
+        }
+    }
+    else if(e == mStageMoveDelayE)
+    {
+ 		mUC7.setStageMoveDelay(e->getValue());
     }
 }
 
@@ -220,6 +239,12 @@ void __fastcall TMainForm::mRepeatEveryBtnClick(TObject *Sender)
     {
 		mRepeatEveryBtn->Caption = "Repeat Every";
     }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::mRibbonCreatorActiveCBClick(TObject *Sender)
+{
+	mRibbonCreatorActiveCB->OnClick(Sender);
 }
 
 

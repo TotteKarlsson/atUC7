@@ -32,6 +32,7 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                     //Transfer hardware data to UC7 'soft' data
                     mUC7.setFeedRate(rate, false);
                     mFeedRateE->setValue(rate);
+                    mRibbonStartBtn->Enabled = (rate != 0) ? false : true;
                 }
             }
             else if(m.getCommand() == "30")
@@ -93,45 +94,37 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
             	string d = m.getData().substr(2,2);
                 if(d == "00")  //Retract
                 {
+                	Log(lInfo) << "Retracting";
+                	mUC7.setStrokeState(UC7::ssRetracting);
                 	mCrankPositionPie->Angles->EndAngle = 180;
                 	mCrankPositionPie->Angles->StartAngle = 90;
                 }
                 else if(d == "01")  //Before cutting
                 {
+                   	Log(lInfo) << "Before Cutting";
+                   	mUC7.setStrokeState(UC7::ssBeforeCutting);
                 	mCrankPositionPie->Angles->EndAngle = 90;
                 	mCrankPositionPie->Angles->StartAngle = 0;
                 }
                 else if(d == "03") //Cutting
                 {
+                   	Log(lInfo) << "Cutting";
+                   	mUC7.getCounter().increase();
+                   	mUC7.setStrokeState(UC7::ssCutting);
                 	mCrankPositionPie->Angles->EndAngle = 0;
                 	mCrankPositionPie->Angles->StartAngle = 270;
-                   	mUC7.getCounter().increase();
                 }
                 else if(d == "02") //After cutting
                 {
+                   	Log(lInfo) << "After Cutting";
+                   	mUC7.setStrokeState(UC7::ssAfterCutting);
                 	mCrankPositionPie->Angles->EndAngle = 270;
                 	mCrankPositionPie->Angles->StartAngle = 180;
-                    if(mUC7.prepareToCutRibbon())
-                    {
-    	                mUC7.setFeedRate(0);
-                        //Sleep(100);
-					    mUC7.moveKnifeStageSouth(mKnifeStageJogStep->getValue());
-                        mUC7.prepareToCutRibbon(false);
-                        mUC7.prepareForNewRibbon(false);
-                    }
 
-                    if(mUC7.prepareForNewRibbon())
-                    {
-    	                mUC7.setPresetFeedRate();
-                        //Sleep(100);
-					    mUC7.moveKnifeStageNorth(mKnifeStageJogStep->getValue());
-                        mUC7.prepareToCutRibbon(false);
-                        mUC7.prepareForNewRibbon(false);
-                    }
                 }
                 else if(d == "E0")
                 {
-
+                   	mUC7.setStrokeState(UC7::ssUndefined);
                 }
             }
             else
