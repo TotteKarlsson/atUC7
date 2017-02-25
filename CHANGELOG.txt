@@ -1,3 +1,33 @@
+Release 0.5.2 (Feb 24)
+=======================
+* Simplifying uc7 code
+* Added consumer thread for sending serial messages
+* Added button to test ho fast one can send serial messages
+* Added UI controls for ribbon separation
+* Added document for documenting the Leica automation
+* Creating UI for automated ribbon separation
+* Added support for FEED serial commands
+* Added support for KnifeStage absolute position
+* Added ability to set/get feedrate/cut
+* Fixed bugs in the counter
+* Added timed events in UC7 to deal with movement of knife stage
+* Added more logic to deal with starting and ending a ribbon
+* Added message consumer unit
+* Added message sender
+* Added settings for COM port send and receive buffer sizes
+* Added outgoing container for messages - use a consumer thread to send them
+* Removed printf's in Serial worker
+* Changed generation of createEvent handle in serial worker run function
+* Added a default of a 512 buffer in atSerial
+* Added many functions for orchestrating ribbon separation
+* Added functions for section counter
+* Implementing a counter for the UC7 object
+* Renamed atUC7 Unit file to atUC7Component.
+* Added fixes to SerialWorker class
+* Added ability to set handshake mode for serial communication
+* many upgrades to UC7Message class
+* Upgrading UC7 software
+
 Release 0.5.1 (Feb 20)
 =======================
 * Added UI enable/disable stuff, reflecting connection state
