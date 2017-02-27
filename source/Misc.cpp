@@ -104,6 +104,9 @@ void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
         }
     }
 
+    //Give it some time to close down..
+    //These should be UC7 callbacks..
+    Sleep(100);
     if(mUC7.isConnected())
     {
 	    onConnectedToUC7();
@@ -156,6 +159,7 @@ void __fastcall TMainForm::enableDisableUI(bool enableDisable)
 	mSendBtn1->Enabled 		                = enableDisable;
     mSynchUIBtn->Enabled					= enableDisable;
 	mRepeatEveryBtn->Enabled				= enableDisable;
+
     //group boxes
 	enableDisableGroupBox(CounterGB, 		enableDisable);
 	enableDisableGroupBox(CuttingMotorGB, 	enableDisable);

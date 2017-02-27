@@ -81,6 +81,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         Application->MainFormOnTaskBar = true;
 
 //		TStyleManager::TrySetStyle("Iceberg Classico");
+		TStyleManager::TrySetStyle("Amakrits");
 		Application->Title = "atUC7";
         Application->ProcessMessages();
 		Application->CreateForm(__classid(TMainForm), &MainForm);

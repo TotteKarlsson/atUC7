@@ -27,11 +27,6 @@ void __fastcall TMainForm::ShutDownTimerTimer(TObject *Sender)
     {
 	    mUC7.disConnect();
     }
-//    else if(mUC7Consumer.isRunning())
-//    {
-//	    mUC7Consumer.stop();
-//    }
-
     Close();
 }
 
