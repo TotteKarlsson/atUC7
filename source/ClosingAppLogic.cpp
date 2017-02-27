@@ -23,6 +23,14 @@ void __fastcall TMainForm::ShutDownTimerTimer(TObject *Sender)
 		Log(lDebug) << "Shutting down log file reader";
 		mLogFileReader.stop();
 	}
+    else if(mUC7.isConnected())
+    {
+	    mUC7.disConnect();
+    }
+//    else if(mUC7Consumer.isRunning())
+//    {
+//	    mUC7Consumer.stop();
+//    }
 
     Close();
 }
@@ -33,7 +41,7 @@ void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose)
 	Log(lInfo) << "Closing down....";
 
 	//Check if we can close.. abort all threads..
-	if(mLogFileReader.isRunning() )
+	if(mLogFileReader.isRunning() || mUC7.isConnected())
     {
 		CanClose = false;
     }

@@ -137,8 +137,8 @@ class TMainForm : public TRegistryForm
 
 		UC7												mUC7;
 
-        												//!Consume UC7 messages
-        UC7MessageConsumer		  						mUC7Consumer;
+//        												//!Consume UC7 messages
+//        UC7MessageConsumer		  						mUC7Consumer;
 
         int												getCOMPortNumber();
         void __fastcall                                 logMsg();
@@ -160,6 +160,7 @@ class TMainForm : public TRegistryForm
 
 		void __fastcall 								onConnectedToUC7();
         void __fastcall 								onDisConnectedToUC7();
+
 		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
         bool											handleUC7Message(const UC7Message& m);
 		void __fastcall 								enableDisableUI(bool enableDisable);

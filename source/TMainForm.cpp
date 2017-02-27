@@ -38,13 +38,14 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     gCanClose(true),
     mLogFileReader(joinPath(getSpecialFolder(CSIDL_LOCAL_APPDATA), "atUC7", gLogFileName), &logMsg),
     mCOMPort(0),
-    mUC7Consumer(mUC7, Handle),
+//    mUC7Consumer(mUC7, Handle),
+	mUC7(Handle),
     mCountTo(0)
 {
     TMemoLogger::mMemoIsEnabled = (false);
 
-    //Setup UC7 object
-    mUC7Consumer.start();
+//    //Setup UC7 object
+//    mUC7Consumer.start();
 
 	//Setup references
   	//The following causes the editbox, and its property to reference the counters CountTo value
@@ -55,7 +56,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 
 	mRibbonCreatorActiveCB->setReference(mUC7.getRibbonCreatorActiveReference());
 
-	mNumberOfZeroStrokesAfter->setReference(mUC7.getSetNumberOfZeroStrokes());
+	mNumberOfZeroStrokesAfter->setReference(mUC7.getSetNumberOfZeroStrokesReference());
     
     setupIniFile();
     setupAndReadIniParameters();
