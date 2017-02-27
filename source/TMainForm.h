@@ -14,30 +14,26 @@
 //---------------------------------------------------------------------------
 #include "source/atUC7ApplicationMessages.h"
 #include "source/atUC7DataStructures.h"
+#include "atUC7Component.h"
 #include "mtkIniFileC.h"
 #include "mtkIniFileProperties.h"
+#include "mtkIntEdit.h"
 #include "mtkLogFileReader.h"
 #include "mtkLogLevel.h"
-#include "mtkMessageContainer.h"
 #include "mtkProperty.h"
 #include "mtkSQLite.h"
-#include "TApplicationProperties.h"
-#include "TRegistryForm.h"
-#include "TRegistryProperties.h"
-#include "TSTDStringLabeledEdit.h"
-#include "TSTDStringEdit.h"
-#include "mtkIniFileC.h"
-#include "atUC7Component.h"
 #include "pies.h"
+#include "TApplicationProperties.h"
 #include "TFloatLabeledEdit.h"
-#include "atUC7MessageConsumer.h"
-#include "TSTDStringEdit.h"
 #include "TIntegerLabeledEdit.h"
 #include "TIntLabel.h"
-#include "mtkIntEdit.h"
 #include "TPropertyCheckBox.h"
+#include "TRegistryForm.h"
+#include "TRegistryProperties.h"
+#include "TSTDStringEdit.h"
+#include "TSTDStringLabeledEdit.h"
 using mtk::Property;
-using mtk::MessageContainer;
+
 using mtk::IniFileProperties;
 using mtk::TRegistryProperties;
 
