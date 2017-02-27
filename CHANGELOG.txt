@@ -1,3 +1,13 @@
+Release 0.5.3 (Feb 27)
+=======================
+* Minor cleanup
+* Moved serial reader thread to UC7 component
+* Restructured atUC7 source tree
+* Added more info regarding serial connection state in UC7 component
+* Renamed UC7MessageConsumer to UC7MessageReceiver
+* Cleaned up UC7 message sender and reader
+* Testing a different UI skin
+
 Release 0.5.2 (Feb 24)
 =======================
 * Simplifying uc7 code
