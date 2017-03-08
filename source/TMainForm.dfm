@@ -40,8 +40,6 @@ object MainForm: TMainForm
     Height = 329
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 938
-    ExplicitHeight = 436
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
@@ -49,7 +47,6 @@ object MainForm: TMainForm
       Height = 327
       Align = alLeft
       TabOrder = 0
-      ExplicitHeight = 434
       object CuttingMotorGB: TGroupBox
         Left = 1
         Top = 89
@@ -58,9 +55,6 @@ object MainForm: TMainForm
         Align = alClient
         Caption = 'Cutting Parameters'
         TabOrder = 0
-        ExplicitLeft = 7
-        ExplicitWidth = 262
-        ExplicitHeight = 344
         object mStartStopBtn: TButton
           Left = 21
           Top = 138
@@ -129,7 +123,6 @@ object MainForm: TMainForm
         Align = alTop
         Caption = 'Misc parameters'
         TabOrder = 1
-        ExplicitWidth = 262
         object mStageMoveDelayE: TIntegerLabeledEdit
           Left = 22
           Top = 34
@@ -159,9 +152,6 @@ object MainForm: TMainForm
       Align = alLeft
       Caption = 'North-South'
       TabOrder = 1
-      ExplicitLeft = 240
-      ExplicitTop = 0
-      ExplicitHeight = 434
       object mGetFeedRateBtn: TButton
         Left = 127
         Top = 40
@@ -286,8 +276,6 @@ object MainForm: TMainForm
       Align = alLeft
       Caption = 'Ribbon Creation'
       TabOrder = 2
-      ExplicitLeft = 498
-      ExplicitHeight = 434
       object mCounterLabel: TIntLabel
         Left = 32
         Top = 33
@@ -396,8 +384,6 @@ object MainForm: TMainForm
     Width = 856
     Height = 19
     Panels = <>
-    ExplicitTop = 670
-    ExplicitWidth = 938
   end
   object BottomPanel: TPanel
     Left = 0
@@ -406,8 +392,6 @@ object MainForm: TMainForm
     Height = 190
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 480
-    ExplicitWidth = 938
     object infoMemo: TMemo
       Left = 1
       Top = 49
@@ -417,7 +401,6 @@ object MainForm: TMainForm
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
-      ExplicitWidth = 618
     end
     object Panel1: TPanel
       Left = 1
@@ -426,7 +409,6 @@ object MainForm: TMainForm
       Height = 48
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 936
       object Button1: TButton
         Left = 8
         Top = 12
@@ -465,7 +447,6 @@ object MainForm: TMainForm
       Align = alRight
       Caption = 'Handwheel Position'
       TabOrder = 2
-      ExplicitLeft = 619
       object mCrankPositionPie: TPie
         Left = 95
         Top = 36
@@ -512,7 +493,6 @@ object MainForm: TMainForm
     Height = 41
     Align = alTop
     TabOrder = 3
-    ExplicitWidth = 938
     object Label1: TLabel
       Left = 679
       Top = 19
@@ -578,7 +558,6 @@ object MainForm: TMainForm
       Caption = 'Get All Status'
       TabOrder = 4
       OnClick = mSynchUIBtnClick
-      ExplicitLeft = 852
     end
     object mCheckSumEdit: TSTDStringEdit
       Left = 396

@@ -7,6 +7,9 @@
 #include "mtkVCLUtils.h"
 #include "TMainForm.h"
 #include "TMemoLogger.h"
+#include "sound/atSounds.h"
+#include <mmsystem.h>
+#include "atCore.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "mtkIniFileC"
@@ -42,6 +45,9 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 	mUC7(Handle),
     mCountTo(0)
 {
+    //Init the DLL -> give intra messages their ID's
+	initABCoreLib();
+
     TMemoLogger::mMemoIsEnabled = (false);
 
 	//Setup references
@@ -146,6 +152,14 @@ void __fastcall TMainForm::onConnectedToUC7()
 void TMainForm::onUC7Count()
 {
 	mCounterLabel->update();
+    if(mRibbonCreatorActiveCB->Checked)
+    {
+    	//Check if we are close to ribbon separation
+        if(mCounterLabel->getValue() >= (mCountToE->getValue() - 3))
+        {
+			playABSound(absBeforeBackOff, SND_ASYNC);
+        }
+    }
 }
 
 void TMainForm::onUC7CountedTo()
