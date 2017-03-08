@@ -1,3 +1,11 @@
+Release 0.5.4 (March 8)
+=======================
+* Changed style to Obsidian
+* Moved some uc7 message handling out of UI
+* Added ability to back off knife at any time, while cutting
+* Added feature to perform zero strokes before backing knife
+* Added error message for non handled UC7 messages
+
 Release 0.5.3 (Feb 27)
 =======================
 * Minor cleanup
@@ -50,3 +58,6 @@ Release 0.5.1 (Feb 20)
 Release 0.5.0 (Jan 17)
 =======================
 * Initial commit of the UC7 application code.
+
+
+=========================== 2017 ==================================================================
