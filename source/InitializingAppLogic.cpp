@@ -88,6 +88,9 @@ bool TMainForm::setupAndReadIniParameters()
 	mGeneralProperties.add((BaseProperty*)  &mCOMPort.setup( 	                    "COM_PORT",    	                	0));
 	mGeneralProperties.add((BaseProperty*)  &mRawCMDE->getProperty()->setup(        "RAW_CMD",    	                	""));
 	mGeneralProperties.add((BaseProperty*)  &mCountToE->getProperty()->setup(       "COUNT_TO",                     	5));
+	mGeneralProperties.add((BaseProperty*)  &mZeroCutsE->getProperty()->setup(      "NUMBER_OF_ZERO_CUTS",           	2));
+
+	mGeneralProperties.add((BaseProperty*)  &mStageMoveDelayE->getProperty()->setup("KNIFE_STAGE_MOVE_DELAY",          	10));
 	mGeneralProperties.add((BaseProperty*)  &mPresetFeedRateE->getProperty()->setup("PRESET_FEED_RATE",               	100));
 	mGeneralProperties.add((BaseProperty*)  &mKnifeStageJogStep->getProperty()->setup("KNIFE_STAGE_JOG_SIZE",          	100));
 
@@ -100,7 +103,8 @@ bool TMainForm::setupAndReadIniParameters()
 	mCountToE->update();
     mPresetFeedRateE->update();
     mKnifeStageJogStep->update();
-
+    mStageMoveDelayE->update();
+	mZeroCutsE->update();
 	mComportCB->ItemIndex = mCOMPort - 1;
 
     gLogger.setLogLevel(mLogLevel);

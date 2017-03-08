@@ -17,6 +17,7 @@
 #pragma link "TIntLabel"
 #pragma link "mtkIntEdit"
 #pragma link "TPropertyCheckBox"
+#pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
@@ -46,22 +47,17 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 	//Setup references
   	//The following causes the editbox, and its property to reference the counters CountTo value
    	mCountToE->setReference(mUC7.getCounter().getCountToReference());
-
    	mCounterLabel->setReference(mUC7.getCounter().getCountReference());
+    mZeroCutsE->setReference(mUC7.getNumberOfZeroStrokesReference());
+
+    mCountToE->update();
     mCounterLabel->update();
+    mZeroCutsE->update();
 
 	mRibbonCreatorActiveCB->setReference(mUC7.getRibbonCreatorActiveReference());
 
-	mNumberOfZeroStrokesAfter->setReference(mUC7.getSetNumberOfZeroStrokesReference());
-    
     setupIniFile();
     setupAndReadIniParameters();
-}
-
-//---------------------------------------------------------------------------
-int	TMainForm::getCOMPortNumber()
-{
-	return mComportCB->ItemIndex + 1;
 }
 
 void __fastcall TMainForm::createUC7Message(TObject *Sender)
@@ -96,8 +92,17 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
     }
     else if(btn == mRibbonStartBtn)
     {
-        mUC7.prepareForNewRibbon(true);
-        btn->Caption = "Resume";
+    	if(btn->Caption == "Back off")
+        {
+			mUC7.prepareToCutRibbon(true);
+            btn->Caption = "Preparing for IDLE";
+        }
+        else
+        {
+            mUC7.prepareForNewRibbon(true);
+            btn->Caption = "Preparing start of Ribbon";
+            btn->Enabled = false;
+        }
     }
     else if(btn == mMoveSouthBtn)
     {
@@ -174,10 +179,24 @@ void __fastcall TMainForm::mRawCMDEChange(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
+	TIntegerLabeledEdit* e = dynamic_cast<TIntegerLabeledEdit*>(Sender);
+
 	if(Key == VK_RETURN)
     {
-    	//Set feedrate
-        mUC7.setFeedRate(mFeedRateE->getValue());
+
+    	if(e == mFeedRateE)
+        {
+        	//Set feedrate
+	        mUC7.setFeedRate(e->getValue());
+        }
+        else if(e == mKnifeStageJogStep)
+        {
+	        mUC7.setKnifeStageJogStepPreset(e->getValue());
+        }
+        else if(e == mNorthLimitPosE)
+        {
+        	mUC7.setNorthLimitPosition(e->getValue());
+        }
     }
 }
 
@@ -207,7 +226,7 @@ void __fastcall TMainForm::mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, T
     {
         if(Key == VK_RETURN)
         {
-            mUC7.setPresetFeedRate(e->getValue());
+            mUC7.setFeedRatePreset(e->getValue());
         }
     }
     else if(e == mStageMoveDelayE)
@@ -221,7 +240,6 @@ void __fastcall TMainForm::mRepeatTimerTimer(TObject *Sender)
 {
 	mSendBtn1->Click();
 }
-
 
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::mRepeatEveryBtnClick(TObject *Sender)

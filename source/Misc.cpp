@@ -4,8 +4,8 @@
 #include "mtkLogger.h"
 #include "TAboutUC7Form.h"
 #pragma package(smart_init)
-using Poco::DateTimeFormatter;
 
+using Poco::DateTimeFormatter;
 using namespace mtk;
 
 extern HWND gOtherAppWindow;
@@ -146,6 +146,12 @@ void __fastcall TMainForm::logMsg()
 }
 
 //---------------------------------------------------------------------------
+int	TMainForm::getCOMPortNumber()
+{
+	return mComportCB->ItemIndex + 1;
+}
+
+//---------------------------------------------------------------------------
 void __fastcall TMainForm::onDisConnectedToUC7()
 {
 	enableDisableUI(false);
@@ -188,7 +194,11 @@ void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
             {
             	UC7Message* m = (UC7Message*) msg.lparam;
                 Log(lDebug) << "Handling UC7 message: \"" << m->getMessageNameAsString()<<"\" with data: "<<m->getData();
-                handleUC7Message(*m);
+                bool result = handleUC7Message(*m);
+                if(!result)
+                {
+                	Log(lError) << "The message: "<<m->getFullMessage()<<" was not properly handled!";
+                }
                 delete m;
             }
             default:

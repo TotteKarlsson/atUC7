@@ -11,7 +11,6 @@
 #include <Vcl.ActnList.hpp>
 #include <Vcl.Menus.hpp>
 #include <Vcl.StdActns.hpp>
-//---------------------------------------------------------------------------
 #include "source/atUC7ApplicationMessages.h"
 #include "source/atUC7DataStructures.h"
 #include "atUC7Component.h"
@@ -32,6 +31,8 @@
 #include "TRegistryProperties.h"
 #include "TSTDStringEdit.h"
 #include "TSTDStringLabeledEdit.h"
+#include <Vcl.Buttons.hpp>
+//---------------------------------------------------------------------------
 using mtk::Property;
 
 using mtk::IniFileProperties;
@@ -77,9 +78,6 @@ class TMainForm : public TRegistryForm
 	TLabel *Label3;
 	TLabel *Label4;
 	TPanel *mMiddleLeftPanel;
-	TGroupBox *GroupBox2;
-	TFloatLabeledEdit *FloatLabeledEdit1;
-	TFloatLabeledEdit *FloatLabeledEdit2;
 	TSTDStringEdit *mCheckSumEdit;
 	TSTDStringEdit *mRawCMDE;
 	TSTDStringEdit *STDStringEdit1;
@@ -92,7 +90,6 @@ class TMainForm : public TRegistryForm
 	TIntegerLabeledEdit *mCountToE;
 	TButton *mResetCounterBtn;
 	TIntLabel *mCounterLabel;
-	TButton *mRibbonStartBtn;
 	TButton *mMoveSouthBtn;
 	TButton *mMoveNorthBtn;
 	TIntegerLabeledEdit *mKnifeStageJogStep;
@@ -102,15 +99,18 @@ class TMainForm : public TRegistryForm
 	TLabel *Label1;
 	TTimer *mRepeatTimer;
 	TPropertyCheckBox *mRibbonCreatorActiveCB;
-	TIntegerLabeledEdit *mNumberOfZeroStrokesAfter;
+	TIntegerLabeledEdit *mNorthLimitPosE;
+	TButton *mRibbonStartBtn;
+	TIntegerLabeledEdit *mZeroCutsE;
+	TGroupBox *GroupBox2;
 	TIntegerLabeledEdit *mStageMoveDelayE;
+	TFloatLabeledEdit *FloatLabeledEdit1;
+	TFloatLabeledEdit *FloatLabeledEdit2;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
-
     void __fastcall ClearMemoAExecute(TObject *Sender);
     void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
     void __fastcall FormShow(TObject *Sender);
-
     void __fastcall ShutDownTimerTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
     void __fastcall LogLevelCBChange(TObject *Sender);
@@ -127,15 +127,10 @@ class TMainForm : public TRegistryForm
 	void __fastcall mRepeatEveryBtnClick(TObject *Sender);
 	void __fastcall mRibbonCreatorActiveCBClick(TObject *Sender);
 
-
     private:
         bool                                            gCanClose;
 
 		UC7												mUC7;
-
-//        												//!Consume UC7 messages
-//        UC7MessageConsumer		  						mUC7Consumer;
-
         int												getCOMPortNumber();
         void __fastcall                                 logMsg();
 		LogFileReader                                   mLogFileReader;
@@ -148,8 +143,6 @@ class TMainForm : public TRegistryForm
 		mtk::Property<mtk::LogLevel>	                mLogLevel;
 		mtk::Property<int>	                			mCOMPort;
         mtk::Property<int>                             	mCountTo;
-
-
 
         bool                                            setupAndReadIniParameters();
         void                                            setupIniFile();
