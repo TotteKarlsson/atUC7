@@ -1,5 +1,6 @@
 Release 0.5.4 (March 8)
 =======================
+* Added ribbon creation count down beep
 * Changed style to Obsidian
 * Moved some uc7 message handling out of UI
 * Added ability to back off knife at any time, while cutting
