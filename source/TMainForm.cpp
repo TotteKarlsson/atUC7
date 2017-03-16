@@ -21,6 +21,7 @@
 #pragma link "mtkIntEdit"
 #pragma link "TPropertyCheckBox"
 #pragma link "TArrayBotBtn"
+#pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
@@ -68,7 +69,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 
 void __fastcall TMainForm::createUC7Message(TObject *Sender)
 {
-	TButton* btn = dynamic_cast<TButton*>(Sender);
+	TArrayBotButton* btn = dynamic_cast<TArrayBotButton*>(Sender);
 
     if(!btn)
     {
@@ -77,15 +78,7 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
     }
 
 	bool sendRaw(false);
-    if(btn == mGetFeedRateBtn)
-    {
-    	mUC7.getCurrentFeedRate();
-    }
-    else if (btn == mGetKnifeStagePosBtn)
-    {
-     	mUC7.getKnifeStagePosition();
-    }
-    else if (btn == mStartStopBtn)
+	if (btn == mStartStopBtn)
     {
     	if(mStartStopBtn->Caption == "Start")
         {
@@ -95,6 +88,10 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
         {
             mUC7.stopCutter();
         }
+    }
+    else if(btn == mSetZeroCutBtn)
+    {
+		mUC7.setFeedRate(0);
     }
     else if(btn == mRibbonStartBtn)
     {
@@ -147,6 +144,7 @@ void __fastcall TMainForm::onConnectedToUC7()
     mUC7.getCounter().assignOnCountCallBack(onUC7Count);
     mUC7.getCounter().assignOnCountedToCallBack(onUC7CountedTo);
 	enableDisableUI(true);
+    mUC7.getStatus();
 }
 
 void TMainForm::onUC7Count()
@@ -276,4 +274,60 @@ void __fastcall TMainForm::mRibbonCreatorActiveCBClick(TObject *Sender)
 	mRibbonCreatorActiveCB->OnClick(Sender);
 }
 
+void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
+{
+	if(mConnectUC7Btn->Caption == "Open")
+    {
+        if(mUC7.connect(getCOMPortNumber()))
+        {
+            Log(lInfo) << "Connected to a UC7 device";
+        }
+        else
+        {
+            Log(lInfo) << "Connection failed";
+        }
+    }
+    else
+    {
+        if(!mUC7.disConnect())
+        {
+			Log(lError) << "Failed to close serial port";
+        }
+    }
+
+    //Give it some time to close down..
+    //These should be UC7 callbacks..
+    Sleep(100);
+    if(mUC7.isConnected())
+    {
+	    onConnectedToUC7();
+    }
+    else
+    {
+		onDisConnectedToUC7();
+    }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::mStartupTimerTimer(TObject *Sender)
+{
+	mStartupTimer->Enabled = false;
+	mConnectUC7BtnClick(NULL);
+}
+
+
+void __fastcall TMainForm::mCloseBottomPanelBtnClick(TObject *Sender)
+{
+	BottomPanel->Visible = false;
+    mShowBottomPanelBtn->Visible = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::mShowBottomPanelBtnClick(TObject *Sender)
+{
+	BottomPanel->Visible = true;
+    mShowBottomPanelBtn->Visible = false;
+    Splitter1->Top = BottomPanel->Top - 1;
+}
+//---------------------------------------------------------------------------
 

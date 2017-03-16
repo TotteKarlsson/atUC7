@@ -32,6 +32,7 @@
 #include "TSTDStringEdit.h"
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
+#include "TArrayBotBtn.h"
 //---------------------------------------------------------------------------
 using mtk::Property;
 
@@ -64,48 +65,53 @@ class TMainForm : public TRegistryForm
 	TPanel *Panel1;
 	TButton *Button1;
 	TComboBox *LogLevelCB;
+	TGroupBox *CuttingMotorGB;
+	TGroupBox *HandwheelGB;
+	TLabel *mRetractLbl;
+	TLabel *mCuttingLbl;
+	TLabel *mAfterCuttingLbl;
+	TGroupBox *NorthSouthGB;
+	TIntegerLabeledEdit *mKnifeStageNSAbsPosE;
+	TGroupBox *CounterGB;
+	TIntegerLabeledEdit *mCountToE;
+	TIntLabel *mCounterLabel;
+	TIntegerLabeledEdit *mPresetFeedRateE;
+	TTimer *mRepeatTimer;
+	TIntegerLabeledEdit *mNorthLimitPosE;
+	TPageControl *PageControl1;
+	TTabSheet *TabSheet1;
+	TTabSheet *TabSheet2;
+	TTabSheet *TabSheet3;
+	TGroupBox *GroupBox1;
+	TIntegerLabeledEdit *mStageMoveDelayE;
+	TPanel *mTopPanel;
 	TComboBox *mComportCB;
 	TButton *mConnectUC7Btn;
-	TButton *mSendBtn1;
-	TButton *mStartStopBtn;
-	TGroupBox *CuttingMotorGB;
-	TPanel *mTopPanel;
-	TButton *mSynchUIBtn;
-	TGroupBox *HandwheelGB;
-	TPie *mCrankPositionPie;
-	TLabel *mRetractLbl;
-	TLabel *mBe;
-	TLabel *Label3;
-	TLabel *Label4;
-	TPanel *mMiddleLeftPanel;
 	TSTDStringEdit *mCheckSumEdit;
 	TSTDStringEdit *mRawCMDE;
 	TSTDStringEdit *STDStringEdit1;
-	TGroupBox *NorthSouthGB;
-	TButton *mGetFeedRateBtn;
-	TIntegerLabeledEdit *mFeedRateE;
-	TIntegerLabeledEdit *mKnifeStageNSAbsPosE;
-	TButton *mGetKnifeStagePosBtn;
-	TGroupBox *CounterGB;
-	TIntegerLabeledEdit *mCountToE;
-	TButton *mResetCounterBtn;
-	TIntLabel *mCounterLabel;
-	TButton *mMoveSouthBtn;
-	TButton *mMoveNorthBtn;
-	TIntegerLabeledEdit *mKnifeStageJogStep;
-	TIntegerLabeledEdit *mPresetFeedRateE;
-	TButton *mRepeatEveryBtn;
-	mtkIntEdit *mRepeatTimeE;
-	TLabel *Label1;
-	TTimer *mRepeatTimer;
-	TPropertyCheckBox *mRibbonCreatorActiveCB;
-	TIntegerLabeledEdit *mNorthLimitPosE;
-	TButton *mRibbonStartBtn;
-	TIntegerLabeledEdit *mZeroCutsE;
 	TGroupBox *GroupBox2;
-	TIntegerLabeledEdit *mStageMoveDelayE;
-	TFloatLabeledEdit *FloatLabeledEdit1;
-	TFloatLabeledEdit *FloatLabeledEdit2;
+	TLabel *Label1;
+	mtkIntEdit *mRepeatTimeE;
+	TButton *mRepeatEveryBtn;
+	TTimer *mStartupTimer;
+	TIntegerLabeledEdit *mFeedRateE;
+	TIntegerLabeledEdit *mKnifeStageJogStep;
+	TShape *mHWPosShape;
+	TIntegerLabeledEdit *mZeroCutsE;
+	TPropertyCheckBox *mRibbonCreatorActiveCB;
+	TButton *mCloseBottomPanelBtn;
+	TButton *mShowBottomPanelBtn;
+	TPie *mCrankPositionPie;
+	TLabel *mBeforeCuttingLbl;
+	TArrayBotButton *mSetZeroCutBtn;
+	TArrayBotButton *mMoveSouthBtn;
+	TArrayBotButton *mMoveNorthBtn;
+	TArrayBotButton *mResetCounterBtn;
+	TArrayBotButton *mRibbonStartBtn;
+	TArrayBotButton *mStartStopBtn;
+	TArrayBotButton *mSynchUIBtn;
+	TArrayBotButton *mSendBtn1;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall ClearMemoAExecute(TObject *Sender);
@@ -126,6 +132,9 @@ class TMainForm : public TRegistryForm
 	void __fastcall mRepeatTimerTimer(TObject *Sender);
 	void __fastcall mRepeatEveryBtnClick(TObject *Sender);
 	void __fastcall mRibbonCreatorActiveCBClick(TObject *Sender);
+	void __fastcall mStartupTimerTimer(TObject *Sender);
+	void __fastcall mCloseBottomPanelBtnClick(TObject *Sender);
+	void __fastcall mShowBottomPanelBtnClick(TObject *Sender);
 
     private:
         bool                                            gCanClose;

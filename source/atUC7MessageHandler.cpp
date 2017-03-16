@@ -43,10 +43,12 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                     {
                     	mRibbonStartBtn->Caption = "Back off";
                         mRibbonStartBtn->Enabled = true;
+                        mSetZeroCutBtn->Enabled = true;
                     }
-                    else
+                    else //Feed rate == zero
                     {
                     	mRibbonStartBtn->Caption = "Resume";
+                        mSetZeroCutBtn->Enabled = false;
                     }
                 }
             }
@@ -98,7 +100,6 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 {
                 	Log(lError) << "Invalid calibration";
                 }
-
             }
         	else if(m.getCommand() == "30")
             {
@@ -117,6 +118,8 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 	mUC7.setStrokeState(UC7::ssRetracting);
                 	mCrankPositionPie->Angles->EndAngle = 180;
                 	mCrankPositionPie->Angles->StartAngle = 90;
+                    mHWPosShape->Left = mRetractLbl->Left;
+                    mHWPosShape->Width = mRetractLbl->Width;
                 }
                 else if(d == "01")  //Before cutting
                 {
@@ -124,6 +127,8 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                    	mUC7.setStrokeState(UC7::ssBeforeCutting);
                 	mCrankPositionPie->Angles->EndAngle = 90;
                 	mCrankPositionPie->Angles->StartAngle = 0;
+                    mHWPosShape->Left = mBeforeCuttingLbl->Left;
+                    mHWPosShape->Width = mBeforeCuttingLbl->Width;
                 }
                 else if(d == "03") //Cutting
                 {
@@ -132,6 +137,8 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                    	mUC7.setStrokeState(UC7::ssCutting);
                 	mCrankPositionPie->Angles->EndAngle = 0;
                 	mCrankPositionPie->Angles->StartAngle = 270;
+                    mHWPosShape->Left = mCuttingLbl->Left;
+                    mHWPosShape->Width = mCuttingLbl->Width;
                 }
                 else if(d == "02") //After cutting
                 {
@@ -139,6 +146,8 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                    	mUC7.setStrokeState(UC7::ssAfterCutting);
                 	mCrankPositionPie->Angles->EndAngle = 270;
                 	mCrankPositionPie->Angles->StartAngle = 180;
+                    mHWPosShape->Left = mAfterCuttingLbl->Left;
+                    mHWPosShape->Width = mAfterCuttingLbl->Width;
 
                 }
                 else if(d == "E0")

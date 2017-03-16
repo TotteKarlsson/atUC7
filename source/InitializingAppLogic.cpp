@@ -47,6 +47,7 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 	}
 
 	mLogFileReader.start(true);
+    mStartupTimer->Enabled = true;
 }
 
 //---------------------------------------------------------------------------

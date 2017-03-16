@@ -83,40 +83,6 @@ void __fastcall TMainForm::LogLevelCBChange(TObject *Sender)
     gLogger.setLogLevel(mLogLevel);
 }
 
-void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
-{
-	if(mConnectUC7Btn->Caption == "Open")
-    {
-        if(mUC7.connect(getCOMPortNumber()))
-        {
-            Log(lInfo) << "Connected to a UC7 device";
-        }
-        else
-        {
-            Log(lInfo) << "Connection failed";
-        }
-    }
-    else
-    {
-        if(!mUC7.disConnect())
-        {
-			Log(lError) << "Failed to close serial port";
-        }
-    }
-
-    //Give it some time to close down..
-    //These should be UC7 callbacks..
-    Sleep(100);
-    if(mUC7.isConnected())
-    {
-	    onConnectedToUC7();
-    }
-    else
-    {
-		onDisConnectedToUC7();
-    }
-}
-
 BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
 {
 	static TCHAR buffer[1024];
