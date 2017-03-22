@@ -39,8 +39,6 @@ object MainForm: TMainForm
     Width = 999
     Height = 19
     Panels = <>
-    ExplicitTop = 615
-    ExplicitWidth = 869
   end
   object BottomPanel: TPanel
     Left = 0
@@ -49,8 +47,6 @@ object MainForm: TMainForm
     Height = 190
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 425
-    ExplicitWidth = 869
     object infoMemo: TMemo
       Left = 1
       Top = 49
@@ -60,7 +56,6 @@ object MainForm: TMainForm
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
-      ExplicitWidth = 867
     end
     object Panel1: TPanel
       Left = 1
@@ -69,7 +64,6 @@ object MainForm: TMainForm
       Height = 48
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 867
       object Button1: TButton
         Left = 8
         Top = 3
@@ -108,7 +102,6 @@ object MainForm: TMainForm
         Caption = 'x'
         TabOrder = 2
         OnClick = mCloseBottomPanelBtnClick
-        ExplicitLeft = 798
       end
     end
   end
@@ -117,15 +110,11 @@ object MainForm: TMainForm
     Top = 65
     Width = 999
     Height = 510
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 869
-    ExplicitHeight = 357
     object TabSheet1: TTabSheet
       Caption = 'Main'
-      ExplicitWidth = 861
-      ExplicitHeight = 329
       object mMiddlePanel: TPanel
         Left = 0
         Top = 0
@@ -133,8 +122,6 @@ object MainForm: TMainForm
         Height = 482
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 861
-        ExplicitHeight = 329
         object NorthSouthGB: TGroupBox
           Left = 401
           Top = 1
@@ -143,8 +130,6 @@ object MainForm: TMainForm
           Align = alLeft
           Caption = 'North-South Knife Stage Position (0-100 000)'
           TabOrder = 0
-          ExplicitLeft = 328
-          ExplicitHeight = 327
           object mKnifeStageNSAbsPosE: TIntegerLabeledEdit
             Left = 14
             Top = 42
@@ -235,8 +220,6 @@ object MainForm: TMainForm
           Align = alLeft
           Caption = 'Ribbon Creation'
           TabOrder = 1
-          ExplicitLeft = 561
-          ExplicitHeight = 327
           object mCounterLabel: TIntLabel
             Left = 224
             Top = 34
@@ -312,8 +295,6 @@ object MainForm: TMainForm
           Align = alLeft
           Caption = 'Cutting Parameters'
           TabOrder = 2
-          ExplicitLeft = -5
-          ExplicitTop = 0
           object mPresetFeedRateE: TIntegerLabeledEdit
             Left = 15
             Top = 44
@@ -593,7 +574,6 @@ object MainForm: TMainForm
     Height = 65
     Align = alTop
     TabOrder = 3
-    ExplicitWidth = 869
     object mHWPosShape: TShape
       Left = 19
       Top = 50
@@ -680,8 +660,6 @@ object MainForm: TMainForm
     TabOrder = 4
     Visible = False
     OnClick = mShowBottomPanelBtnClick
-    ExplicitTop = 634
-    ExplicitWidth = 869
   end
   object mSynchUIBtn: TArrayBotButton
     Left = 776
