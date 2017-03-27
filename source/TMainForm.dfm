@@ -110,7 +110,7 @@ object MainForm: TMainForm
     Top = 65
     Width = 999
     Height = 510
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 2
     object TabSheet1: TTabSheet
@@ -700,12 +700,12 @@ object MainForm: TMainForm
   object mIniFileC: mtkIniFileC
     IniFileName = 'atUC7.ini'
     RootFolder = '.'
-    Left = 562
-    Top = 16
+    Left = 546
+    Top = 72
   end
   object MainMenu1: TMainMenu
     Left = 677
-    Top = 16
+    Top = 80
     object File1: TMenuItem
       Caption = 'File'
       object Exit1: TMenuItem
@@ -723,8 +723,8 @@ object MainForm: TMainForm
     Enabled = False
     Interval = 50
     OnTimer = ShutDownTimerTimer
-    Left = 778
-    Top = 16
+    Left = 770
+    Top = 72
   end
   object mRepeatTimer: TTimer
     Enabled = False

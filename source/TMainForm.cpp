@@ -21,7 +21,6 @@
 #pragma link "mtkIntEdit"
 #pragma link "TPropertyCheckBox"
 #pragma link "TArrayBotBtn"
-#pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
@@ -67,6 +66,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     setupAndReadIniParameters();
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TMainForm::createUC7Message(TObject *Sender)
 {
 	TArrayBotButton* btn = dynamic_cast<TArrayBotButton*>(Sender);
@@ -138,6 +138,7 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
     }
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TMainForm::onConnectedToUC7()
 {
 	//Setup callbacks
@@ -147,6 +148,7 @@ void __fastcall TMainForm::onConnectedToUC7()
     mUC7.getStatus();
 }
 
+//---------------------------------------------------------------------------
 void TMainForm::onUC7Count()
 {
 	mCounterLabel->update();
@@ -160,6 +162,7 @@ void TMainForm::onUC7Count()
     }
 }
 
+//---------------------------------------------------------------------------
 void TMainForm::onUC7CountedTo()
 {
 	if(mUC7.isActive())
@@ -171,6 +174,7 @@ void TMainForm::onUC7CountedTo()
     }
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TMainForm::mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
     UC7Message msg(mRawCMDE->getValue(), false);
@@ -229,6 +233,7 @@ void __fastcall TMainForm::miscBtnClicks(TObject *Sender)
     }
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TMainForm::mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
 
@@ -274,6 +279,7 @@ void __fastcall TMainForm::mRibbonCreatorActiveCBClick(TObject *Sender)
 	mRibbonCreatorActiveCB->OnClick(Sender);
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
 {
 	if(mConnectUC7Btn->Caption == "Open")
@@ -315,19 +321,17 @@ void __fastcall TMainForm::mStartupTimerTimer(TObject *Sender)
 	mConnectUC7BtnClick(NULL);
 }
 
-
+//---------------------------------------------------------------------------
 void __fastcall TMainForm::mCloseBottomPanelBtnClick(TObject *Sender)
 {
 	BottomPanel->Visible = false;
     mShowBottomPanelBtn->Visible = true;
 }
-//---------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------
 void __fastcall TMainForm::mShowBottomPanelBtnClick(TObject *Sender)
 {
 	BottomPanel->Visible = true;
     mShowBottomPanelBtn->Visible = false;
     Splitter1->Top = BottomPanel->Top - 1;
 }
-//---------------------------------------------------------------------------
-
