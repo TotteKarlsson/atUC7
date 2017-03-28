@@ -33,6 +33,7 @@
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include "TArrayBotBtn.h"
+#include "atVCLUtils.h"
 //---------------------------------------------------------------------------
 using mtk::Property;
 

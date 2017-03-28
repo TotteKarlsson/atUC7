@@ -23,7 +23,8 @@ void __fastcall TMainForm::ShutDownTimerTimer(TObject *Sender)
 		Log(lDebug) << "Shutting down log file reader";
 		mLogFileReader.stop();
 	}
-    else if(mUC7.isConnected())
+
+    if(mUC7.isConnected())
     {
 	    mUC7.disConnect();
     }

@@ -11,19 +11,16 @@ enum ApplicationMessageEnum
 
 };
 
-
-//struct AppMessageStruct;
-
-struct ATWindowStructMessage
-{
-	Cardinal            Msg;
-    					//
-	int                 wparam;
-
-    					//This is our data
-    void*				lparam;
-	LRESULT             Result;
-};
-
+//struct ATWindowStructMessage
+//{
+//	Cardinal            Msg;
+//    					//
+//	int                 wparam;
+//
+//    					//This is our data
+//    void*				lparam;
+//	LRESULT             Result;
+//};
+//
 
 #endif

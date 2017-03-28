@@ -45,10 +45,10 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 	mUC7(Handle),
     mCountTo(0)
 {
+    TMemoLogger::mMemoIsEnabled = (false);
+
     //Init the DLL -> give intra messages their ID's
 	initABCoreLib();
-
-    TMemoLogger::mMemoIsEnabled = (false);
 
 	//Setup references
   	//The following causes the editbox, and its property to reference the counters CountTo value
@@ -139,16 +139,6 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::onConnectedToUC7()
-{
-	//Setup callbacks
-    mUC7.getCounter().assignOnCountCallBack(onUC7Count);
-    mUC7.getCounter().assignOnCountedToCallBack(onUC7CountedTo);
-	enableDisableUI(true);
-    mUC7.getStatus();
-}
-
-//---------------------------------------------------------------------------
 void TMainForm::onUC7Count()
 {
 	mCounterLabel->update();
@@ -199,7 +189,6 @@ void __fastcall TMainForm::mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftS
 
 	if(Key == VK_RETURN)
     {
-
     	if(e == mFeedRateE)
         {
         	//Set feedrate
@@ -225,7 +214,7 @@ void __fastcall TMainForm::mSynchUIBtnClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::miscBtnClicks(TObject *Sender)
 {
-	TButton* btn = dynamic_cast<TButton*>(Sender);
+	TArrayBotButton* btn = dynamic_cast<TArrayBotButton*>(Sender);
     if(btn == mResetCounterBtn)
     {
     	mUC7.getCounter().reset();
@@ -236,7 +225,6 @@ void __fastcall TMainForm::miscBtnClicks(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
-
 	TIntegerLabeledEdit* e = dynamic_cast<TIntegerLabeledEdit*>(Sender);
 
     if(e == mPresetFeedRateE)
