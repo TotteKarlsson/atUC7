@@ -11,8 +11,8 @@
 #include <Vcl.ActnList.hpp>
 #include <Vcl.Menus.hpp>
 #include <Vcl.StdActns.hpp>
-#include "source/atUC7ApplicationMessages.h"
-#include "source/atUC7DataStructures.h"
+#include "uc7/atUC7ApplicationMessages.h"
+#include "uc7/atUC7DataStructures.h"
 #include "atUC7Component.h"
 #include "mtkIniFileC.h"
 #include "mtkIniFileProperties.h"
@@ -171,7 +171,7 @@ class TMainForm : public TRegistryForm
                     __fastcall                          ~TMainForm();
 
         BEGIN_MESSAGE_MAP
-                  MESSAGE_HANDLER(UWM_MESSAGE,        ATWindowStructMessage,         AppInBox);
+                  MESSAGE_HANDLER(UWM_UC7_MESSAGE,        ATWindowStructMessage,         AppInBox);
         END_MESSAGE_MAP(TForm)
 };
 

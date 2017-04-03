@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{EB8E9989-74F0-4743-BCCE-A05B331B72C4}</ProjectGuid>
+        <ProjectGuid>{207C15DE-C689-4823-A96D-687A9A8DFF78}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <AppType>Application</AppType>
@@ -52,10 +52,10 @@
         <Manifest_File>None</Manifest_File>
         <ProjectType>CppVCLApplication</ProjectType>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
-        <ILINK_LibraryPath>P:\libs\dslib\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;Forms\;..\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>P:\libs\dsl\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;Forms\;..\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <_TCHARMapping>wchar_t</_TCHARMapping>
-        <IncludePath>P:\libs\dslib\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl;$(AT_ROOT)\source\vcl\datamodules\;Forms\;..\;$(IncludePath)</IncludePath>
+        <IncludePath>P:\libs\dsl\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl;$(AT_ROOT)\source\vcl\datamodules\;Forms\;..\;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
         <AllPackageLibs>rtl.lib;vcl.lib;dbrtl.lib;dbexpress.lib;DbxCommonDriver.lib;dsnap.lib;DbxDevartSQLiteDriver170.lib;vcldb.lib;dbxcds.lib;VCLCommon.lib;vclactnband.lib;vclx.lib;vclimg.lib;CSKGenerator.lib;adortl.lib;DuneComponents.lib;bindengine.lib;bindcomp.lib;bindcompvcl.lib;TeeDB.lib;TeeUI.lib;Tee.lib;RaizeComponentsTrialVcl.lib;RaizeComponentsTrialVclDb.lib;HsBarcode1DRun.lib;DBXMySQLDriver.lib;HsBarcode2DRun.lib;atVCLCore.lib;bcbsmp.lib</AllPackageLibs>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -124,7 +124,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=0.5.4.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <LinkPackageStatics>HsBarcode1DRun.lib;HsBarcode2DRun.lib;atVCLCore.lib</LinkPackageStatics>
-        <Debugger_DebugSourcePath>P:\libs\dslib\VCL\Common\;P:\libs\dslib\VCL\Components\;P:\libs\dslib\Common\;P:\libs\atapi\source\serial\;P:\libs\dslib\Common\IPC\;P:\libs\atapi\source\UC7\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+        <Debugger_DebugSourcePath>P:\libs\dsl\VCL\Common\;P:\libs\dsl\VCL\Components\;P:\libs\dsl\Common\;P:\libs\atapi\source\serial\;P:\libs\dsl\Common\IPC\;P:\libs\atapi\source\UC7\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_PCHInject>pch.h</BCC_PCHInject>
         <BCC_PCHCache>true</BCC_PCHCache>
         <Icon_MainIcon>Resources\atDB.ico</Icon_MainIcon>
@@ -244,8 +244,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <DeployFile LocalName="$(BDS)\Redist\Win32\Tee9170.bpl" Configuration="Debug" Class="DependencyPackage">
                     <Platform Name="Win32"/>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32"/>
+                <DeployFile LocalName="$(BDS)\bin\DbxDevartSQLiteDriver170.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32"/>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\Win32\bindcompvcl170.bpl" Configuration="Debug" Class="DependencyPackage">
                     <Platform Name="Win32"/>
@@ -342,6 +342,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <DeployFile LocalName="$(BDS)\Redist\Win32\DbxCommonDriver170.bpl" Configuration="Debug" Class="DependencyPackage">
                     <Platform Name="Win32"/>
                 </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32"/>
+                </DeployFile>
                 <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\atVCLCore.bpl" Configuration="Debug" Class="DependencyPackage">
                     <Platform Name="Win32"/>
                 </DeployFile>
@@ -353,9 +356,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </DeployFile>
                 <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin64\borlndmm.dll" Class="DependencyModule">
                     <Platform Name="Win64"/>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\DbxDevartSQLiteDriver170.bpl" Configuration="Debug" Class="DependencyPackage">
-                    <Platform Name="Win32"/>
                 </DeployFile>
                 <DeployClass Required="true" Name="DependencyPackage">
                     <Platform Name="iOSDevice">
@@ -581,7 +581,18 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>xcopy ..\CHANGELOG.txt $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy $(OUTPUTDIR)*.ini $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy $(OUTPUTDIR)$(OUTPUTFILENAME) $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy p:\redist\atUC7\*.dll $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy p:\redist\atUC7\*.bpl $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\atVCLCore.bpl $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\Dune*.bpl $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\VCLCommon*.bpl $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy *.txt $(APP_RELEASES)\atUC7 /y&amp;&amp;xcopy $(OUTPUTDIR)atUC7.exe $(APP_RELEASES)\atUC7 /y</PostBuildEvent>
+        <PostBuildEvent>xcopy ..\CHANGELOG.txt $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy $(OUTPUTDIR)*.ini $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy $(OUTPUTDIR)$(OUTPUTFILENAME) $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy p:\redist\atUC7\*.dll $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy p:\redist\atUC7\*.bpl $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy p:\build\xe3_ide\bpl\atVCLCore.bpl $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy p:\build\xe3_ide\bpl\Dune*.bpl $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy p:\build\xe3_ide\bpl\VCLCommon*.bpl $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy *.txt $(APP_RELEASES)\atUC7 /y
+&amp;&amp;xcopy $(OUTPUTDIR)atUC7.exe $(APP_RELEASES)\atUC7 /y
+</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
