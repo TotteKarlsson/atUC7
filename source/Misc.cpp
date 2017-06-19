@@ -121,8 +121,8 @@ int	TMainForm::getCOMPortNumber()
 void __fastcall TMainForm::onConnectedToUC7()
 {
 	//Setup callbacks
-    mUC7.getCounter().assignOnCountCallBack(onUC7Count);
-    mUC7.getCounter().assignOnCountedToCallBack(onUC7CountedTo);
+    mUC7.getSectionCounter().assignOnCountCallBack(onUC7Count);
+    mUC7.getSectionCounter().assignOnCountedToCallBack(onUC7CountedTo);
 	enableDisableUI(true);
     mUC7.getStatus();
 }

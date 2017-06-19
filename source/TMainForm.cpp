@@ -52,8 +52,8 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 
 	//Setup references
   	//The following causes the editbox, and its property to reference the counters CountTo value
-   	mCountToE->setReference(mUC7.getCounter().getCountToReference());
-   	mCounterLabel->setReference(mUC7.getCounter().getCountReference());
+   	mCountToE->setReference(mUC7.getSectionCounter().getCountToReference());
+   	mCounterLabel->setReference(mUC7.getSectionCounter().getCountReference());
     mZeroCutsE->setReference(mUC7.getNumberOfZeroStrokesReference());
 
     mCountToE->update();
@@ -109,11 +109,12 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
     }
     else if(btn == mMoveSouthBtn)
     {
-    	mUC7.moveKnifeStageSouth(mKnifeStageJogStep->getValue());
+    	mUC7.jogKnifeStageSouth(mKnifeStageJogStep->getValue());
+		mUC7.jogKnifeStageSouth(mKnifeStageJogStep->getValue());
     }
     else if(btn == mMoveNorthBtn)
     {
-    	mUC7.moveKnifeStageNorth(mKnifeStageJogStep->getValue());
+    	mUC7.jogKnifeStageNorth(mKnifeStageJogStep->getValue());
     }
 
     else if(btn == mSendBtn1)
@@ -147,7 +148,7 @@ void TMainForm::onUC7Count()
     	//Check if we are close to ribbon separation
         if(mCounterLabel->getValue() >= (mCountToE->getValue() - 3))
         {
-			playABSound(absBeforeBackOff, SND_ASYNC);
+//			playABSound(absBeforeBackOff, SND_ASYNC);
         }
     }
 }
@@ -157,7 +158,7 @@ void TMainForm::onUC7CountedTo()
 {
 	if(mUC7.isActive())
     {
-	    mUC7.getCounter().reset();
+	    mUC7.getSectionCounter().reset();
 		Log(lInfo) << "Creating new ribbon";
 	    mUC7.prepareToCutRibbon(true);
         mRibbonStartBtn->Enabled = false;
@@ -217,7 +218,7 @@ void __fastcall TMainForm::miscBtnClicks(TObject *Sender)
 	TArrayBotButton* btn = dynamic_cast<TArrayBotButton*>(Sender);
     if(btn == mResetCounterBtn)
     {
-    	mUC7.getCounter().reset();
+    	mUC7.getSectionCounter().reset();
         mCounterLabel->update();
     }
 }

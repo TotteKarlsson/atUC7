@@ -133,7 +133,7 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 else if(d == "03") //Cutting
                 {
                    	Log(lDebug3) << "Cutting";
-                   	mUC7.getCounter().increase();
+                   	mUC7.getSectionCounter().increase();
                    	mUC7.setStrokeState(UC7::ssCutting);
                 	mCrankPositionPie->Angles->EndAngle = 0;
                 	mCrankPositionPie->Angles->StartAngle = 270;

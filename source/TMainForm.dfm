@@ -115,6 +115,10 @@ object MainForm: TMainForm
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Main'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object mMiddlePanel: TPanel
         Left = 0
         Top = 0
@@ -373,6 +377,10 @@ object MainForm: TMainForm
     object TabSheet2: TTabSheet
       Caption = 'Tests'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         991
         482)
@@ -468,6 +476,10 @@ object MainForm: TMainForm
     object TabSheet3: TTabSheet
       Caption = 'Settings'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 3
         Top = 47
