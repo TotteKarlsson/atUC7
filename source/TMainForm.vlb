@@ -106,14 +106,8 @@ Coordinates=655,71,94,51
 [CounterGB]
 Coordinates=181,321,69,51
 
-[mRibbonCreatorActiveCB]
-Coordinates=476,1,141,51
-
 [mMoveSouthBtn]
 Coordinates=339,141,96,51
-
-[mFeedRateE]
-Coordinates=50,232,76,51
 
 [Label1]
 Coordinates=228,141,46,51
@@ -156,4 +150,10 @@ Coordinates=339,211,99,51
 
 [mNorthLimitPosE]
 Coordinates=655,211,101,51
+
+[FeedRateE]
+Coordinates=50,232,76,51
+
+[]
+Coordinates=476,1,141,51
 

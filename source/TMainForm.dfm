@@ -1,9 +1,10 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
+  ActiveControl = mNorthLimitPosE
   Caption = 'UC7 Controller'
-  ClientHeight = 806
-  ClientWidth = 999
+  ClientHeight = 788
+  ClientWidth = 1421
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,8 +24,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 575
-    Width = 999
+    Top = 557
+    Width = 1421
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -35,22 +36,22 @@ object MainForm: TMainForm
   end
   object SB: TStatusBar
     Left = 0
-    Top = 768
-    Width = 999
+    Top = 750
+    Width = 1421
     Height = 19
     Panels = <>
   end
   object BottomPanel: TPanel
     Left = 0
-    Top = 578
-    Width = 999
+    Top = 560
+    Width = 1421
     Height = 190
     Align = alBottom
     TabOrder = 1
     object infoMemo: TMemo
       Left = 1
       Top = 49
-      Width = 997
+      Width = 1419
       Height = 140
       Align = alClient
       ScrollBars = ssBoth
@@ -60,7 +61,7 @@ object MainForm: TMainForm
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 997
+      Width = 1419
       Height = 48
       Align = alTop
       TabOrder = 1
@@ -94,7 +95,7 @@ object MainForm: TMainForm
           'EVERYTHING')
       end
       object mCloseBottomPanelBtn: TButton
-        Left = 928
+        Left = 1350
         Top = 1
         Width = 68
         Height = 46
@@ -103,34 +104,39 @@ object MainForm: TMainForm
         TabOrder = 2
         OnClick = mCloseBottomPanelBtnClick
       end
+      object Button2: TButton
+        Left = 192
+        Top = 17
+        Width = 75
+        Height = 25
+        Caption = 'Button2'
+        TabOrder = 3
+        OnClick = Button2Click
+      end
     end
   end
   object PageControl1: TPageControl
     Left = 0
     Top = 65
-    Width = 999
-    Height = 510
+    Width = 1421
+    Height = 492
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Main'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object mMiddlePanel: TPanel
         Left = 0
         Top = 0
-        Width = 991
-        Height = 482
+        Width = 1413
+        Height = 464
         Align = alClient
         TabOrder = 0
         object NorthSouthGB: TGroupBox
           Left = 401
           Top = 1
           Width = 233
-          Height = 480
+          Height = 462
           Align = alLeft
           Caption = 'North-South Knife Stage Position (0-100 000)'
           TabOrder = 0
@@ -152,7 +158,7 @@ object MainForm: TMainForm
             ReadOnly = True
             TabOrder = 0
             Text = '0'
-            OnKeyDown = mFeedRateEKeyDown
+            OnKeyDown = FeedRateEKeyDown
           end
           object mNorthLimitPosE: TIntegerLabeledEdit
             Left = 126
@@ -170,7 +176,7 @@ object MainForm: TMainForm
             ParentFont = False
             TabOrder = 3
             Text = '0'
-            OnKeyDown = mFeedRateEKeyDown
+            OnKeyDown = FeedRateEKeyDown
           end
           object mKnifeStageJogStep: TIntegerLabeledEdit
             Left = 14
@@ -188,7 +194,7 @@ object MainForm: TMainForm
             ParentFont = False
             TabOrder = 4
             Text = '1'
-            OnKeyDown = mFeedRateEKeyDown
+            OnKeyDown = FeedRateEKeyDown
             Value = 1
           end
           object mMoveSouthBtn: TArrayBotButton
@@ -220,7 +226,7 @@ object MainForm: TMainForm
           Left = 634
           Top = 1
           Width = 287
-          Height = 480
+          Height = 462
           Align = alLeft
           Caption = 'Ribbon Creation'
           TabOrder = 1
@@ -295,7 +301,7 @@ object MainForm: TMainForm
           Left = 1
           Top = 1
           Width = 400
-          Height = 480
+          Height = 462
           Align = alLeft
           Caption = 'Cutting Parameters'
           TabOrder = 2
@@ -318,7 +324,7 @@ object MainForm: TMainForm
             OnKeyDown = mPresetFeedRateEKeyDown
             Value = 50
           end
-          object mFeedRateE: TIntegerLabeledEdit
+          object FeedRateE: TIntegerLabeledEdit
             Left = 145
             Top = 44
             Width = 73
@@ -334,7 +340,7 @@ object MainForm: TMainForm
             ParentFont = False
             TabOrder = 2
             Text = '0'
-            OnKeyDown = mFeedRateEKeyDown
+            OnKeyDown = FeedRateEKeyDown
           end
           object mSetZeroCutBtn: TArrayBotButton
             Left = 281
@@ -372,20 +378,105 @@ object MainForm: TMainForm
             SoundID = 'BUTTON_CLICK_4'
           end
         end
+        object Panel2: TPanel
+          Left = 921
+          Top = 1
+          Width = 256
+          Height = 462
+          Align = alLeft
+          TabOrder = 3
+          object GroupBox3: TGroupBox
+            Left = 1
+            Top = 1
+            Width = 254
+            Height = 224
+            Align = alTop
+            Caption = 'Cutting Speed'
+            TabOrder = 0
+            object Label2: TLabel
+              Left = 16
+              Top = 83
+              Width = 44
+              Height = 13
+              Caption = 'Current: '
+            end
+            object CurrentCuttingSpeedL: TIntLabel
+              Left = 66
+              Top = 83
+              Width = 10
+              Height = 13
+              Caption = '-1'
+              Value = -1
+              TheFont.Charset = DEFAULT_CHARSET
+              TheFont.Color = clWindowText
+              TheFont.Height = -11
+              TheFont.Name = 'Tahoma'
+              TheFont.Style = []
+            end
+            object CuttingSpeedE: TIntegerLabeledEdit
+              Left = 16
+              Top = 38
+              Width = 121
+              Height = 21
+              EditLabel.Width = 104
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Cutting Speed (mm/s)'
+              TabOrder = 0
+              Text = '0'
+              OnKeyDown = setSpeedE
+            end
+          end
+          object GroupBox4: TGroupBox
+            Left = 1
+            Top = 225
+            Width = 254
+            Height = 236
+            Align = alClient
+            Caption = 'Return Speed'
+            TabOrder = 1
+            object Label3: TLabel
+              Left = 16
+              Top = 80
+              Width = 44
+              Height = 13
+              Caption = 'Current: '
+            end
+            object CurrentReturnSpeedL: TIntLabel
+              Left = 66
+              Top = 80
+              Width = 10
+              Height = 13
+              Caption = '-1'
+              Value = -1
+              TheFont.Charset = DEFAULT_CHARSET
+              TheFont.Color = clWindowText
+              TheFont.Height = -11
+              TheFont.Name = 'Tahoma'
+              TheFont.Style = []
+            end
+            object ReturnSpeedE: TIntegerLabeledEdit
+              Left = 16
+              Top = 40
+              Width = 121
+              Height = 21
+              EditLabel.Width = 102
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Return Speed (mm/s)'
+              TabOrder = 0
+              Text = '0'
+            end
+          end
+        end
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Tests'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
-        991
-        482)
+        1413
+        464)
       object mCrankPositionPie: TPie
-        Left = 459
+        Left = 881
         Top = 14
         Width = 152
         Height = 147
@@ -476,10 +567,6 @@ object MainForm: TMainForm
     object TabSheet3: TTabSheet
       Caption = 'Settings'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 3
         Top = 47
@@ -533,7 +620,7 @@ object MainForm: TMainForm
       object mTopPanel: TPanel
         Left = 0
         Top = 0
-        Width = 991
+        Width = 1413
         Height = 41
         Align = alTop
         TabOrder = 1
@@ -542,7 +629,6 @@ object MainForm: TMainForm
           Top = 12
           Width = 145
           Height = 21
-          ItemIndex = 0
           TabOrder = 0
           Text = 'COM1'
           Items.Strings = (
@@ -565,7 +651,16 @@ object MainForm: TMainForm
             'COM17'
             'COM18'
             'COM19'
-            'COM20')
+            'COM20'
+            'COM21'
+            'COM22'
+            'COM23'
+            'COM24'
+            'COM25'
+            'COM26'
+            'COM27'
+            'COM28'
+            'COM29')
         end
         object mConnectUC7Btn: TButton
           Left = 165
@@ -582,7 +677,7 @@ object MainForm: TMainForm
   object HandwheelGB: TGroupBox
     Left = 0
     Top = 0
-    Width = 999
+    Width = 1421
     Height = 65
     Align = alTop
     TabOrder = 3
@@ -646,26 +741,11 @@ object MainForm: TMainForm
       Font.Style = []
       ParentFont = False
     end
-    object mRibbonCreatorActiveCB: TPropertyCheckBox
-      Left = 536
-      Top = 24
-      Width = 241
-      Height = 17
-      Caption = 'Ribbon Creator on/off'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -21
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      OnClick = mRibbonCreatorActiveCBClick
-    end
   end
   object mShowBottomPanelBtn: TButton
     Left = 0
-    Top = 787
-    Width = 999
+    Top = 769
+    Width = 1421
     Height = 19
     Align = alBottom
     Caption = '^'
@@ -716,8 +796,8 @@ object MainForm: TMainForm
     Top = 72
   end
   object MainMenu1: TMainMenu
-    Left = 677
-    Top = 80
+    Left = 1077
+    Top = 16
     object File1: TMenuItem
       Caption = 'File'
       object Exit1: TMenuItem
@@ -735,8 +815,8 @@ object MainForm: TMainForm
     Enabled = False
     Interval = 50
     OnTimer = ShutDownTimerTimer
-    Left = 770
-    Top = 72
+    Left = 1170
+    Top = 16
   end
   object mRepeatTimer: TTimer
     Enabled = False

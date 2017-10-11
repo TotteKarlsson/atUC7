@@ -9,7 +9,7 @@
 #include "TMemoLogger.h"
 #include "sound/atSounds.h"
 #include <mmsystem.h>
-#include "atCore.h"
+#include "core/atCore.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "mtkIniFileC"
@@ -59,8 +59,6 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     mCountToE->update();
     mCounterLabel->update();
     mZeroCutsE->update();
-
-	mRibbonCreatorActiveCB->setReference(mUC7.getRibbonCreatorActiveReference());
 
     setupIniFile();
     setupAndReadIniParameters();
@@ -143,14 +141,6 @@ void __fastcall TMainForm::createUC7Message(TObject *Sender)
 void TMainForm::onUC7Count()
 {
 	mCounterLabel->update();
-    if(mRibbonCreatorActiveCB->Checked)
-    {
-    	//Check if we are close to ribbon separation
-        if(mCounterLabel->getValue() >= (mCountToE->getValue() - 3))
-        {
-//			playABSound(absBeforeBackOff, SND_ASYNC);
-        }
-    }
 }
 
 //---------------------------------------------------------------------------
@@ -184,13 +174,13 @@ void __fastcall TMainForm::mRawCMDEChange(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+void __fastcall TMainForm::FeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
 	TIntegerLabeledEdit* e = dynamic_cast<TIntegerLabeledEdit*>(Sender);
 
 	if(Key == VK_RETURN)
     {
-    	if(e == mFeedRateE)
+    	if(e == FeedRateE)
         {
         	//Set feedrate
 	        mUC7.setFeedRate(e->getValue());
@@ -263,12 +253,6 @@ void __fastcall TMainForm::mRepeatEveryBtnClick(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::mRibbonCreatorActiveCBClick(TObject *Sender)
-{
-	mRibbonCreatorActiveCB->OnClick(Sender);
-}
-
-//---------------------------------------------------------------------------
 void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
 {
 	if(mConnectUC7Btn->Caption == "Open")
@@ -324,3 +308,34 @@ void __fastcall TMainForm::mShowBottomPanelBtnClick(TObject *Sender)
     mShowBottomPanelBtn->Visible = false;
     Splitter1->Top = BottomPanel->Top - 1;
 }
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::setSpeedE(TObject *Sender, WORD &Key, TShiftState Shift)
+
+{
+	TIntegerLabeledEdit* e = dynamic_cast<TIntegerLabeledEdit*>(Sender);
+
+    if(e && Key == VK_RETURN)
+    {
+    	if(e == CuttingSpeedE)
+        {
+        	Log(lInfo) << "Setting cutting speed: " << e->getValue() <<" mm/s";
+        	mUC7.setCuttingSpeed(e->getValue());
+        }
+        else if(e == ReturnSpeedE)
+        {
+        	Log(lInfo) << "Setting return speed: " << e->getValue() <<" mm/s";
+        	mUC7.setReturnSpeed(e->getValue());
+        }
+    }
+}
+
+void __fastcall TMainForm::Button2Click(TObject *Sender)
+{
+	for(int i = 0; i < mUC7Messages.size(); i++)
+    {
+    	Log(lInfo) << mUC7Messages[i].first.getFullMessage() << ", " << mtk::toString(mUC7Messages[i].second);
+    }
+}
+
+

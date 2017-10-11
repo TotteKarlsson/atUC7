@@ -96,11 +96,10 @@ class TMainForm : public TRegistryForm
 	mtkIntEdit *mRepeatTimeE;
 	TButton *mRepeatEveryBtn;
 	TTimer *mStartupTimer;
-	TIntegerLabeledEdit *mFeedRateE;
+	TIntegerLabeledEdit *FeedRateE;
 	TIntegerLabeledEdit *mKnifeStageJogStep;
 	TShape *mHWPosShape;
 	TIntegerLabeledEdit *mZeroCutsE;
-	TPropertyCheckBox *mRibbonCreatorActiveCB;
 	TButton *mCloseBottomPanelBtn;
 	TButton *mShowBottomPanelBtn;
 	TPie *mCrankPositionPie;
@@ -113,6 +112,16 @@ class TMainForm : public TRegistryForm
 	TArrayBotButton *mStartStopBtn;
 	TArrayBotButton *mSynchUIBtn;
 	TArrayBotButton *mSendBtn1;
+	TPanel *Panel2;
+	TGroupBox *GroupBox3;
+	TGroupBox *GroupBox4;
+	TIntegerLabeledEdit *CuttingSpeedE;
+	TIntegerLabeledEdit *ReturnSpeedE;
+	TLabel *Label2;
+	TLabel *Label3;
+	TIntLabel *CurrentCuttingSpeedL;
+	TIntLabel *CurrentReturnSpeedL;
+	TButton *Button2;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall ClearMemoAExecute(TObject *Sender);
@@ -126,21 +135,25 @@ class TMainForm : public TRegistryForm
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall mRawCMDEChange(TObject *Sender);
-	void __fastcall mFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall FeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall mSynchUIBtnClick(TObject *Sender);
 	void __fastcall miscBtnClicks(TObject *Sender);
 	void __fastcall mPresetFeedRateEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall mRepeatTimerTimer(TObject *Sender);
 	void __fastcall mRepeatEveryBtnClick(TObject *Sender);
-	void __fastcall mRibbonCreatorActiveCBClick(TObject *Sender);
 	void __fastcall mStartupTimerTimer(TObject *Sender);
 	void __fastcall mCloseBottomPanelBtnClick(TObject *Sender);
 	void __fastcall mShowBottomPanelBtnClick(TObject *Sender);
+	void __fastcall setSpeedE(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall Button2Click(TObject *Sender);
 
     private:
         bool                                            gCanClose;
 
 		UC7												mUC7;
+
+        												//Keep a log of incoming messages and note if they are handled or not
+        vector< pair<UC7Message, bool> >	 			mUC7Messages;
         int												getCOMPortNumber();
         void __fastcall                                 logMsg();
 		LogFileReader                                   mLogFileReader;
@@ -165,6 +178,7 @@ class TMainForm : public TRegistryForm
 		void __fastcall 								enableDisableUI(bool enableDisable);
         void 											onUC7Count();
         void 											onUC7CountedTo();
+
 
     public:
                     __fastcall                          TMainForm(TComponent* Owner);

@@ -11,6 +11,8 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
 {
 	//Find out controller address from sender parameter
     int contr_address = toInt(m.getSender());
+    bool message_handled(false);
+
 	switch(contr_address)
     {
         case gStepperControllerAddress:
@@ -21,11 +23,13 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 {
                 	//This is the absolute, current position of feed controller (the arm)
                 	Log(lDebug) << "Handling Feedrate Motor Control Message: "<<m.getData();
+					message_handled = true;
                 }
             }
             else if(m.getCommand() == "21")
             {
             	Log(lDebug) << "Autosend position at motion:" <<m.getData();
+                message_handled = true;
             }
             else if(m.getCommand() == "23") //Feed rate
             {
@@ -36,7 +40,7 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
 
                     //Transfer hardware data to UC7 'soft' data
                     mUC7.setFeedRate(rate, false);
-                    mFeedRateE->setValue(rate);
+                    FeedRateE->setValue(rate);
 
                    	mRibbonStartBtn->Enabled = (rate != 0) ? false : true;
                     if(rate)
@@ -50,6 +54,7 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                     	mRibbonStartBtn->Caption = "Resume";
                         mSetZeroCutBtn->Enabled = false;
                     }
+	                message_handled = true;
                 }
             }
             else if(m.getCommand() == "30")
@@ -59,24 +64,23 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
 	               string absPos  = m.getData().substr(2);
                    mKnifeStageNSAbsPosE->setValue(hexToDec(absPos));
                    mUC7.setNorthSouthStageAbsolutePosition(mKnifeStageNSAbsPosE->getValue(), false);
-
+                   message_handled = true;
                 }
             }
             else if(m.getCommand() == "31")
             {
             	Log(lDebug) << "Send position at movement (North/South)" <<m.getData();
+                message_handled = true;
             }
             else if(m.getCommand() == "40")
             {
             	Log(lDebug) << "East/West Motor control" <<m.getData();
+                message_handled = true;
             }
             else if(m.getCommand() == "41")
             {
             	Log(lDebug) << "Autosend position at motion (East/West):" <<m.getData();
-            }
-			else
-            {
-            	Log(lError) << "Unhandled message:" <<m.getFullMessage();
+                message_handled = true;
             }
         }
         break;
@@ -100,14 +104,39 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 {
                 	Log(lError) << "Invalid calibration";
                 }
+                message_handled = true;
             }
         	else if(m.getCommand() == "30")
             {
-               	Log(lInfo) << "Cutting speed.. unhandled message";
+              	Log(lInfo) << "Got Cutting Speed Message ("<<m.getXX()<<" "<<m.getData()<<")";
+
+                if(m.getXX() == "FF")  //Getting cutting speed
+                {
+                	Log(lInfo) << "Reading Cutting Speed..";
+
+                    //16 bit speed value
+                	string yyyy = m.getData();
+                   	Log(lInfo) << "Data: " << yyyy;
+                   	CurrentCuttingSpeedL->setValue(hexToDec(yyyy));
+                    mUC7.setCuttingSpeed(CurrentCuttingSpeedL->getValue(), false);
+	                message_handled = true;
+                }
             }
         	else if(m.getCommand() == "31")
             {
-               	Log(lInfo) << "Return speed.. unhandled message";
+
+              	Log(lInfo) << "Got Return Speed Message ("<<m.getXX()<<" "<<m.getData()<<")";
+                if(m.getXX() == "FF")  //Getting cutting speed
+                {
+                	Log(lInfo) << "Reading Return Speed..";
+
+                    //16 bit speed value
+                	string yyyy = m.getData();
+                   	Log(lInfo) << "Data: " << yyyy;
+                   	CurrentReturnSpeedL->setValue(hexToDec(yyyy));
+                    mUC7.setReturnSpeed(CurrentReturnSpeedL->getValue(), false);
+	                message_handled = true;
+                }
             }
         	else if(m.getCommand() == "40")
             {
@@ -115,7 +144,7 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 if(d == "00")  //Retract
                 {
                 	Log(lDebug3) << "Retracting";
-                	mUC7.setStrokeState(UC7::ssRetracting);
+                	mUC7.setStrokeState(ssRetracting);
                 	mCrankPositionPie->Angles->EndAngle = 180;
                 	mCrankPositionPie->Angles->StartAngle = 90;
                     mHWPosShape->Left = mRetractLbl->Left;
@@ -124,7 +153,7 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 else if(d == "01")  //Before cutting
                 {
                    	Log(lDebug3) << "Before Cutting";
-                   	mUC7.setStrokeState(UC7::ssBeforeCutting);
+                   	mUC7.setStrokeState(ssBeforeCutting);
                 	mCrankPositionPie->Angles->EndAngle = 90;
                 	mCrankPositionPie->Angles->StartAngle = 0;
                     mHWPosShape->Left = mBeforeCuttingLbl->Left;
@@ -134,7 +163,7 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 {
                    	Log(lDebug3) << "Cutting";
                    	mUC7.getSectionCounter().increase();
-                   	mUC7.setStrokeState(UC7::ssCutting);
+                   	mUC7.setStrokeState(ssCutting);
                 	mCrankPositionPie->Angles->EndAngle = 0;
                 	mCrankPositionPie->Angles->StartAngle = 270;
                     mHWPosShape->Left = mCuttingLbl->Left;
@@ -143,7 +172,7 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 else if(d == "02") //After cutting
                 {
                    	Log(lDebug3) << "After Cutting";
-                   	mUC7.setStrokeState(UC7::ssAfterCutting);
+                   	mUC7.setStrokeState(ssAfterCutting);
                 	mCrankPositionPie->Angles->EndAngle = 270;
                 	mCrankPositionPie->Angles->StartAngle = 180;
                     mHWPosShape->Left = mAfterCuttingLbl->Left;
@@ -152,12 +181,9 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
                 }
                 else if(d == "E0")
                 {
-                   	mUC7.setStrokeState(UC7::ssUndefined);
+                   	mUC7.setStrokeState(ssUndefined);
                 }
-            }
-            else
-            {
-            	Log(lError) << "Unhandled message:" <<m.getFullMessage();
+                message_handled = true;
             }
         }
         break;
@@ -168,29 +194,40 @@ bool TMainForm::handleUC7Message(const UC7Message& m)
         	if(cmd == "F0")
             {
                	Log(lInfo) << "Software Reset!";
+                message_handled = true;
             }
             else if(cmd == "F1")
             {
                	Log(lInfo) << "Getting part ID data: "<<m.getData();
+                message_handled = true;
             }
             else if(cmd == "F2")
             {
                	Log(lInfo) << "Logging in";
+                message_handled = true;
             }
             else if(cmd == "F3")
             {
             	Log(lError) << "There was a Command/Transmission Error. Data: "<<m.getData();
+                message_handled = true;
             }
             else if(cmd == "F5")
             {
                	Log(lInfo) << "Getting version data: "<<m.getData();
+                message_handled = true;
             }
         }
 		break;
 
-        default:   return false;
+        default:
+        	message_handled = false;
     }
 
+    if(!message_handled)
+    {
+    	Log(lInfo) << "UC7 sent an unhandled message: " << m.getFullMessage();
+    }
+    mUC7Messages.push_back(pair<UC7Message, bool>(m, message_handled));
     return true;
 }
 
