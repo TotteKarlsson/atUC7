@@ -125,6 +125,10 @@ object MainForm: TMainForm
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Main'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object mMiddlePanel: TPanel
         Left = 0
         Top = 0
@@ -472,6 +476,10 @@ object MainForm: TMainForm
     object TabSheet2: TTabSheet
       Caption = 'Tests'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         1413
         464)
@@ -532,13 +540,15 @@ object MainForm: TMainForm
           OnKeyDown = mRawCMDEKeyDown
           Value = '81F0F8'
         end
-        object mRepeatTimeE: mtkIntEdit
+        object mRepeatTimeE: TIntegerEdit
           Left = 117
           Top = 197
           Width = 43
           Height = 21
+          NumbersOnly = True
           TabOrder = 4
           Text = '10'
+          Value = 10
         end
         object mRepeatEveryBtn: TButton
           Left = 22
@@ -567,6 +577,10 @@ object MainForm: TMainForm
     object TabSheet3: TTabSheet
       Caption = 'Settings'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 3
         Top = 47
@@ -692,7 +706,7 @@ object MainForm: TMainForm
     object mRetractLbl: TLabel
       Left = 21
       Top = 20
-      Width = 89
+      Width = 88
       Height = 25
       Caption = 'Retracting'
       Font.Charset = DEFAULT_CHARSET
@@ -789,7 +803,7 @@ object MainForm: TMainForm
       Action = ClearMemoA
     end
   end
-  object mIniFileC: mtkIniFileC
+  object mIniFileC: TIniFileC
     IniFileName = 'atUC7.ini'
     RootFolder = '.'
     Left = 546

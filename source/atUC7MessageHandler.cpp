@@ -2,9 +2,9 @@
 #pragma hdrstop
 #include "atVCLUtils.h"
 #include "TMainForm.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 bool TMainForm::handleUC7Message(const UC7Message& m)

@@ -1,14 +1,14 @@
 #pragma hdrstop
 #include "TMainForm.h"
-#include "TMemoLogger.h"
-#include "mtkVCLUtils.h"
-#include "mtkLogger.h"
-#include "mtkIniSection.h"
+#include "dslTMemoLogger.h"
+#include "dslVCLUtils.h"
+#include "dslLogger.h"
+#include "dslIniSection.h"
 
 extern bool             gAppIsStartingUp;
 extern string           gLogFileLocation;
 extern string           gLogFileName;
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::FormCreate(TObject *Sender)

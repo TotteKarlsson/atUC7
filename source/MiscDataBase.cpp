@@ -1,17 +1,17 @@
 #pragma hdrstop
 #include "TMainForm.h"
-#include "TMemoLogger.h"
-#include "mtkVCLUtils.h"
-#include "mtkLogger.h"
-#include "mtkSQLiteQuery.h"
-#include "mtkSQLiteTable.h"
-#include "mtkSQLiteException.h"
-#include "mtkMoleculixException.h"
+#include "dslTMemoLogger.h"
+#include "dslVCLUtils.h"
+#include "dslLogger.h"
+#include "dslSQLiteQuery.h"
+#include "dslSQLiteTable.h"
+#include "dslSQLiteException.h"
+#include "dslException.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
 
-using namespace mtk;
+using namespace dsl;
 extern string gCommonAppDataLocation;
 //---------------------------------------------------------------------------
 

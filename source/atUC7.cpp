@@ -6,16 +6,16 @@
 #include <Vcl.Themes.hpp>
 USEFORM("UI\TMainForm.cpp", MainForm);
 //---------------------------------------------------------------------------
-#include "mtkUtils.h"
-#include "mtkVCLUtils.h"
-#include "mtkIniKey.h"
-#include "mtkRestartApplicationUtils.h"
-#include "mtkLogger.h"
-#include "mtkMoleculixException.h"
-#include "mtkSQLite.h"
+#include "dslUtils.h"
+#include "dslVCLUtils.h"
+#include "dslIniKey.h"
+#include "dslRestartApplicationUtils.h"
+#include "dslLogger.h"
+#include "dslException.h"
+#include "dslSQLite.h"
 #pragma package(smart_init)
 
-using namespace mtk;
+using namespace dsl;
 using std::string;
 
 extern HWND         gOtherAppWindow             = NULL;
@@ -40,32 +40,6 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
     //The app mutex is used to check for already running instances
     try
     {
-		// Initialize restart code
-		// Check if this instance is restarted and
-		// wait while previos instance finish
-		if (mtk::checkForCommandLineFlag("--Restart"))
-		{
-			mtk::WaitForPreviousProcessToFinish(gRestartMutexName);
-		}
-        else
-        {
-            //Look at this later... does not work yet
-            HANDLE appMutex = ::CreateMutexA(NULL, FALSE, gAppMutexName.c_str());
-            int err = GetLastError();
-            if( ERROR_ALREADY_EXISTS == err)
-            {
-                // Program already running somewhere
-                ::EnumWindows(FindOtherWindow, NULL);
-
-                if(gOtherAppWindow != NULL)
-                {
-                    //Send a custom message to restore window here..
-                    ::SwitchToThisWindow(gOtherAppWindow, false);
-                }
-
-                return(0); // Exit program
-            }
-        }
 
         setupLogging();
         Log(lInfo) << "The Logfile was opened..";
@@ -79,22 +53,17 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 
         Application->Initialize();
         Application->MainFormOnTaskBar = true;
-
-//		TStyleManager::TrySetStyle("Iceberg Classico");
-		TStyleManager::TrySetStyle("Obsidian");
+		TStyleManager::TrySetStyle("Iceberg Classico");
 		Application->Title = "atUC7";
         Application->ProcessMessages();
 		Application->CreateForm(__classid(TMainForm), &MainForm);
 		Application->Run();
-
-        // Finish restarting process if needed
-        DoRestartProcessFinish();
 	}
 	catch (Exception &exception)
 	{
 		Application->ShowException(&exception);
 	}
-	catch(const MoleculixException &e)
+	catch(const DSLException &e)
 	{
 		throw Exception(e.what());
 	}
@@ -125,7 +94,7 @@ void setupLogging()
 	gLogFileLocation = fldr;
 	string fullLogFileName(joinPath(gLogFileLocation, gLogFileName));
 	clearFile(fullLogFileName);
-	mtk::gLogger.logToFile(fullLogFileName);
+	dsl::gLogger.logToFile(fullLogFileName);
 	LogOutput::mShowLogLevel = true;
 	LogOutput::mShowLogTime = true;
 	LogOutput::mUseLogTabs = false;

@@ -14,32 +14,32 @@
 #include "uc7/atUC7ApplicationMessages.h"
 #include "uc7/atUC7DataStructures.h"
 #include "atUC7Component.h"
-#include "mtkIniFileC.h"
-#include "mtkIniFileProperties.h"
-#include "mtkIntEdit.h"
-#include "mtkLogFileReader.h"
-#include "mtkLogLevel.h"
-#include "mtkProperty.h"
-#include "mtkSQLite.h"
+#include "dslTInifileC.h"
+#include "dslIniFileProperties.h"
+#include "dslTIntegerEdit.h"
+#include "dslLogFileReader.h"
+#include "dslLogLevel.h"
+#include "dslProperty.h"
+#include "dslSQLite.h"
 #include "pies.h"
-#include "TApplicationProperties.h"
-#include "TFloatLabeledEdit.h"
-#include "TIntegerLabeledEdit.h"
-#include "TIntLabel.h"
-#include "TPropertyCheckBox.h"
-#include "TRegistryForm.h"
-#include "TRegistryProperties.h"
-#include "TSTDStringEdit.h"
-#include "TSTDStringLabeledEdit.h"
+#include "dslApplicationProperties.h"
+#include "dslTFloatLabeledEdit.h"
+#include "dslTIntegerLabeledEdit.h"
+#include "dslTIntLabel.h"
+#include "dslTPropertyCheckBox.h"
+#include "dslTRegistryForm.h"
+#include "dslRegistryProperties.h"
+#include "dslTSTDStringEdit.h"
+#include "dslTSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include "TArrayBotBtn.h"
 #include "atVCLUtils.h"
 //---------------------------------------------------------------------------
-using mtk::Property;
-
-using mtk::IniFileProperties;
-using mtk::TRegistryProperties;
-
+using dsl::Property;
+using dsl::IniFileProperties;
+using dsl::TRegistryProperties;
+using std::vector;
+using std::pair;
 extern string gApplicationRegistryRoot;
 
 class TMainForm : public TRegistryForm
@@ -52,7 +52,7 @@ class TMainForm : public TRegistryForm
         TMenuItem *ClearMemoA1;
     TSplitter *Splitter1;
 	TPanel *mMiddlePanel;
-    mtkIniFileC *mIniFileC;
+    TIniFileC *mIniFileC;
     TMainMenu *MainMenu1;
     TMenuItem *File1;
     TMenuItem *Help1;
@@ -93,7 +93,7 @@ class TMainForm : public TRegistryForm
 	TSTDStringEdit *STDStringEdit1;
 	TGroupBox *GroupBox2;
 	TLabel *Label1;
-	mtkIntEdit *mRepeatTimeE;
+	TIntegerEdit *mRepeatTimeE;
 	TButton *mRepeatEveryBtn;
 	TTimer *mStartupTimer;
 	TIntegerLabeledEdit *FeedRateE;
@@ -162,10 +162,10 @@ class TMainForm : public TRegistryForm
 
                                                         //INI Parameters...
         IniFileProperties	      	                    mGeneralProperties;
-        mtk::Property<int>	                            mBottomPanelHeight;
-		mtk::Property<mtk::LogLevel>	                mLogLevel;
-		mtk::Property<int>	                			mCOMPort;
-        mtk::Property<int>                             	mCountTo;
+        dsl::Property<int>	                            mBottomPanelHeight;
+		dsl::Property<dsl::LogLevel>	                mLogLevel;
+		dsl::Property<int>	                			mCOMPort;
+        dsl::Property<int>                             	mCountTo;
 
         bool                                            setupAndReadIniParameters();
         void                                            setupIniFile();

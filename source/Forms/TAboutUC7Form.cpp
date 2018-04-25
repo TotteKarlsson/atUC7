@@ -1,17 +1,17 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TAboutUC7Form.h"
-#include "mtkApplicationInfo.h"
-#include "mtkLogger.h"
+#include "dslApplicationInfo.h"
+#include "dslLogger.h"
 #include <sstream>
-#include "mtkVersion.h"
+#include "dslVersion.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 
 TAboutUC7Form *AboutUC7Form;
 using namespace std;
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TAboutUC7Form::TAboutUC7Form(TComponent* Owner)
@@ -22,7 +22,7 @@ __fastcall TAboutUC7Form::TAboutUC7Form(TComponent* Owner)
 void __fastcall TAboutUC7Form::FormShow(TObject *Sender)
 {
     stringstream ss;
-    mtkApplicationInfo appInfo(Application);
+    dslApplicationInfo appInfo(Application);
 
     //Current Version Info
     Version version(stdstr(appInfo.mVersion));

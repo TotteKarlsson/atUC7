@@ -3,46 +3,40 @@
         <ProjectGuid>{0FC5F94A-9A7D-4EFF-A350-B191D50840A5}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="P:\libs\dsl\Common\mtkCommon.cbproj">
+        <Projects Include="P:\libs\dsl\builds\dslCommon\dslCommon.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\dsl\Common\Math\mtkMath.cbproj">
+        <Projects Include="P:\libs\dsl\builds\dslMath\dslMath.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\dsl\Common\IPC\mtkIPC.cbproj">
+        <Projects Include="P:\libs\dsl\builds\dslIPC\dslIPC.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\dsl\Common\DataBase\mtkDataBase.cbproj">
+        <Projects Include="P:\libs\dsl\builds\dslPlugins\dslPlugins.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\dsl\VCL\Common\VCLCommon.cbproj">
+        <Projects Include="P:\libs\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\dsl\VCL\Components\DuneComponents.cbproj">
+        <Projects Include="P:\libs\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\dsl\VCL\Forms\DuneForms.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="P:\libs\atapi\source\core\atCore.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="P:\libs\atapi\source\serial\atSerialAPI.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="P:\libs\atapi\source\uc7\atUC7API.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="P:\libs\atapi\source\database\atDatabase.cbproj">
+        <Projects Include="P:\libs\dsl\builds\dslVCLVisualComponents\dslVCLVisualComponents.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj">
+        <Projects Include="P:\libs\atapi\builds\atFoundation\atFoundation.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\atapi\source\vcl\atVCLCore.cbproj">
+        <Projects Include="P:\libs\atapi\builds\atVCLCommon\atVCLCommon.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="P:\libs\atapi\builds\atComponents\atComponents.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="P:\libs\atapi\builds\atVCLVisualComponents\atVisualComponents.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="source\atUC7.cbproj">
@@ -56,104 +50,68 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="mtkCommon">
-        <MSBuild Projects="P:\libs\dsl\Common\mtkCommon.cbproj"/>
+    <Target Name="dslCommon">
+        <MSBuild Projects="P:\libs\dsl\builds\dslCommon\dslCommon.cbproj"/>
     </Target>
-    <Target Name="mtkCommon:Clean">
-        <MSBuild Projects="P:\libs\dsl\Common\mtkCommon.cbproj" Targets="Clean"/>
+    <Target Name="dslCommon:Clean">
+        <MSBuild Projects="P:\libs\dsl\builds\dslCommon\dslCommon.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="mtkCommon:Make">
-        <MSBuild Projects="P:\libs\dsl\Common\mtkCommon.cbproj" Targets="Make"/>
+    <Target Name="dslCommon:Make">
+        <MSBuild Projects="P:\libs\dsl\builds\dslCommon\dslCommon.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="mtkMath">
-        <MSBuild Projects="P:\libs\dsl\Common\Math\mtkMath.cbproj"/>
+    <Target Name="dslMath">
+        <MSBuild Projects="P:\libs\dsl\builds\dslMath\dslMath.cbproj"/>
     </Target>
-    <Target Name="mtkMath:Clean">
-        <MSBuild Projects="P:\libs\dsl\Common\Math\mtkMath.cbproj" Targets="Clean"/>
+    <Target Name="dslMath:Clean">
+        <MSBuild Projects="P:\libs\dsl\builds\dslMath\dslMath.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="mtkMath:Make">
-        <MSBuild Projects="P:\libs\dsl\Common\Math\mtkMath.cbproj" Targets="Make"/>
+    <Target Name="dslMath:Make">
+        <MSBuild Projects="P:\libs\dsl\builds\dslMath\dslMath.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="mtkIPC">
-        <MSBuild Projects="P:\libs\dsl\Common\IPC\mtkIPC.cbproj"/>
+    <Target Name="dslIPC">
+        <MSBuild Projects="P:\libs\dsl\builds\dslIPC\dslIPC.cbproj"/>
     </Target>
-    <Target Name="mtkIPC:Clean">
-        <MSBuild Projects="P:\libs\dsl\Common\IPC\mtkIPC.cbproj" Targets="Clean"/>
+    <Target Name="dslIPC:Clean">
+        <MSBuild Projects="P:\libs\dsl\builds\dslIPC\dslIPC.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="mtkIPC:Make">
-        <MSBuild Projects="P:\libs\dsl\Common\IPC\mtkIPC.cbproj" Targets="Make"/>
+    <Target Name="dslIPC:Make">
+        <MSBuild Projects="P:\libs\dsl\builds\dslIPC\dslIPC.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="mtkDataBase">
-        <MSBuild Projects="P:\libs\dsl\Common\DataBase\mtkDataBase.cbproj"/>
+    <Target Name="dslPlugins">
+        <MSBuild Projects="P:\libs\dsl\builds\dslPlugins\dslPlugins.cbproj"/>
     </Target>
-    <Target Name="mtkDataBase:Clean">
-        <MSBuild Projects="P:\libs\dsl\Common\DataBase\mtkDataBase.cbproj" Targets="Clean"/>
+    <Target Name="dslPlugins:Clean">
+        <MSBuild Projects="P:\libs\dsl\builds\dslPlugins\dslPlugins.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="mtkDataBase:Make">
-        <MSBuild Projects="P:\libs\dsl\Common\DataBase\mtkDataBase.cbproj" Targets="Make"/>
+    <Target Name="dslPlugins:Make">
+        <MSBuild Projects="P:\libs\dsl\builds\dslPlugins\dslPlugins.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="VCLCommon">
-        <MSBuild Projects="P:\libs\dsl\VCL\Common\VCLCommon.cbproj"/>
+    <Target Name="dslVCLCommon">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj"/>
     </Target>
-    <Target Name="VCLCommon:Clean">
-        <MSBuild Projects="P:\libs\dsl\VCL\Common\VCLCommon.cbproj" Targets="Clean"/>
+    <Target Name="dslVCLCommon:Clean">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="VCLCommon:Make">
-        <MSBuild Projects="P:\libs\dsl\VCL\Common\VCLCommon.cbproj" Targets="Make"/>
+    <Target Name="dslVCLCommon:Make">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="DuneComponents">
-        <MSBuild Projects="P:\libs\dsl\VCL\Components\DuneComponents.cbproj"/>
+    <Target Name="dslVCLComponents">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj"/>
     </Target>
-    <Target Name="DuneComponents:Clean">
-        <MSBuild Projects="P:\libs\dsl\VCL\Components\DuneComponents.cbproj" Targets="Clean"/>
+    <Target Name="dslVCLComponents:Clean">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="DuneComponents:Make">
-        <MSBuild Projects="P:\libs\dsl\VCL\Components\DuneComponents.cbproj" Targets="Make"/>
+    <Target Name="dslVCLComponents:Make">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="DuneForms">
-        <MSBuild Projects="P:\libs\dsl\VCL\Forms\DuneForms.cbproj"/>
+    <Target Name="dslVCLVisualComponents">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLVisualComponents\dslVCLVisualComponents.cbproj"/>
     </Target>
-    <Target Name="DuneForms:Clean">
-        <MSBuild Projects="P:\libs\dsl\VCL\Forms\DuneForms.cbproj" Targets="Clean"/>
+    <Target Name="dslVCLVisualComponents:Clean">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLVisualComponents\dslVCLVisualComponents.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="DuneForms:Make">
-        <MSBuild Projects="P:\libs\dsl\VCL\Forms\DuneForms.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="atCore">
-        <MSBuild Projects="P:\libs\atapi\source\core\atCore.cbproj"/>
-    </Target>
-    <Target Name="atCore:Clean">
-        <MSBuild Projects="P:\libs\atapi\source\core\atCore.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="atCore:Make">
-        <MSBuild Projects="P:\libs\atapi\source\core\atCore.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="atSerialAPI">
-        <MSBuild Projects="P:\libs\atapi\source\serial\atSerialAPI.cbproj"/>
-    </Target>
-    <Target Name="atSerialAPI:Clean">
-        <MSBuild Projects="P:\libs\atapi\source\serial\atSerialAPI.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="atSerialAPI:Make">
-        <MSBuild Projects="P:\libs\atapi\source\serial\atSerialAPI.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="atUC7API">
-        <MSBuild Projects="P:\libs\atapi\source\uc7\atUC7API.cbproj"/>
-    </Target>
-    <Target Name="atUC7API:Clean">
-        <MSBuild Projects="P:\libs\atapi\source\uc7\atUC7API.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="atUC7API:Make">
-        <MSBuild Projects="P:\libs\atapi\source\uc7\atUC7API.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="atDatabase">
-        <MSBuild Projects="P:\libs\atapi\source\database\atDatabase.cbproj"/>
-    </Target>
-    <Target Name="atDatabase:Clean">
-        <MSBuild Projects="P:\libs\atapi\source\database\atDatabase.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="atDatabase:Make">
-        <MSBuild Projects="P:\libs\atapi\source\database\atDatabase.cbproj" Targets="Make"/>
+    <Target Name="dslVCLVisualComponents:Make">
+        <MSBuild Projects="P:\libs\dsl\builds\dslVCLVisualComponents\dslVCLVisualComponents.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atSSI">
         <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj"/>
@@ -164,23 +122,41 @@
     <Target Name="atSSI:Make">
         <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="atBarcodeReader">
-        <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj"/>
+    <Target Name="atFoundation">
+        <MSBuild Projects="P:\libs\atapi\builds\atFoundation\atFoundation.cbproj"/>
     </Target>
-    <Target Name="atBarcodeReader:Clean">
-        <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj" Targets="Clean"/>
+    <Target Name="atFoundation:Clean">
+        <MSBuild Projects="P:\libs\atapi\builds\atFoundation\atFoundation.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="atBarcodeReader:Make">
-        <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj" Targets="Make"/>
+    <Target Name="atFoundation:Make">
+        <MSBuild Projects="P:\libs\atapi\builds\atFoundation\atFoundation.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="atVCLCore">
-        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj"/>
+    <Target Name="atVCLCommon">
+        <MSBuild Projects="P:\libs\atapi\builds\atVCLCommon\atVCLCommon.cbproj"/>
     </Target>
-    <Target Name="atVCLCore:Clean">
-        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj" Targets="Clean"/>
+    <Target Name="atVCLCommon:Clean">
+        <MSBuild Projects="P:\libs\atapi\builds\atVCLCommon\atVCLCommon.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="atVCLCore:Make">
-        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj" Targets="Make"/>
+    <Target Name="atVCLCommon:Make">
+        <MSBuild Projects="P:\libs\atapi\builds\atVCLCommon\atVCLCommon.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atComponents">
+        <MSBuild Projects="P:\libs\atapi\builds\atComponents\atComponents.cbproj"/>
+    </Target>
+    <Target Name="atComponents:Clean">
+        <MSBuild Projects="P:\libs\atapi\builds\atComponents\atComponents.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atComponents:Make">
+        <MSBuild Projects="P:\libs\atapi\builds\atComponents\atComponents.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atVisualComponents">
+        <MSBuild Projects="P:\libs\atapi\builds\atVCLVisualComponents\atVisualComponents.cbproj"/>
+    </Target>
+    <Target Name="atVisualComponents:Clean">
+        <MSBuild Projects="P:\libs\atapi\builds\atVCLVisualComponents\atVisualComponents.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atVisualComponents:Make">
+        <MSBuild Projects="P:\libs\atapi\builds\atVCLVisualComponents\atVisualComponents.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atUC7">
         <MSBuild Projects="source\atUC7.cbproj"/>
@@ -192,13 +168,13 @@
         <MSBuild Projects="source\atUC7.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="mtkCommon;mtkMath;mtkIPC;mtkDataBase;VCLCommon;DuneComponents;DuneForms;atCore;atSerialAPI;atUC7API;atDatabase;atSSI;atBarcodeReader;atVCLCore;atUC7"/>
+        <CallTarget Targets="dslCommon;dslMath;dslIPC;dslPlugins;dslVCLCommon;dslVCLComponents;dslVCLVisualComponents;atSSI;atFoundation;atVCLCommon;atComponents;atVisualComponents;atUC7"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="mtkCommon:Clean;mtkMath:Clean;mtkIPC:Clean;mtkDataBase:Clean;VCLCommon:Clean;DuneComponents:Clean;DuneForms:Clean;atCore:Clean;atSerialAPI:Clean;atUC7API:Clean;atDatabase:Clean;atSSI:Clean;atBarcodeReader:Clean;atVCLCore:Clean;atUC7:Clean"/>
+        <CallTarget Targets="dslCommon:Clean;dslMath:Clean;dslIPC:Clean;dslPlugins:Clean;dslVCLCommon:Clean;dslVCLComponents:Clean;dslVCLVisualComponents:Clean;atSSI:Clean;atFoundation:Clean;atVCLCommon:Clean;atComponents:Clean;atVisualComponents:Clean;atUC7:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="mtkCommon:Make;mtkMath:Make;mtkIPC:Make;mtkDataBase:Make;VCLCommon:Make;DuneComponents:Make;DuneForms:Make;atCore:Make;atSerialAPI:Make;atUC7API:Make;atDatabase:Make;atSSI:Make;atBarcodeReader:Make;atVCLCore:Make;atUC7:Make"/>
+        <CallTarget Targets="dslCommon:Make;dslMath:Make;dslIPC:Make;dslPlugins:Make;dslVCLCommon:Make;dslVCLComponents:Make;dslVCLVisualComponents:Make;atSSI:Make;atFoundation:Make;atVCLCommon:Make;atComponents:Make;atVisualComponents:Make;atUC7:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

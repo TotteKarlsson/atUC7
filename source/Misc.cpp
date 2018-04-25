@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "TMainForm.h"
-#include "mtkVCLUtils.h"
-#include "mtkLogger.h"
+#include "dslVCLUtils.h"
+#include "dslLogger.h"
 #include "TAboutUC7Form.h"
 #pragma package(smart_init)
 
 using Poco::DateTimeFormatter;
-using namespace mtk;
+using namespace dsl;
 
 extern HWND gOtherAppWindow;
 void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)

@@ -1,31 +1,31 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "atVCLUtils.h"
-#include "mtkLogger.h"
-#include "mtkStringUtils.h"
-#include "mtkUtils.h"
-#include "mtkVCLUtils.h"
+#include "dslLogger.h"
+#include "dslStringUtils.h"
+#include "dslUtils.h"
+#include "dslVCLUtils.h"
 #include "TMainForm.h"
-#include "TMemoLogger.h"
+#include "dslTMemoLogger.h"
 #include "sound/atSounds.h"
 #include <mmsystem.h>
 #include "core/atCore.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "mtkIniFileC"
+//#pragma link "TIniFileC"
 #pragma link "pies"
-#pragma link "TFloatLabeledEdit"
-#pragma link "TSTDStringEdit"
-#pragma link "TIntegerLabeledEdit"
-#pragma link "TIntLabel"
-#pragma link "mtkIntEdit"
-#pragma link "TPropertyCheckBox"
-#pragma link "TArrayBotBtn"
+//#pragma link "TFloatLabeledEdit"
+//#pragma link "TSTDStringEdit"
+//#pragma link "TIntegerLabeledEdit"
+//#pragma link "TIntLabel"
+//#pragma link "TIntegerEdit"
+//#pragma link "TPropertyCheckBox"
+//#pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;
-using namespace mtk;
-using namespace at;
+using namespace dsl;
+//using namespace at;
 
 extern string gLogFileName;
 extern string gApplicationRegistryRoot;
@@ -334,7 +334,7 @@ void __fastcall TMainForm::Button2Click(TObject *Sender)
 {
 	for(int i = 0; i < mUC7Messages.size(); i++)
     {
-    	Log(lInfo) << mUC7Messages[i].first.getFullMessage() << ", " << mtk::toString(mUC7Messages[i].second);
+    	Log(lInfo) << mUC7Messages[i].first.getFullMessage() << ", " << dsl::toString(mUC7Messages[i].second);
     }
 }
 
