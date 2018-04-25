@@ -12,15 +12,7 @@
 #include "core/atCore.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-//#pragma link "TIniFileC"
 #pragma link "pies"
-//#pragma link "TFloatLabeledEdit"
-//#pragma link "TSTDStringEdit"
-//#pragma link "TIntegerLabeledEdit"
-//#pragma link "TIntLabel"
-//#pragma link "TIntegerEdit"
-//#pragma link "TPropertyCheckBox"
-//#pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
 TMainForm *MainForm;

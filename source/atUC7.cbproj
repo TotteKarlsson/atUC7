@@ -57,7 +57,7 @@
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <IncludePath>P:\libs\dsl\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl;$(AT_ROOT)\source\vcl\datamodules\;Forms\;..\;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
-        <AllPackageLibs>rtl.lib;vcl.lib;dbrtl.lib;dbexpress.lib;DbxCommonDriver.lib;dsnap.lib;vcldb.lib;dbxcds.lib;vclactnband.lib;vclx.lib;vclimg.lib;adortl.lib;bindengine.lib;bindcomp.lib;bindcompvcl.lib;TeeDB.lib;TeeUI.lib;Tee.lib;bcbsmp.libb;dslVCLVisualComponents.lib;dslVCLComponents.lib;bcbsmp.lib;atComponents.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;vcl.lib;dbrtl.lib;dbexpress.lib;DbxCommonDriver.lib;dsnap.lib;vcldb.lib;dbxcds.lib;vclactnband.lib;vclx.lib;vclimg.lib;adortl.lib;bindengine.lib;bindcomp.lib;bindcompvcl.lib;TeeDB.lib;TeeUI.lib;Tee.lib;dslVCLVisualComponents.lib;dslVCLComponents.lib;atComponents.lib;bcbsmp.lib</AllPackageLibs>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -76,7 +76,7 @@
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <PackageImports>bindcompvcl;TeeUI;adortl;vcltouch;bcbsmp;bindcompfmx;DBXSqliteDriver;CustomIPTransport;fmx;dsnap;rtl;dbrtl;DbxClientDriver;vcl;fmxase;bindcomp;TeeDB;IndyCore;IndySystem;dsnapcon;DBXInterBaseDriver;Tee;DataSnapCommon;fmxobj;vclx;xmlrtl;DbxCommonDriver;vclimg;fmxdae;DBXMySQLDriver;dbxcds;IndyProtocols;bdertl;bindengine;vclactnband;dbexpress;vcldb;bindcompdbx;vcldsnap;$(PackageImports)</PackageImports>
+        <PackageImports>bindcompvcl;TeeUI;adortl;vcltouch;bindcompfmx;DBXSqliteDriver;CustomIPTransport;fmx;dsnap;rtl;dbrtl;DbxClientDriver;vcl;fmxase;bindcomp;TeeDB;IndyCore;IndySystem;dsnapcon;DBXInterBaseDriver;Tee;DataSnapCommon;fmxobj;vclx;xmlrtl;DbxCommonDriver;vclimg;fmxdae;DBXMySQLDriver;dbxcds;IndyProtocols;bdertl;bindengine;vclactnband;dbexpress;vcldb;bindcompdbx;vcldsnap;$(PackageImports)</PackageImports>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -120,7 +120,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
         <VerInfo_Keys>CompanyName=;FileVersion=0.5.4.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <LinkPackageStatics>dslVCLVisualComponents.lib;dslVCLComponents.lib;atComponents.lib</LinkPackageStatics>
+        <LinkPackageStatics>dslVCLVisualComponents.lib;dslVCLComponents.lib;atComponents.lib;bcbsmp.lib</LinkPackageStatics>
         <Debugger_DebugSourcePath>P:\libs\dsl\VCL\Common\;P:\libs\dsl\VCL\Components\;P:\libs\dsl\Common\;P:\libs\atapi\source\serial\;P:\libs\dsl\Common\IPC\;P:\libs\atapi\source\UC7\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_PCHInject>pch.h</BCC_PCHInject>
         <BCC_PCHCache>true</BCC_PCHCache>
@@ -131,7 +131,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <ILINK_LibraryPath>$(DEBUG_BCC32)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <IncludePath>$(DEBUG_BCC32)\include;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;dbrtl.bpi;dbexpress.bpi;DbxCommonDriver.bpi;dsnap.bpi;vcldb.bpi;dbxcds.bpi;vclactnband.bpi;vclx.bpi;vclimg.bpi;adortl.bpi;bindengine.bpi;bindcomp.bpi;bindcompvcl.bpi;TeeDB.bpi;TeeUI.bpi;Tee.bpi;bcbsmp.bpi;bcbsmp.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;dbrtl.bpi;dbexpress.bpi;DbxCommonDriver.bpi;dsnap.bpi;vcldb.bpi;dbxcds.bpi;vclactnband.bpi;vclx.bpi;vclimg.bpi;adortl.bpi;bindengine.bpi;bindcomp.bpi;bindcompvcl.bpi;TeeDB.bpi;TeeUI.bpi;Tee.bpi</LinkPackageImports>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
@@ -237,7 +237,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\cboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
             </CPlusPlusBuilder.Personality>

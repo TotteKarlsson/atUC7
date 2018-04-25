@@ -24,9 +24,6 @@
         <Projects Include="P:\libs\dsl\builds\dslVCLVisualComponents\dslVCLVisualComponents.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="P:\libs\atapi\builds\atFoundation\atFoundation.cbproj">
             <Dependencies/>
         </Projects>
@@ -113,15 +110,6 @@
     <Target Name="dslVCLVisualComponents:Make">
         <MSBuild Projects="P:\libs\dsl\builds\dslVCLVisualComponents\dslVCLVisualComponents.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="atSSI">
-        <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj"/>
-    </Target>
-    <Target Name="atSSI:Clean">
-        <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="atSSI:Make">
-        <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="atFoundation">
         <MSBuild Projects="P:\libs\atapi\builds\atFoundation\atFoundation.cbproj"/>
     </Target>
@@ -168,13 +156,13 @@
         <MSBuild Projects="source\atUC7.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="dslCommon;dslMath;dslIPC;dslPlugins;dslVCLCommon;dslVCLComponents;dslVCLVisualComponents;atSSI;atFoundation;atVCLCommon;atComponents;atVisualComponents;atUC7"/>
+        <CallTarget Targets="dslCommon;dslMath;dslIPC;dslPlugins;dslVCLCommon;dslVCLComponents;dslVCLVisualComponents;atFoundation;atVCLCommon;atComponents;atVisualComponents;atUC7"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="dslCommon:Clean;dslMath:Clean;dslIPC:Clean;dslPlugins:Clean;dslVCLCommon:Clean;dslVCLComponents:Clean;dslVCLVisualComponents:Clean;atSSI:Clean;atFoundation:Clean;atVCLCommon:Clean;atComponents:Clean;atVisualComponents:Clean;atUC7:Clean"/>
+        <CallTarget Targets="dslCommon:Clean;dslMath:Clean;dslIPC:Clean;dslPlugins:Clean;dslVCLCommon:Clean;dslVCLComponents:Clean;dslVCLVisualComponents:Clean;atFoundation:Clean;atVCLCommon:Clean;atComponents:Clean;atVisualComponents:Clean;atUC7:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="dslCommon:Make;dslMath:Make;dslIPC:Make;dslPlugins:Make;dslVCLCommon:Make;dslVCLComponents:Make;dslVCLVisualComponents:Make;atSSI:Make;atFoundation:Make;atVCLCommon:Make;atComponents:Make;atVisualComponents:Make;atUC7:Make"/>
+        <CallTarget Targets="dslCommon:Make;dslMath:Make;dslIPC:Make;dslPlugins:Make;dslVCLCommon:Make;dslVCLComponents:Make;dslVCLVisualComponents:Make;atFoundation:Make;atVCLCommon:Make;atComponents:Make;atVisualComponents:Make;atUC7:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
